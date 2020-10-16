@@ -9,7 +9,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: '诉记',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: '诉记'),
     );
   }
 }
@@ -50,7 +51,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  List _list = ["aa", "bbb", "XXX"];
 
   void _incrementCounter() {
     setState(() {
@@ -59,8 +60,65 @@ class _MyHomePageState extends State<MyHomePage> {
       // so that the display can reflect the updated values. If we changed
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
-      _counter++;
+      _list.add("jjjjj");
     });
+  }
+
+  ListView buildList(BuildContext context) {
+    return new ListView(
+      // shrinkWrap: true,
+      children: _list
+          .map((e) => new ListTile(
+              leading: new Icon(Icons.map), title: new SelectableText(e)))
+          .toList(),
+      //
+      // [
+      //   new ListTile(
+      //       leading: new Icon(Icons.map), title: new SelectableText("33333")),
+      //   new ListTile(
+      //       leading: new Icon(Icons.photo_album),
+      //       title: new SelectableText("Album")),
+      //   new ListTile(
+      //     leading: new Icon(Icons.photo),
+      //     title: new Text('Phone'),
+      //   ),
+      //   new ListTile(leading: new Icon(Icons.map), title: new Text("Maps")),
+      //   new ListTile(
+      //       leading: new Icon(Icons.photo_album), title: new Text("Album")),
+      //   new ListTile(
+      //     leading: new Icon(Icons.photo),
+      //     title: new Text('Phone'),
+      //   ),
+      //   new ListTile(leading: new Icon(Icons.map), title: new Text("Maps")),
+      //   new ListTile(
+      //       leading: new Icon(Icons.photo_album), title: new Text("Album")),
+      //   new ListTile(
+      //     leading: new Icon(Icons.photo),
+      //     title: new Text('Phone'),
+      //   ),
+      //   new ListTile(leading: new Icon(Icons.map), title: new Text("Maps")),
+      //   new ListTile(
+      //       leading: new Icon(Icons.photo_album), title: new Text("Album")),
+      //   new ListTile(
+      //     leading: new Icon(Icons.photo),
+      //     title: new Text('Phone'),
+      //   ),
+      //   new ListTile(leading: new Icon(Icons.map), title: new Text("Maps")),
+      //   new ListTile(
+      //       leading: new Icon(Icons.photo_album), title: new Text("Album")),
+      //   new ListTile(
+      //     leading: new Icon(Icons.photo),
+      //     title: new Text('Phone'),
+      //   ),
+      //   new ListTile(leading: new Icon(Icons.map), title: new Text("Maps")),
+      //   new ListTile(
+      //       leading: new Icon(Icons.photo_album), title: new Text("Album")),
+      //   new ListTile(
+      //     leading: new Icon(Icons.photo),
+      //     title: new Text('Phone'),
+      //   ),
+      // ],
+    );
   }
 
   @override
@@ -72,55 +130,169 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
 
-    return Scaffold(body: Center(
-      child:Text(
-              '呵呵呵呵',
-              style: TextStyle(color: Colors.blue, decoration: TextDecoration.none,
-              fontSize: 25),
-            )
-    ) );
-
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
+        // backgroundColor: Colors.green,
+        body: Container(
+      //color: Colors.amber,
+      child: Row(
+        children: [
+          Expanded(
+            child: Container(),
+            flex: 1,
+          ),
+          Expanded(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                    //color: Colors.blue,
+                    height: 100.0,
+                    width: double.infinity,
+                    alignment: Alignment.centerLeft,
+                    padding: EdgeInsets.only(left: 20, right: 20),
+                    child: SelectableText(
+                      '诉记',
+                      style: TextStyle(
+                          color: Colors.black,
+                          decoration: TextDecoration.none,
+                          fontSize: 28),
+                    )
+                    // Row(
+                    //   mainAxisSize: MainAxisSize.max,
+                    //   crossAxisAlignment: CrossAxisAlignment.center,
+                    //   children: [
+                    //
+                    //   ],
+                    // ),
+                    ),
+
+                // Expanded(
+                //   child:
+                Container(
+                  //color: Colors.purpleAccent,
+                  //height: double.infinity,
+                  padding: EdgeInsets.only(left: 20, right: 20),
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: Container(
+                            //color: Colors.lime,
+                            // child: FlatButton(
+                            //   child: Text("normal"),
+                            //   onPressed: () {},
+                            // ),
+                            // alignment: Alignment.centerLeft,
+                            ),
+                        flex: 1,
+                      ),
+                      Expanded(
+                        child: Container(
+                            //color: Colors.teal,
+                            child: OutlineButton(
+                              child: Text("写文章"),
+                              onPressed: () {
+                                _incrementCounter();
+                              },
+                            ),
+                            alignment: Alignment.centerRight),
+                        flex: 2,
+                      ),
+                    ],
+                  ),
+                ),
+                //   flex: 1,
+                // ),
+
+                Expanded(
+                  child: Container(
+                      //  color: Colors.black54,
+                      child: Scrollbar(
+                    child: buildList(context),
+                  )
+                      //  alignment: Alignment.topRight,
+                      ),
+                  flex: 3,
+                )
+
+                // Row(
+                //   children: [
+                //     Container(
+                //       child: new ListView(
+                //         shrinkWrap: true,
+                //         children: [
+                //           new ListTile(
+                //               leading: new Icon(Icons.map),
+                //               title: new Text("Maps")),
+                //           new ListTile(
+                //               leading: new Icon(Icons.photo_album),
+                //               title: new Text("Album")),
+                //           new ListTile(
+                //             leading: new Icon(Icons.photo),
+                //             title: new Text('Phone'),
+                //           )
+                //         ],
+                //       ),
+                //     )
+                //   ],
+                // )
+              ],
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
+            flex: 2,
+          ),
+          Expanded(
+            child: Container(),
+            flex: 1,
+          ),
+        ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
+    ));
+
+    // return Scaffold(
+    //   appBar: AppBar(
+    //     // Here we take the value from the MyHomePage object that was created by
+    //     // the App.build method, and use it to set our appbar title.
+    //     title: Text(widget.title),
+    //   ),
+    //   body: Center(
+    //       // Center is a layout widget. It takes a single child and positions it
+    //       // in the middle of the parent.
+    //       child:
+    //           // Column(
+    //           //   mainAxisAlignment: MainAxisAlignment.center,
+    //           //   children: <Widget>[
+    //           // Text(
+    //           //   'You have pushed the button this many times:',
+    //           // ),
+    //           // Text(
+    //           //   '$_counter',
+    //           //   style: Theme.of(context).textTheme.headline4,
+    //           // ),
+    //           new Row(
+    //     children: [
+    //       new ListView(
+    //         children: [
+    //           new ListTile(
+    //               leading: new Icon(Icons.map), title: new Text("Maps")),
+    //           new ListTile(
+    //               leading: new Icon(Icons.photo_album),
+    //               title: new Text("Album")),
+    //           new ListTile(
+    //             leading: new Icon(Icons.photo),
+    //             title: new Text('Phone'),
+    //           )
+    //         ],
+    //       )
+    //     ],
+    //   )
+    //       //   ],
+    //       // ),
+    //       ),
+    //   floatingActionButton: FloatingActionButton(
+    //     onPressed: _incrementCounter,
+    //     tooltip: 'Increment',
+    //     child: Icon(Icons.add),
+    //   ), // This trailing comma makes auto-formatting nicer for build methods.
+    // );
   }
 }
