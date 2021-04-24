@@ -37,15 +37,6 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
   final String title;
 
   @override
@@ -76,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
               }
               _incrementCounter(el);
             }))
-        .catchError((err) => print(err))
+        .catchError((err) => print("加载内容出错 $err"))
         .whenComplete(() => {_isLoading = false, _showLoadingTip("")});
   }
 
@@ -203,6 +194,27 @@ class _MyHomePageState extends State<MyHomePage> {
     _loadMore();
   }
 
+  // 获取主容器及边栏留白
+  // main 是否主内容容器
+  int _mainRowFlex(BuildContext context, bool main) {
+    var mediaQueryData = MediaQuery.of(context);
+    print("media ${mediaQueryData.size}");
+    // 主内容容器
+    if (main) {
+      if (mediaQueryData.size.width < 640) {
+        return 10;
+      }
+      return 3;
+    } else {
+      // 两边留白
+      if (mediaQueryData.size.width < 640) {
+        return 1;
+      }
+    }
+
+    return 1;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -214,7 +226,7 @@ class _MyHomePageState extends State<MyHomePage> {
             children: [
               Expanded(
                 child: Container(),
-                flex: 1,
+                flex: _mainRowFlex(context, false),
               ),
               Expanded(
                 child: Column(
@@ -365,11 +377,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     )
                   ],
                 ),
-                flex: 3,
+                flex: _mainRowFlex(context, true),
               ),
               Expanded(
                 child: Container(),
-                flex: 1,
+                flex: _mainRowFlex(context, false),
               ),
             ],
           ),

@@ -60,7 +60,8 @@ Future<List<Article>> loadArticles(int created) async {
 Future<void> saveArticle(String content) async {
   if (content == null || content == "") return;
 
-  var url = 'http://localhost:8080/add';
+  var config = loadConfig();
+  print("jjjj33 ${config.loadArticlesUrl}");
 
   var article = new Article();
   article.content = content;
@@ -69,7 +70,7 @@ Future<void> saveArticle(String content) async {
 
   print("jjj $artJson");
 
-  var resp = await http.post(url, body: artJson);
+  var resp = await http.post(config.saveArticleUrl, body: artJson);
 
   print("cccc $resp");
 }
