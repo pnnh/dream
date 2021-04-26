@@ -6,7 +6,7 @@ class SFEditorRoute extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Second Route'),
+        title: Text('编辑器'),
       ),
       body: SFEditorBody(),
     );
@@ -16,19 +16,23 @@ class SFEditorRoute extends StatelessWidget {
 class SFEditorBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Column(
-          children: [
-            TextField(),
-            TextField(
-              decoration: InputDecoration(
-                hintText: '文章正文',
-              ),
-              maxLines: null,
-              minLines: 5,
-            )
-          ],
-        ));
+    return Container(
+      padding: EdgeInsets.all(16),
+      child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            children: [
+              TextField(
+                decoration: InputDecoration(
+                  hintText: '开始输入',
+                  enabledBorder: InputBorder.none,
+                  focusedBorder: InputBorder.none,
+                  focusedErrorBorder: InputBorder.none,
+                ),
+                maxLines: null,
+              )
+            ],
+          )),
+    );
   }
 }

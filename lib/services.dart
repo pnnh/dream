@@ -5,8 +5,8 @@ import 'package:http/http.dart' as http;
 import 'config.dart';
 
 class Article {
-  String content;
-  int created; // 创建时间，毫秒时间戳
+  String content = '';
+  int created = 0; // 创建时间，毫秒时间戳
 
   Article() {
     content = "";
@@ -22,12 +22,6 @@ class Article {
 }
 
 Future<List<Article>> loadArticles(int created) async {
-  // var url = 'https://example.com/whatsit/create';
-  // var response =
-  //     await http.post(url, body: {'name': 'doodle', 'color': 'blue'});
-  // print('Response status: ${response.statusCode}');
-  // print('Response body: ${response.body}');
-
   var queryMap = new Map<String, dynamic>();
   queryMap["created"] = created;
 
@@ -37,15 +31,15 @@ Future<List<Article>> loadArticles(int created) async {
 
   var config = loadConfig();
   print("jjjj22 ${config.loadArticlesUrl}");
-  var resp = await http.post(config.loadArticlesUrl, body: queryJsonStr);
+  var loadUri = Uri.dataFromString(config.loadArticlesUrl);
+  var resp = await http.post(loadUri, body: queryJsonStr);
 
-  var result = new List<Article>();
+  List<dynamic> data = json.decode(resp.body);
+  var result = List.filled(data.length, new Article());
   if (resp.statusCode != 200) {
     print("loadArticles返回错误 ${resp.statusCode}");
     return result;
   }
-
-  List<dynamic> data = json.decode(resp.body);
 
   data.forEach((element) {
     var info = new Article();
@@ -70,7 +64,8 @@ Future<void> saveArticle(String content) async {
 
   print("jjj $artJson");
 
-  var resp = await http.post(config.saveArticleUrl, body: artJson);
+  var loadUri = Uri.dataFromString(config.saveArticleUrl);
+  var resp = await http.post(loadUri, body: artJson);
 
   print("cccc $resp");
 }

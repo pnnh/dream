@@ -3,7 +3,7 @@ class AppConfig {
   String saveArticleUrl = "/api/add";
   String hostUrl;
 
-  AppConfig({this.hostUrl}) {
+  AppConfig({required this.hostUrl}) {
     this.loadArticlesUrl = this.hostUrl + this.loadArticlesUrl;
     this.saveArticleUrl = this.hostUrl + this.saveArticleUrl;
   }
