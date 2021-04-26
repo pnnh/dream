@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:suji/editor/editor.dart';
+import 'package:sfxui/editor/editor.dart';
 
 class SFXApplication extends StatelessWidget {
   @override
@@ -8,7 +8,9 @@ class SFXApplication extends StatelessWidget {
     return MaterialApp(
       title: '路由切换示例',
       debugShowCheckedModeBanner: false,
-      home: SFEditorRoute(),
+      home: SFEditorRoute(
+        title: '啊哈哈',
+      ),
     );
   }
 }
