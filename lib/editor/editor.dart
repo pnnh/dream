@@ -16,6 +16,8 @@ class SFEditorRoute extends StatefulWidget {
 class _SFEditorRoute extends State<SFEditorRoute> {
   String _text = 'xxx';
   List<SFNode> children = [SFNode()];
+  int currentRow = 0;
+
   @override
   void initState() {
     super.initState();
@@ -23,23 +25,47 @@ class _SFEditorRoute extends State<SFEditorRoute> {
   }
 
   List<Widget> buildChildren() {
-    var result = children
-        .map((e) => Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                IconButton(
-                    onPressed: () {
-                      print('pressed');
-                      setState(() {
-                        children.add(SFNode());
-                      });
-                    },
-                    icon: Icon(Icons.add)),
-                Expanded(child: SFText())
-              ],
-            ))
-        .toList();
+    var result = List<Widget>.empty(growable: true);
+    for (var i = 0; i < children.length; i++) {
+      var colLeft = Column(
+        children: [],
+      );
+      if (currentRow == i) {
+        colLeft.children.insert(
+            0,
+            IconButton(
+                onPressed: () {
+                  print('pressed');
+                  setState(() {
+                    children.add(SFNode());
+                  });
+                },
+                icon: Icon(Icons.add)));
+      } else {
+        colLeft.children.insert(
+            0, IconButton(onPressed: () {}, icon: Icon(Icons.new_label)));
+      }
+      var row = Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          colLeft,
+          Expanded(
+              child: MouseRegion(
+            onEnter: (event) {
+              print('onHover' + i.toString());
+              setState(() {
+                this.currentRow = i;
+              });
+            },
+            child: Column(
+              children: [SFText()],
+            ),
+          ))
+        ],
+      );
+      result.add(row);
+    }
     return result;
   }
 
