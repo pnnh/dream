@@ -8,8 +8,15 @@ class SFXApplication extends StatelessWidget {
     return MaterialApp(
       title: '路由切换示例',
       debugShowCheckedModeBanner: false,
-      home: SFEditorRoute(
-        title: '啊哈哈',
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('SFXAPP'),
+        ),
+        body: SafeArea(
+          child: SFEditorRoute(
+            title: '啊哈哈',
+          ),
+        ),
       ),
     );
   }
