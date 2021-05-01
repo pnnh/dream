@@ -27,8 +27,8 @@ class SFEditorState with ChangeNotifier {
     notifyListeners();
   }
 
-  void addNode(SFNode node) {
-    this.children.add(node);
+  void insertNode(int index, SFNode node) {
+    this.children.insert(index, node);
     notifyListeners();
   }
 }

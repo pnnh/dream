@@ -5,7 +5,8 @@ import 'package:sfxui/editor/nodes/text.dart';
 
 class SFRow extends StatefulWidget {
   final SFNode node;
-  SFRow(this.node, {Key? key}) : super(key: key);
+  final int index;
+  SFRow(this.index, this.node, {Key? key}) : super(key: key);
   @override
   _SFRow createState() => _SFRow();
 }
@@ -33,7 +34,7 @@ class _SFRow extends State<SFRow> {
                       // });
                       var node = SFTextNode('content + ');
                       var state = context.read<SFEditorState>();
-                      state.addNode(node);
+                      state.insertNode(widget.index + 1, node);
                     },
                     icon: Icon(Icons.add))
                 : Text(''),

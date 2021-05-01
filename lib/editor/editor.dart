@@ -11,7 +11,7 @@ class SFEditorRoute extends StatelessWidget {
     var result = List<Widget>.empty(growable: true);
     for (var i = 0; i < children.length; i++) {
       var node = children[i];
-      var row = SFRow(node);
+      var row = SFRow(i, node);
       result.add(row);
     }
     return result;
