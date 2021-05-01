@@ -13,9 +13,7 @@ class SFXApplication extends StatelessWidget {
           title: Text('SFXAPP'),
         ),
         body: SafeArea(
-          child: SFEditorRoute(
-            title: '啊哈哈',
-          ),
+          child: SFEditorRoute(),
         ),
       ),
     );

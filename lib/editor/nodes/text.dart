@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:sfxui/editor/models/node.dart';
 
-class SFText extends StatefulWidget {
-  final String text;
-  SFText({Key? key, required this.text}) : super(key: key);
+typedef OnTextChange = void Function(String text);
 
-  @override
-  _SFText createState() => _SFText();
-}
+class SFTextWidget extends StatelessWidget {
+  final SFNode node;
+  final OnTextChange onChange;
+  SFTextWidget(this.node, this.onChange);
 
-class _SFText extends State<SFText> {
   @override
   Widget build(BuildContext context) {
-    final myController = TextEditingController()..text = widget.text;
+    var textNode = this.node as SFTextNode;
+    final myController = TextEditingController()..text = textNode.content;
+    myController.addListener(() {
+      print('value change ' + myController.text);
+      this.onChange(myController.text);
+    });
     return TextField(
       decoration: InputDecoration(
         hintText: '开始输入',

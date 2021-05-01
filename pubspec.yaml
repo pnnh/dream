@@ -13,6 +13,4 @@ dependencies:
     sdk: flutter
   http: ^0.13.1
   cupertino_icons: ^1.0.0
-
-flutter:
-  uses-material-design: true
+  provider:
