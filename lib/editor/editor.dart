@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sfxui/editor/models/node.dart';
 
+import 'models/states.dart';
 import 'nodes/row.dart';
 
 typedef OnPress = void Function();
@@ -11,7 +12,7 @@ class SFEditorRoute extends StatelessWidget {
     var result = List<Widget>.empty(growable: true);
     for (var i = 0; i < children.length; i++) {
       var node = children[i];
-      var row = SFRow(i, node);
+      var row = SFRowWidget(i, node);
       result.add(row);
     }
     return result;
