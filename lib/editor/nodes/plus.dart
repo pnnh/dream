@@ -7,26 +7,41 @@ class SFPlus extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<RowState>(
-      builder: (context, state, child) => Container(
-        width: 48,
-        height: 48,
-        child: state.show
-            ? IconButton(
-                onPressed: () {
-                  // print('pressed ' + i.toString());
-                  // setState(() {
-                  //   children.insert(
-                  //       i + 1,
-                  //       SFNode('text',
-                  //           content: 'content + ' + (i + 1).toString()));
-                  // });
-                  var node = SFTextNode('content + ');
-                  var editorState = context.read<SFEditorState>();
-                  editorState.insertNode(state.index + 1, node);
-                },
-                icon: Icon(Icons.add))
-            : Text(''),
-      ),
-    );
+        builder: (context, state, child) => Container(
+              height: 48,
+              width: 48,
+              child: state.show
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        IconButton(
+                            iconSize: 24,
+                            constraints:
+                                BoxConstraints(maxHeight: 24, maxWidth: 24),
+                            padding: EdgeInsets.zero,
+                            highlightColor: Colors.transparent,
+                            splashColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            onPressed: () {
+                              var node = SFTextNode('content + ');
+                              var editorState = context.read<SFEditorState>();
+                              editorState.insertNode(state.index + 1, node);
+                            },
+                            icon: Icon(Icons.add)),
+                        IconButton(
+                            iconSize: 24,
+                            constraints:
+                                BoxConstraints(maxHeight: 24, maxWidth: 24),
+                            padding: EdgeInsets.zero,
+                            highlightColor: Colors.transparent,
+                            splashColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            onPressed: () {},
+                            icon: Icon(Icons.article))
+                      ],
+                    )
+                  : null,
+            ));
   }
 }
