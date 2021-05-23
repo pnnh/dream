@@ -9,7 +9,7 @@ class SFPlus extends StatelessWidget {
     return Consumer<RowState>(
         builder: (context, state, child) => Container(
               height: 48,
-              width: 48,
+              width: 96,
               child: state.show
                   ? Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -38,7 +38,25 @@ class SFPlus extends StatelessWidget {
                             splashColor: Colors.transparent,
                             hoverColor: Colors.transparent,
                             onPressed: () {},
-                            icon: Icon(Icons.article))
+                            icon: Icon(Icons.article)),
+                        PopupMenuButton(
+                            initialValue: '语文',
+                            itemBuilder: (context) {
+                              return <PopupMenuEntry<String>>[
+                                PopupMenuItem<String>(
+                                  value: '语文',
+                                  child: Column(
+                                    children: [
+                                      TextButton(
+                                          onPressed: () {},
+                                          child: Text('一号标题')),
+                                      TextButton(
+                                          onPressed: () {}, child: Text('二号标题'))
+                                    ],
+                                  ),
+                                ),
+                              ];
+                            })
                       ],
                     )
                   : null,
