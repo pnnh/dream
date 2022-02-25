@@ -1,7 +1,14 @@
-use std::error::Error;
+// use axum::{
+//     routing::get,
+//     Router,
+// };
 
-fn main() -> Result<(), Box<dyn Error>> {
-    let resp = reqwest::blocking::get("https://httpbin.org/ip")?.text()?;
-    println!("{:#?}", resp);
-    Ok(())
+#[tokio::main]
+async fn main() {
+    let app = axum::Router::new().route("/", axum::routing::get(|| async { "Hello, World!" }));
+
+    axum::Server::bind(&"0.0.0.0:3000".parse().unwrap())
+        .serve(app.into_make_service())
+        .await
+        .unwrap();
 }
