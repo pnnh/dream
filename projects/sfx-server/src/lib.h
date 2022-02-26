@@ -5,12 +5,17 @@
 #ifndef CPP_SERVER_LIB_H
 #define CPP_SERVER_LIB_H
 
-#include <string>
+//#include <string>
 
 //void initAws();
 //void initConfig();
-std::string HandleSitemap();
+
+//std::string HandleSitemap();
+
+extern "C" {
 
 int list_file(int input);
+}
+
 
 #endif //CPP_SERVER_LIB_H

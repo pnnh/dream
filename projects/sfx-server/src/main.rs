@@ -5,7 +5,7 @@ use axum::routing::get;
 use handlebars::Handlebars;
 use serde_json::json;
 
-#[link(name = "sfxcc")]
+#[link(name = "sfx_server_common")]
 extern {
     fn list_file(input: libc::c_int) -> libc::c_int;
 }
