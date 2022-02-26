@@ -23,12 +23,10 @@ endif (folly_FOUND)
 
 find_package(AWSSDK REQUIRED COMPONENTS s3 appconfig appconfigdata)
 
-add_executable(sfx-server-api
+add_library(sfx_server_library
+        src/lib.cc src/lib.h
         src/services/config/aws/init.cpp src/services/config/aws/init.h
-        src/main.cc
-        src/server/http_connection.cc
-        src/server/state.cc
-        src/utils/md5.cc src/server/handlers/index.cpp src/server/handlers/index.h
+        src/utils/md5.cc
         src/utils/mime.h src/utils/mime.cpp
         src/services/markdown/markdown.cpp src/services/markdown/mdtransform.hpp src/services/markdown/markdown.h
         src/services/config/aws/appconfig.cpp src/services/config/aws/appconfig.h src/services/database/postgresql/pq.cpp
@@ -37,6 +35,9 @@ add_executable(sfx-server-api
 find_library(PQXX_LIB pqxx)
 find_library(PQ_LIB pq)
 
-target_link_libraries(sfx-server-api ${AWSSDK_LINK_LIBRARIES}
-        ${AWSSDK_PLATFORM_DEPS})
-target_link_libraries(sfx-server-api ${PQXX_LIB} ${PQ_LIB})
+target_link_libraries(sfx_server_library ${AWSSDK_LINK_LIBRARIES} ${AWSSDK_PLATFORM_DEPS})
+target_link_libraries(sfx_server_library ${PQXX_LIB} ${PQ_LIB})
+
+add_executable(sfx_server src/bin/main.cc)
+target_link_libraries(sfx_server sfx_server_library)
+add_dependencies(sfx_server sfx_server_library)

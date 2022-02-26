@@ -1,7 +1,14 @@
+extern crate libc;
+
 use axum::response::Html;
 use axum::routing::get;
 use handlebars::Handlebars;
 use serde_json::json;
+
+#[link(name = "sfxcc")]
+extern {
+    fn list_file(input: libc::c_int) -> libc::c_int;
+}
 
 async fn index() -> Result<Html<String>, String> {
     let mut reg = Handlebars::new();
@@ -32,6 +39,10 @@ async fn html_file() -> Result<Html<String>, String> {
 
 #[tokio::main]
 async fn main() {
+    let input = 4;
+    let output = unsafe { list_file(input) };
+    println!("{} * 2 = {}", input, output);
+
     let app = axum::Router::new().route("/", axum::routing::get(|| async { "Hello, World!" }))
         .route("/html", get(index))
         .route("/file", get(html_file));
