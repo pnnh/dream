@@ -1,10 +1,5 @@
-use std::error::Error;
-
-use axum::{
-    Router,
-    routing::get,
-};
 use axum::response::Html;
+use axum::routing::get;
 use handlebars::Handlebars;
 use serde_json::json;
 
@@ -25,12 +20,23 @@ async fn index() -> Result<Html<String>, String> {
     Ok(Html(html))
 }
 
+async fn html_file() -> Result<Html<String>, String> {
+    let mut reg = Handlebars::new();
+    reg.register_template_file("index", "assets/templates/index.html").unwrap();
+    let result = reg.render("index", &json!({"name": "World"}))
+        .map_err(|err| err.to_string())?;
+    println!("{}", result);
+
+    Ok(Html(result))
+}
+
 #[tokio::main]
 async fn main() {
     let app = axum::Router::new().route("/", axum::routing::get(|| async { "Hello, World!" }))
-        .route("/html", get(index));
+        .route("/html", get(index))
+        .route("/file", get(html_file));
 
-    axum::Server::bind(&"0.0.0.0:3000".parse().unwrap())
+    axum::Server::bind(&"0.0.0.0:5500".parse().unwrap())
         .serve(app.into_make_service())
         .await
         .unwrap();
