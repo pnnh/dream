@@ -6,9 +6,10 @@ set(CMAKE_VERBOSE_MAKEFILE on)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 # 优先查找静态库，保证 .a 后缀在前面，把默认的后缀加上
-set(CMAKE_FIND_LIBRARY_SUFFIXES .a)
+#set(CMAKE_FIND_LIBRARY_SUFFIXES .
+set(CMAKE_PREFIX_PATH "/home/ubuntu/.nix-profile/lib")
 
-find_package(PkgConfig REQUIRED)
+#find_package(PkgConfig REQUIRED)
 
 find_package(Boost COMPONENTS system thread REQUIRED)
 if (Boost_FOUND)
@@ -32,12 +33,12 @@ add_library(sfx_server_common SHARED
         src/models/article.cpp src/models/article.h
         src/utils/datetime.cpp src/utils/datetime.h)
 
-#find_library(PQXX_LIB pqxx)
+find_library(PQXX_LIB pqxx)
 find_library(PQ_LIB pq)
 
 target_link_libraries(sfx_server_common ${AWSSDK_LINK_LIBRARIES} ${AWSSDK_PLATFORM_DEPS})
-target_link_libraries(sfx_server_common ${PQ_LIB})
-install(TARGETS sfx_server_common DESTINATION .)
+target_link_libraries(sfx_server_common ${PQXX_LIB} ${PQ_LIB})
+#install(TARGETS sfx_server_common DESTINATION .)
 
 
 add_executable(sfx_server src/bin/main.cc)
