@@ -6,7 +6,7 @@
 #include "server/http_connection.h"
 #include "services/config/aws/init.h"
 #include "services/config/aws/appconfig.h"
-#include "services/database/postgresql/pq.h"
+#include "src/utils/ctemplate.h"
 
 namespace beast = boost::beast;         // from <boost/beast.hpp>
 namespace http = beast::http;           // from <boost/beast/http.hpp>
@@ -24,6 +24,9 @@ void http_server(tcp::acceptor &acceptor, tcp::socket &socket) {
 
 int main(int argc, char *argv[]) {
     std::cout << "Hello, World!" << std::endl;
+    render_template();
+
+    return 0;
     initAws();
     std::string region = "ap-east-1";
     initConfig();
