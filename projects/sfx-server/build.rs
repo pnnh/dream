@@ -10,7 +10,7 @@
 // }
 
 fn main() {
-    println!("cargo:rustc-link-arg=-Wl,-rpath={}", "/home/ubuntu/Projects/sfxui/projects/sfx-server/cmake-build-debug");
+    println!("cargo:rustc-link-arg=-Wl,-rpath={}", "cmake-build-debug");
     println!("cargo:rustc-link-lib=dylib=sfx_server_common");
-    println!("cargo:rustc-link-search=native=/home/ubuntu/Projects/sfxui/projects/sfx-server/cmake-build-debug");
+    println!("cargo:rustc-link-search=native=cmake-build-debug");
 }

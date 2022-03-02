@@ -1,13 +1,18 @@
 extern crate libc;
 
+use std::ffi::CStr;
+use std::str;
+
 use axum::response::Html;
 use axum::routing::get;
 use handlebars::Handlebars;
+use libc::c_char;
 use serde_json::json;
 
 #[link(name = "sfx_server_common")]
 extern {
     fn list_file(input: libc::c_int) -> libc::c_int;
+    fn return_string() -> *const c_char;
 }
 
 async fn index() -> Result<Html<String>, String> {
@@ -42,6 +47,11 @@ async fn main() {
     let input = 4;
     let output = unsafe { list_file(input) };
     println!("{} * 2 = {}", input, output);
+
+    let c_buf: *const c_char = unsafe { return_string() };
+    let c_str: &CStr = unsafe { CStr::from_ptr(c_buf) };
+    let str_slice: &str = c_str.to_str().unwrap();
+    println!("return_string: {}", str_slice);
 
     let app = axum::Router::new().route("/", axum::routing::get(|| async { "Hello, World!" }))
         .route("/html", get(index))
