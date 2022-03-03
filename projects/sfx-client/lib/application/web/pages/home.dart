@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sfxui/application/web/pages/random.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomePageWidget extends StatelessWidget {
@@ -12,7 +13,6 @@ class HomePageWidget extends StatelessWidget {
           children: [
             Container(
               width: 1024,
-              color: Colors.lightBlue,
               child: Row(
                 // mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -40,6 +40,18 @@ class HomePageWidget extends StatelessWidget {
                   Text("动态"),
                   Text("随机值")
                 ],
+              ),
+            ),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              width: 1024,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [RandomWidget()],
               ),
             )
           ],
