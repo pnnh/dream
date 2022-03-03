@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'application/application.dart';
 import 'dart:io' show Platform;
 import 'package:flutter/foundation.dart' show kIsWeb;
-
-
+import 'package:sfxui/application/desktop/application.dart';
+import 'package:sfxui/application/web/application.dart';
 
 void main() {
-
   var platformName = '';
   if (kIsWeb) {
     platformName = "Web";
@@ -26,19 +24,11 @@ void main() {
       platformName = "Windows";
     }
   }
-  print("platformName :- "+platformName.toString());
+  print("platformName :- " + platformName.toString());
 
   if (kIsWeb) {
-    runApp(SFXApplication());
+    runApp(WebApplication());
   } else {
-    runApp(
-      const Center(
-        child: Text(
-          'Hello, world!',
-          textDirection: TextDirection.ltr,
-        ),
-      ),
-    );
+    runApp(DesktopApplication());
   }
-
 }

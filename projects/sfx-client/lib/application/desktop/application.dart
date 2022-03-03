@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:sfxui/editor/editor.dart';
 
-class SFXApplication extends StatelessWidget {
+class DesktopApplication extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: '路由切换示例',
+      title: '桌面应用',
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
