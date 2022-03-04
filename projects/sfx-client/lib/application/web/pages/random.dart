@@ -14,6 +14,7 @@ class _MyStatefulWidgetState extends State<RandomWidget> {
   bool hasNumber = true;
   bool hasSymbol = false;
   int length = 16;
+  String password = "";
 
   @override
   Widget build(BuildContext context) {
@@ -129,7 +130,7 @@ class _MyStatefulWidgetState extends State<RandomWidget> {
         Padding(
             padding: const EdgeInsets.all(8),
             child: SizedBox(
-              width: 100,
+              width: 48,
               height: 32,
               child: TextField(
                 decoration: InputDecoration(
@@ -148,7 +149,29 @@ class _MyStatefulWidgetState extends State<RandomWidget> {
                   });
                 },
               ),
-            ))
+            )),
+        Padding(
+          padding: const EdgeInsets.all(8),
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(fixedSize: Size(100, 32)),
+            onPressed: () {
+              setState(() {
+                password = "aaaaa";
+              });
+            },
+            child: Text(
+              "生成密码",
+              style: TextStyle(fontSize: 14, height: 1),
+            ),
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.all(8),
+          child: Text(
+            password,
+            style: TextStyle(fontSize: 20),
+          ),
+        )
       ],
     );
   }
