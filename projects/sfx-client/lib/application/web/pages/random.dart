@@ -87,6 +87,8 @@ class _MyStatefulWidgetState extends State<RandomWidget> {
               Checkbox(
                 checkColor: Colors.white,
                 fillColor: MaterialStateProperty.resolveWith(getColor),
+                hoverColor: Colors.transparent,
+                splashRadius: 0,
                 value: isChecked,
                 onChanged: (bool? value) {
                   setState(() {
@@ -94,7 +96,10 @@ class _MyStatefulWidgetState extends State<RandomWidget> {
                   });
                 },
               ),
-              Text("大写字母")
+              Text(
+                "大写字母",
+                style: TextStyle(fontSize: 14, height: 1),
+              )
             ],
           ),
         )
