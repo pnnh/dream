@@ -13,6 +13,7 @@ dependencies:
   http:
   provider:
   url_launcher: ^6.0.20
+  js:
 
 flutter:
   uses-material-design: true
