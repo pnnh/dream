@@ -1,3 +1,5 @@
+import 'dart:js' as js;
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -158,6 +160,8 @@ class _MyStatefulWidgetState extends State<RandomWidget> {
               setState(() {
                 password = "aaaaa";
               });
+
+              print(js.context.callMethod("sayHello"));
             },
             child: Text(
               "生成密码",

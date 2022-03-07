@@ -44,8 +44,8 @@ const config = defineConfig(({command, mode}) => {
             console.debug('assetFileNames', chunkInfo.name, baseName, extName)
             return baseName
           },
-          dir: path.resolve(__dirname, 'dist'),
-          format: 'esm',
+          // dir: path.resolve(__dirname, 'dist'),
+          // format: 'esm',
           manualChunks (id) {
             // 每个npm包一个chunk
             if (id.includes('node_modules')) {

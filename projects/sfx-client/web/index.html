@@ -1,31 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="写下想说的话">
+    <meta charset="UTF-8">
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+    <meta content="写下想说的话" name="description">
 
-  <!-- iOS meta tags & icons -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="诉记">
-  <link rel="apple-touch-icon" href="icons/Icon-128.png">
+    <!-- iOS meta tags & icons -->
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="诉记" name="apple-mobile-web-app-title">
+    <link href="icons/Icon-128.png" rel="apple-touch-icon">
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
+    <!-- Favicon -->
+    <link href="favicon.png" rel="icon" type="image/png"/>
 
-  <title>诉记</title>
-  <link rel="manifest" href="manifest.json">
+    <title>诉记</title>
+    <link href="manifest.json" rel="manifest">
 </head>
 <body>
-  <script>
+<script src="./dist/index.js" type="application/javascript"></script>
+<script src="main.dart.js" type="application/javascript"></script>
+<script>
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function () {
-        navigator.serviceWorker.register('flutter_service_worker.js');
-      });
+        window.addEventListener('load', function () {
+            navigator.serviceWorker.register('flutter_service_worker.js');
+        });
     }
-  </script>
-  <script src="./dist/index.js" type="module"></script>
-  <script src="main.dart.js" type="application/javascript"></script>
+</script>
+<script src="main.dart.js" type="application/javascript"></script>
 </body>
 </html>
