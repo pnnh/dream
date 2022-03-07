@@ -1,0 +1,22 @@
+{
+  "name": "sfxui",
+  "version": "1.0.0",
+  "workspaces": [
+    "pkg"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build --watch"
+  },
+  "dependencies": {
+    "@pnnh/hello-wasm": "^0.1.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^20.0.0",
+    "@rollup/plugin-node-resolve": "^13.0.0",
+    "@rollup/plugin-wasm": "^5.1.2",
+    "rollup": "^2.51.2",
+    "rollup-plugin-visualizer": "^5.5.0",
+    "vite": "^2.7.1"
+  }
+}
