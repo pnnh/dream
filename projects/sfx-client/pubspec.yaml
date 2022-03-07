@@ -20,4 +20,4 @@ flutter:
   fonts:
     - family: Cookie
       fonts:
-        - asset: assets/fonts/Cookie-Regular.ttf
+        - asset: static/fonts/Cookie-Regular.ttf
