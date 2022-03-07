@@ -4,7 +4,7 @@ import path from 'path'
 
 const config = defineConfig(({command, mode}) => {
   let inputFiles = ['src/index.js']
-  let baseUrl = "/packages/dist/"
+  let baseUrl = "/dist/"
 
   if (mode === 'development') {
     baseUrl = "/"
