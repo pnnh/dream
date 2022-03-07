@@ -5,7 +5,7 @@
     "packages/**"
   ],
   "scripts": {
-    "dev": "vite",
+    "debug": "vite",
     "build": "vite build --watch"
   },
   "dependencies": {

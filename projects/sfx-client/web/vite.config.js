@@ -3,12 +3,10 @@ import path from 'path'
 
 
 const config = defineConfig(({command, mode}) => {
-  let inputFiles = ['src/index.js']
   let baseUrl = "/dist/"
 
   if (mode === 'development') {
     baseUrl = "/"
-    inputFiles = ['index.html']
   }
 
   return {
@@ -17,13 +15,14 @@ const config = defineConfig(({command, mode}) => {
       hmr: true,
       fs: {
         allow: ['../..']
-      }
+      },
+      open: '/debug.html'
     },
     build: {
       emptyOutDir: true,
       outDir: 'dist',
       rollupOptions: {
-        input: inputFiles,
+        input: ['src/index.js'],
         output: {
           entryFileNames: (chunkInfo) => {
             if (!chunkInfo.facadeModuleId) {
