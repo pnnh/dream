@@ -4,37 +4,13 @@ import path from 'path'
 
 const config = defineConfig(({command, mode}) => {
     return {
-        base: "/",
-        server: {
-            hmr: true
-        },
+        base: "/dist/",
         build: {
-            emptyOutDir: false,
-            outDir: 'web',
+            emptyOutDir: true,
+            outDir: 'web/dist',
             rollupOptions: {
-                input: ['index.html'],
+                input: ['index.js'],
                 output: {
-                    // entryFileNames: (chunkInfo) => {
-                    //     if (!chunkInfo.facadeModuleId) {
-                    //         throw new Error('entryFileNames facadeModuleId为空')
-                    //     }
-                    //     const baseName = path.basename(chunkInfo.facadeModuleId)
-                    //     const extName = path.extname(baseName)
-                    //     console.debug('entryFileNames', chunkInfo.facadeModuleId, baseName)
-                    //     const fileName = baseName.replace(extName, '.js')
-                    //     return fileName
-                    // },
-                    // assetFileNames: (chunkInfo) => {
-                    //     if (!chunkInfo.name) {
-                    //         throw new Error('assetFileNames name为空')
-                    //     }
-                    //     const baseName = path.basename(chunkInfo.name)
-                    //     const extName = path.extname(baseName)
-                    //     console.debug('assetFileNames', chunkInfo.name, baseName, extName)
-                    //     return baseName
-                    // },
-                    // dir: path.resolve(__dirname, 'dist'),
-                    // format: 'esm',
                     manualChunks(id) {
                         // 每个npm包一个chunk
                         if (id.includes('node_modules')) {
