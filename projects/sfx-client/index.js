@@ -1,5 +1,3 @@
-import ReactDOM from 'react-dom'
-import React from 'react'
 import init, {excited_greeting, init_console_error_panic_hook, random_greeting, random_string} from "@pnnh/hello-wasm";
 
 // init().then((_exports) => {
@@ -28,25 +26,10 @@ async function randomString(length, hasNumber, hasLetter, hasUppercase, hasSymbo
     await init()
     init_console_error_panic_hook()
     console.log('random: ')
-    const result = random_string(16, false, false, false, false);
+    const result = random_string(length, hasNumber, hasLetter, hasUppercase, hasSymbol);
     console.log('random2222: ', result)
     return result
 }
 
 window.sayHello = sayHello
 window.randomString = randomString
-
-
-function App() {
-    return <div>
-        <button onClick={() => {
-            sayHello().then()
-        }}>随机
-        </button>
-    </div>
-}
-
-const rootElement = document.getElementById('root')
-if (rootElement) {
-    ReactDOM.render(<App/>, rootElement)
-}

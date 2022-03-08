@@ -170,11 +170,11 @@ class _MyStatefulWidgetState extends State<RandomWidget> {
             style: ElevatedButton.styleFrom(fixedSize: Size(100, 32)),
             onPressed: () async {
               //var result = await promiseToFuture(sayHello());
-              // var result = await promiseToFuture(
-              //     randomString(length, hasNumber, hasLetter, hasUppercaseLetter,
-              //         hasSymbol));
               var result = await promiseToFuture(
-                  randomString(length, false, false, false, false));
+                  randomString(length, hasNumber, hasLetter, hasUppercaseLetter,
+                      hasSymbol));
+              // var result = await promiseToFuture(
+              //     randomString(length, false, false, false, false));
               print("--> $result");
               setState(() {
                 password = result;
