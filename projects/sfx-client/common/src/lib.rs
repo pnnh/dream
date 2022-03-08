@@ -1,3 +1,5 @@
+mod random;
+
 extern crate wasm_bindgen;
 extern crate rand;
 extern crate js_sys;
@@ -5,15 +7,6 @@ extern crate web_sys;
 
 use rand::Rng;
 use wasm_bindgen::prelude::*;
-
-#[wasm_bindgen]
-extern "C" {
-    pub fn alert(s: &str);
-
-    #[wasm_bindgen(js_namespace = console, js_name = log)]
-    fn log(a: &str);
-}
-
 
 #[wasm_bindgen]
 pub fn greet(name: &str) -> String {

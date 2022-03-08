@@ -167,6 +167,9 @@ class _MyStatefulWidgetState extends State<RandomWidget> {
             onPressed: () async {
               var result = await promiseToFuture(sayHello());
               print("--> $result");
+              setState(() {
+                password = result;
+              });
             },
             child: Text(
               "生成密码",
