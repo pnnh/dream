@@ -2,14 +2,16 @@
   "name": "sfxui",
   "version": "1.0.0",
   "workspaces": [
-    "common/pkg"
+    "pkg"
   ],
   "scripts": {
     "debug": "vite",
     "build": "vite build --watch"
   },
   "dependencies": {
-    "@pnnh/hello-wasm": "^0.1.0"
+    "@pnnh/hello-wasm": "^0.1.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
   },
   "devDependencies": {
     "vite": "^2.7.1"

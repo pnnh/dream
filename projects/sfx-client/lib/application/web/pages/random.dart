@@ -1,7 +1,15 @@
+@JS()
+library my_lib; //Not avoid the library annotation
+
 import 'dart:js' as js;
+import 'dart:js_util';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:js/js.dart';
+
+@JS()
+external sayHello();
 
 class RandomWidget extends StatefulWidget {
   const RandomWidget({Key? key}) : super(key: key);
@@ -156,12 +164,9 @@ class _MyStatefulWidgetState extends State<RandomWidget> {
           padding: const EdgeInsets.all(8),
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(fixedSize: Size(100, 32)),
-            onPressed: () {
-              setState(() {
-                password = "aaaaa";
-              });
-
-              print(js.context.callMethod("sayHello"));
+            onPressed: () async {
+              var result = await promiseToFuture(sayHello());
+              print("--> $result");
             },
             child: Text(
               "生成密码",
@@ -198,4 +203,9 @@ class LimitRangeTextInputFormatter extends TextInputFormatter {
     }
     return newValue;
   }
+}
+
+Future getSomething(String someValue) async {
+  var result = await js.context.callMethod('sayHello');
+  return result;
 }

@@ -1,3 +1,5 @@
+import ReactDOM from 'react-dom'
+import React from 'react'
 import init, {excited_greeting, random_greeting} from '@pnnh/hello-wasm'
 
 // init().then((_exports) => {
@@ -17,8 +19,14 @@ export async function sayHello() {
     console.log("hello9", result2)
     const a = random_greeting(16)
     console.log('received', a)
-    return a.toString()
 }
 
-window.sayHello = sayHello
+function App() {
+    sayHello().then()
+    return <div></div>
+}
 
+const rootElement = document.getElementById('root')
+if (rootElement) {
+    ReactDOM.render(<App/>, rootElement)
+}
