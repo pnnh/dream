@@ -18,7 +18,7 @@ const config = defineConfig(({command, mode}) => {
             emptyOutDir: true,
             outDir: 'web/dist',
             rollupOptions: {
-                input: ['index.js'],
+                input: ['src/index.js'],
                 output: {
                     entryFileNames: (chunkInfo) => {
                         if (!chunkInfo.facadeModuleId) {
