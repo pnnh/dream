@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom'
 import React from 'react'
-import init, {excited_greeting, random_greeting} from '@pnnh/hello-wasm'
+import init, {random_string} from '@pnnh/hello-wasm'
 
 // init().then((_exports) => {
 //     let result = greet('WebAssembly')
@@ -13,17 +13,18 @@ import init, {excited_greeting, random_greeting} from '@pnnh/hello-wasm'
 
 
 export async function sayHello() {
-    console.log("hello6")
     await init()
-    const result2 = excited_greeting("hasOwnProperty")
-    console.log("hello9", result2)
-    const a = random_greeting(16)
+    const a = random_string(16, true, false, false, false)
     console.log('received', a)
 }
 
 function App() {
-    sayHello().then()
-    return <div></div>
+    return <div>
+        <button onClick={() => {
+            sayHello().then()
+        }}>随机
+        </button>
+    </div>
 }
 
 const rootElement = document.getElementById('root')

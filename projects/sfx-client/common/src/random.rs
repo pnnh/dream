@@ -6,40 +6,48 @@ use wasm_bindgen::prelude::*;
 #[wasm_bindgen]
 pub fn random_string(mut length: u32, has_number: bool, has_letter: bool,
                      has_uppercase: bool, has_symbol: bool) -> String {
-    let mut rng = rand::thread_rng();
-
-    let chars_number = "0123456789";
-    let chars_letter = "abcdefghijklmnopqrstuvwxyz";
-    let chars_uppercase_letter = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    let chars_symbol = "~!@#$%^&*()_+=-[]}{;:,<>?/.";
-
-    let mut all_chars: String = "".into();
-
-    if has_number {
-        all_chars += chars_number;
-    }
-    if has_letter {
-        all_chars += chars_letter;
-    }
-    if has_uppercase {
-        all_chars += chars_uppercase_letter;
-    }
-    if has_symbol {
-        all_chars += chars_symbol;
-    }
-
-    if length < 2 {
-        length = 2;
-    } else if length > 256 {
-        length = 256
-    }
-
-    let mut chars: String = "".into();
-
-    for _ in 0..length {
-        let index = rng.gen_range(0..all_chars.len());
-        chars += &all_chars[index..index+1];
-    }
-
+    let mut chars: String = "aa".into();
+    //chars += "bb";
     chars.to_string()
+
+    // let mut rng = rand::thread_rng();
+    //
+    // let chars_number = "0123456789";
+    // let chars_letter = "abcdefghijklmnopqrstuvwxyz";
+    // let chars_uppercase_letter = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    // let chars_symbol = "~!@#$%^&*()_+=-[]}{;:,<>?/.";
+    //
+    // let mut all_chars: String = "".into();
+    //
+    // if has_number {
+    //     all_chars += chars_number;
+    // }
+    // if has_letter {
+    //     all_chars += chars_letter;
+    // }
+    // if has_uppercase {
+    //     all_chars += chars_uppercase_letter;
+    // }
+    // if has_symbol {
+    //     all_chars += chars_symbol;
+    // }
+    //
+    // let mut chars: String = "aa".into();
+    //
+    // if all_chars.len() < 1 {
+    //     return chars;
+    // }
+    //
+    // if length < 2 {
+    //     length = 2;
+    // } else if length > 256 {
+    //     length = 256
+    // }
+    //
+    // for _ in 0..length {
+    //     let index = rng.gen_range(0..all_chars.len());
+    //     chars += &all_chars[index..index+1];
+    // }
+    //
+    // chars.to_string()
 }

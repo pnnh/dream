@@ -1,5 +1,5 @@
 mod random;
-
+extern crate console_error_panic_hook;
 extern crate wasm_bindgen;
 extern crate rand;
 extern crate js_sys;
@@ -7,6 +7,11 @@ extern crate web_sys;
 
 use rand::Rng;
 use wasm_bindgen::prelude::*;
+
+#[wasm_bindgen]
+pub fn init_console_error_panic_hook() {
+    console_error_panic_hook::set_once();
+}
 
 #[wasm_bindgen]
 pub fn greet(name: &str) -> String {

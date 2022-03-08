@@ -11,6 +11,10 @@ import 'package:js/js.dart';
 @JS()
 external sayHello();
 
+@JS()
+external String randomString(int length, bool has_number, bool has_letter,
+    bool has_uppercase, bool has_symbol);
+
 class RandomWidget extends StatefulWidget {
   const RandomWidget({Key? key}) : super(key: key);
 
@@ -165,7 +169,12 @@ class _MyStatefulWidgetState extends State<RandomWidget> {
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(fixedSize: Size(100, 32)),
             onPressed: () async {
-              var result = await promiseToFuture(sayHello());
+              //var result = await promiseToFuture(sayHello());
+              // var result = await promiseToFuture(
+              //     randomString(length, hasNumber, hasLetter, hasUppercaseLetter,
+              //         hasSymbol));
+              var result = await promiseToFuture(
+                  randomString(length, false, false, false, false));
               print("--> $result");
               setState(() {
                 password = result;

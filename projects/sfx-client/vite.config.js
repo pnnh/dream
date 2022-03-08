@@ -3,42 +3,36 @@ import path from 'path'
 
 
 const config = defineConfig(({command, mode}) => {
-    let baseUrl = "/dist/"
-
-    if (mode === 'development') {
-        baseUrl = "/"
-    }
-
     return {
-        base: baseUrl,
+        base: "/",
         server: {
             hmr: true
         },
         build: {
-            emptyOutDir: true,
-            outDir: 'web/dist',
+            emptyOutDir: false,
+            outDir: 'web',
             rollupOptions: {
-                input: ['src/index.js'],
+                input: ['index.html'],
                 output: {
-                    entryFileNames: (chunkInfo) => {
-                        if (!chunkInfo.facadeModuleId) {
-                            throw new Error('entryFileNames facadeModuleId为空')
-                        }
-                        const baseName = path.basename(chunkInfo.facadeModuleId)
-                        const extName = path.extname(baseName)
-                        console.debug('entryFileNames', chunkInfo.facadeModuleId, baseName)
-                        const fileName = baseName.replace(extName, '.js')
-                        return fileName
-                    },
-                    assetFileNames: (chunkInfo) => {
-                        if (!chunkInfo.name) {
-                            throw new Error('assetFileNames name为空')
-                        }
-                        const baseName = path.basename(chunkInfo.name)
-                        const extName = path.extname(baseName)
-                        console.debug('assetFileNames', chunkInfo.name, baseName, extName)
-                        return baseName
-                    },
+                    // entryFileNames: (chunkInfo) => {
+                    //     if (!chunkInfo.facadeModuleId) {
+                    //         throw new Error('entryFileNames facadeModuleId为空')
+                    //     }
+                    //     const baseName = path.basename(chunkInfo.facadeModuleId)
+                    //     const extName = path.extname(baseName)
+                    //     console.debug('entryFileNames', chunkInfo.facadeModuleId, baseName)
+                    //     const fileName = baseName.replace(extName, '.js')
+                    //     return fileName
+                    // },
+                    // assetFileNames: (chunkInfo) => {
+                    //     if (!chunkInfo.name) {
+                    //         throw new Error('assetFileNames name为空')
+                    //     }
+                    //     const baseName = path.basename(chunkInfo.name)
+                    //     const extName = path.extname(baseName)
+                    //     console.debug('assetFileNames', chunkInfo.name, baseName, extName)
+                    //     return baseName
+                    // },
                     // dir: path.resolve(__dirname, 'dist'),
                     // format: 'esm',
                     manualChunks(id) {
