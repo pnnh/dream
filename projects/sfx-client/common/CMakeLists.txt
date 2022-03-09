@@ -54,3 +54,4 @@ add_executable(cmain src/main.c)
 target_link_libraries(cmain hello_wasm)
 
 add_subdirectory(src/hello_world)
+add_subdirectory(src/bin/structs_library)
