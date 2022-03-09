@@ -1,4 +1,6 @@
 mod random;
+mod cinter;
+
 extern crate console_error_panic_hook;
 extern crate wasm_bindgen;
 extern crate rand;

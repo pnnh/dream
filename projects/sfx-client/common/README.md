@@ -9,7 +9,6 @@
 ```shell
 # 配置了以下cmake参数
 -DCMAKE_PREFIX_PATH=~/Qt/6.2.0/macos/lib/cmake
--DCMAKE_BUILD_TYPE:STRING=MinSizeRel
 -DCMAKE_TOOLCHAIN_FILE:PATH=~/Qt/6.2.0/wasm_32/lib/cmake/Qt6/qt.toolchain.cmake
 ```
 
@@ -23,4 +22,22 @@
 
 ```bash
 wasm-pack build --scope pnnh --target web
+```
+
+安装cbindgen
+
+```bash
+cargo install cbindgen
+```
+
+生成C头文件
+
+```bash
+cbindgen --config cbindgen.toml --crate hello-wasm --output include/hello_wasm.h
+```
+
+编译动态链接库
+
+```bash
+cargo build
 ```

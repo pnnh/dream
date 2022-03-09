@@ -6,10 +6,6 @@ use wasm_bindgen::prelude::*;
 #[wasm_bindgen]
 pub fn random_string(length: u32, has_number: bool, has_letter: bool,
                      has_uppercase: bool, has_symbol: bool) -> String {
-    // let mut chars: String = "aa".into();
-    // //chars += "bb";
-    // chars.to_string()
-
     let mut rng = rand::thread_rng();
 
     let chars_number = "0123456789";

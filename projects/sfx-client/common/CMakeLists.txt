@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.15)
 
 SET(PROJECT_NAME qt-canvas)
 
-project(${PROJECT_NAME} VERSION 0.1 LANGUAGES CXX)
+project(${PROJECT_NAME} VERSION 0.1 LANGUAGES C CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -10,15 +10,26 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
+set(C_STANDARD C25)
 set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 include_directories(${PROJECT_SOURCE_DIR})
+include_directories(${PROJECT_SOURCE_DIR}/include)
+link_directories(${PROJECT_SOURCE_DIR}/lib)
+
+# Mac系统使用内置的pthreads
+IF(APPLE)
+    set(CMAKE_THREAD_LIBS_INIT "-lpthread")
+    set(CMAKE_HAVE_THREADS_LIBRARY 1)
+    set(CMAKE_USE_WIN32_THREADS_INIT 0)
+    set(CMAKE_USE_PTHREADS_INIT 1)
+    set(THREADS_PREFER_PTHREAD_FLAG ON)
+ENDIF()
 
 find_package(Qt6 COMPONENTS Core REQUIRED)
 
 set(PROJECT_SOURCES
-        main.cpp
+        src/main.cpp
         src/stele/stele.cpp src/stele/stele.h
         src/md5.cc src/md5.h
         src/wasm/wasm.h
@@ -38,3 +49,6 @@ if (EMSCRIPTEN)
 endif ()
 
 qt_finalize_executable(${PROJECT_NAME})
+
+add_executable(cmain src/main.c)
+target_link_libraries(cmain hello_wasm)
