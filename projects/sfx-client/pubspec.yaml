@@ -7,6 +7,13 @@ version: 1.0.0
 environment:
   sdk: ">=2.12.0 <3.0.0"
 
+flutter:
+  uses-material-design: true
+  fonts:
+    - family: Cookie
+      fonts:
+        - asset: static/fonts/Cookie-Regular.ttf
+
 dependencies:
   flutter:
     sdk: flutter
@@ -14,10 +21,7 @@ dependencies:
   provider:
   url_launcher: ^6.0.20
   js:
+  path:
 
-flutter:
-  uses-material-design: true
-  fonts:
-    - family: Cookie
-      fonts:
-        - asset: static/fonts/Cookie-Regular.ttf
+dev_dependencies:
+  flutter_lints:
