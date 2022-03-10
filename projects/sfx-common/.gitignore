@@ -2,7 +2,6 @@ cmake-build-*
 target/
 pkg/
 .idea/
-cmake-build-*
 build/
 gen/
 dist/
@@ -12,4 +11,3 @@ GPATH
 GTAGS
 GRTAGS
 ID
-/target
