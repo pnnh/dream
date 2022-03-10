@@ -1,0 +1,74 @@
+{{ define "article/article.gohtml" }}
+	<!DOCTYPE html>
+	<html lang="zh">
+	<head>
+        {{ template "partial/headmeta.gohtml" }}
+        {{ template "partial/analytics.gohtml" }}
+		<title>{{.title}} - 泛涵</title>
+		<meta name="description" content="{{.description}}"/>
+		<meta name="keywords" content="{{.keywords}}"/>
+		<link rel="canonical" href="https://www.sfx.xyz/article/read/{{.pk}}"/>
+		{{ template "res/css.gohtml" }}
+	</head>
+	<body class="article-read-page">
+	<div>
+        {{ template "partial/header.gohtml" }}
+		<main>
+				<div class="page-left">
+					<article>
+						<div class="article-title">
+							<h1 id="{{.title}}">{{.title}}</h1>
+							<div class="description">{{.description}}</div>
+							<div class="keywords-list">
+								{{range .keywordsList}}
+									<span class="keyword">{{.}}</span>
+								{{end}}
+							</div>
+						</div>
+						<div class="article-body">
+							{{.body}}
+						</div>
+					</article>
+				</div>
+				<div class="page-right">
+					<div class="creator-info fx-card">
+						<div class="fx-card-body">
+							{{with .creator}}
+								<div class="profile">
+									<div class="profile-left">
+										<a href="/user/{{.pk}}">
+											<img src="{{.photo}}" alt="作者头像" class="creator-photo"/>
+										</a>
+									</div>
+									<div class="profile-right">
+										<a class="nickname fx-link" href="/user/{{.pk}}">{{.nickname}}</a>
+										<span class="email">{{.email}}</span>
+									</div>
+								</div>
+								<div class="desc">{{.description}}</div>
+							{{end}}
+						</div>
+					</div>
+					<div class="article-toc fx-card">
+						<div class="fx-card-title">文章目录</div>
+						<div class="fx-card-body">
+							{{range .tocList}}
+								{{with .}}
+									<div class="toc-item" style="padding-left: calc(8px*{{.Header}});">
+										<a class="fx-link" href="#{{.Title}}" title="{{.Title}}">{{.Title}}</a>
+									</div>
+								{{end}}
+							{{end}}
+						</div>
+					</div>
+				</div>
+		</main>
+        {{ template "partial/footer.gohtml" }}
+	</div>
+
+	<div id="root"></div>
+	<script id="data" type="application/json">{{.data}}</script>
+	{{ template "res/js.gohtml" }}
+	</body>
+	</html>
+{{ end }}

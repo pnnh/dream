@@ -1,0 +1,23 @@
+{{ define "utils/timestamp.gohtml" }}
+	<!DOCTYPE html>
+	<html lang="zh">
+	<head>
+        {{ template "partial/headmeta.gohtml" }}
+        {{ template "partial/analytics.gohtml" }}
+		<title>时间戳 - 泛涵</title>
+		<meta name="keywords" content="timestamp"/>
+		<meta name="description" content="Unix时间戳小工具"/>
+		{{ template "res/css.gohtml" }}
+	</head>
+	<body>
+	<div class="ms-Grid" dir="ltr">
+        {{ template "partial/header.gohtml" }}
+		<main>
+			<fx-timestamp></fx-timestamp>
+		</main>
+        {{ template "partial/footer.gohtml" }}
+	</div>
+	{{ template "res/js.gohtml" }}
+	</body>
+	</html>
+{{ end }}

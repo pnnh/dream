@@ -1,0 +1,23 @@
+{{ define "utils/md5.gohtml" }}
+	<!DOCTYPE html>
+	<html lang="zh">
+	<head>
+        {{ template "partial/headmeta.gohtml" }}
+        {{ template "partial/analytics.gohtml" }}
+		<title>加解密 - 泛涵</title>
+		<meta name="keywords" content="md5,aes"/>
+		<meta name="description" content="在线加解密工具"/>
+		{{ template "res/css.gohtml" }}
+	</head>
+	<body>
+	<div class="ms-Grid" dir="ltr">
+        {{ template "partial/header.gohtml" }}
+		<main>
+			<fx-md5></fx-md5>
+		</main>
+        {{ template "partial/footer.gohtml" }}
+	</div>
+	{{ template "res/js.gohtml" }}
+	</body>
+	</html>
+{{ end }}
