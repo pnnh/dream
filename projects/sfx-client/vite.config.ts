@@ -9,8 +9,9 @@ const config = defineConfig(({command, mode}) => {
             emptyOutDir: true,
             outDir: 'web/dist',
             rollupOptions: {
-                input: ['index.js'],
+                input: ['src/index.tsx', 'src/index.scss'],
                 output: {
+                    format: 'es',
                     entryFileNames: (chunkInfo) => {
                         if (!chunkInfo.facadeModuleId) {
                             throw new Error('entryFileNames facadeModuleId为空')
