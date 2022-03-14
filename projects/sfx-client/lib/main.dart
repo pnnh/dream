@@ -2,10 +2,12 @@ import 'dart:io' show Platform;
 
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
-import 'package:sfxui/application/desktop/application.dart';
-import 'package:sfxui/application/web/application.dart';
+import 'package:sfxui/application/desktop/application.dart'
+    if (dart.library.html) 'package:sfxui/application/web/application.dart'
+    as application;
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   var platformName = '';
   if (kIsWeb) {
     platformName = "Web";
@@ -26,9 +28,6 @@ void main() {
   }
   print("platformName :- " + platformName.toString());
 
-  if (kIsWeb) {
-    runApp(WebApplication());
-  } else {
-    runApp(DesktopApplication());
-  }
+  await application.initApp();
+  runApp(application.Application());
 }

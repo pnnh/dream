@@ -25,6 +25,7 @@ dependencies:
   ffi:
   hive:
   hive_flutter:
+  desktop_window:
 
 dev_dependencies:
   flutter_lints:

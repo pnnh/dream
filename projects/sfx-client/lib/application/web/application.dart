@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sfxui/application/web/pages/home.dart';
 
-class WebApplication extends StatelessWidget {
+class Application extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -11,3 +11,5 @@ class WebApplication extends StatelessWidget {
     );
   }
 }
+
+void initApp() async {}
