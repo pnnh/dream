@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-
 import 'dart:io' show Platform;
+
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:flutter/material.dart';
 import 'package:sfxui/application/desktop/application.dart';
 import 'package:sfxui/application/web/application.dart';
 
