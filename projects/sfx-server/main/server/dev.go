@@ -92,15 +92,29 @@ func (w *devResponseWriter) Pusher() (pusher http.Pusher) {
 	return nil
 }
 
+type MyTransport struct {
+}
+
+func (t MyTransport) RoundTrip(r *http.Request) (*http.Response, error) {
+	resp, err := http.DefaultTransport.RoundTrip(r)
+	resp.Header.Add("Access-Control-Allow-Origin", "*")
+
+	return resp, err
+}
+
 func devHandler(gctx *gin.Context) {
-	target := "localhost:3000"
+	target := "localhost:1234"
+
+	mytransport := MyTransport{}
 	//devUrl := fmt.Sprintf("http://localhost:3000%s", realPath)
-	proxy := &httputil.ReverseProxy{Director: func(req *http.Request) {
-		req.URL.Scheme = "http"
-		req.URL.Host = target
-		req.URL.Path = gctx.Request.URL.Path //"/svc/css/index.scss"
-		//r.Host = target
-	}}
+	proxy := &httputil.ReverseProxy{
+		Director: func(req *http.Request) {
+			req.URL.Scheme = "http"
+			req.URL.Host = target
+			req.URL.Path = gctx.Request.URL.Path
+		},
+		Transport: mytransport,
+	}
 
 	proxy.ServeHTTP(gctx.Writer, gctx.Request)
 	//rs1 := "http://localhost:3000"

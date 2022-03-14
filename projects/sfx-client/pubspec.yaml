@@ -12,7 +12,7 @@ flutter:
   fonts:
     - family: Cookie
       fonts:
-        - asset: static/fonts/Cookie-Regular.ttf
+        - asset: fonts/Cookie-Regular.ttf
 
 dependencies:
   flutter:

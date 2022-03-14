@@ -5,15 +5,14 @@ go 1.15
 require (
 	github.com/aws/aws-sdk-go-v2 v1.11.2
 	github.com/aws/aws-sdk-go-v2/config v1.11.1
-	github.com/aws/aws-sdk-go-v2/service/appconfig v1.3.1
 	github.com/aws/aws-sdk-go-v2/feature/dynamodb/attributevalue v1.1.3
 	github.com/aws/aws-sdk-go-v2/feature/dynamodb/expression v1.1.3
 	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.7.5
+	github.com/aws/aws-sdk-go-v2/service/appconfig v1.3.1
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.4.1
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.22.0
 	github.com/bwmarrin/snowflake v0.3.0
 	github.com/gin-gonic/gin v1.7.2
-	github.com/go-playground/validator/v10 v10.4.1 // indirect
 	github.com/go-redis/redis/v8 v8.11.4
 	github.com/golang-jwt/jwt v3.2.2+incompatible
 	github.com/google/uuid v1.3.0

@@ -84,8 +84,8 @@ func init() {
 		CSRFToken = uuid.New().String()[:32]
 	}
 	if Debug() {
-		ServerUrl = "http://127.0.0.1:5000"
-		ResourceUrl = "http://127.0.0.1:3000"
+		ServerUrl = "http://localhost:5000"
+		ResourceUrl = "http://localhost:5000"
 	}
 	QuestKey = configMap["QUEST_KEY"]
 	if len(QuestKey) < 1 {

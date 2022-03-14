@@ -4,10 +4,10 @@ import path from 'path'
 
 const config = defineConfig(({command, mode}) => {
     return {
-        base: "/dist/",
+        base: "/assets/",
         build: {
             emptyOutDir: true,
-            outDir: 'web/dist',
+            outDir: 'web/assets',
             rollupOptions: {
                 input: ['src/index.tsx', 'src/index.scss'],
                 output: {
@@ -28,7 +28,13 @@ const config = defineConfig(({command, mode}) => {
                         }
                         const baseName = path.basename(chunkInfo.name)
                         const extName = path.extname(baseName)
-                        console.debug('assetFileNames', chunkInfo.name, baseName, extName)
+                        if (chunkInfo.name.startsWith(__dirname)) {
+
+                            const assetName = chunkInfo.name.replace(__dirname + "/", "")
+                            console.debug('assetFileNames==', chunkInfo.name, baseName, assetName, __dirname)
+                            return assetName
+                        }
+                        console.debug('assetFileNames', chunkInfo.name, baseName)
                         return baseName
                     },
                     manualChunks(id) {

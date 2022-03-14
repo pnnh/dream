@@ -2,3 +2,10 @@
 @import "src/styles/navtop";
 @import "src/styles/controls";
 @import "src/styles/pages";
+
+@font-face {
+  font-family: 'Cookie';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/Cookie-Regular.ttf');
+}
