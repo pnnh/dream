@@ -22,7 +22,8 @@ export async function sayHello() {
     return c
 }
 
-export async function randomString(length, hasNumber, hasLetter, hasUppercase, hasSymbol) {
+export async function randomString(length: number, hasNumber: boolean, hasLetter: boolean,
+                                   hasUppercase: boolean, hasSymbol: boolean) {
     await init()
     init_console_error_panic_hook()
     console.log('random: ')

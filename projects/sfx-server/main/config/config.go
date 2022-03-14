@@ -2,6 +2,7 @@ package config
 
 import (
 	"fmt"
+	"os"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
@@ -36,6 +37,11 @@ var (
 )
 
 func init() {
+	mode := os.Getenv("MODE")
+	if len(mode) > 0 {
+		GINMODE = mode
+	}
+
 	configMap, err := GetConfigurationMap()
 	if err != nil {
 		logrus.Fatalln("获取appconfig配置出错: %w", err)
@@ -53,11 +59,6 @@ func init() {
 	REDIS = configMap["REDIS"]
 	if len(REDIS) < 1 {
 		logrus.Fatalln("Redis未配置")
-	}
-
-	mode := configMap["MODE"]
-	if len(mode) > 0 {
-		GINMODE = mode
 	}
 
 	MailHost = configMap["MAIL_HOST"]
