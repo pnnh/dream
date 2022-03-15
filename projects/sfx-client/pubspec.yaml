@@ -21,6 +21,9 @@ flutter:
     - images/svg/wallet.svg
     - images/svg/calendar_todo.svg
     - images/svg/bill.svg
+    - images/svg/sun.svg
+    - images/svg/archive_drawer.svg
+    - images/svg/stack.svg
 
 dependencies:
   flutter:

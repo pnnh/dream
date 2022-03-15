@@ -94,6 +94,117 @@ class _FilterGroupWidget extends State<FilterGroupWidget> {
                       });
                     })),
           ),
+          Padding(
+            padding: const EdgeInsets.only(left: 8, right: 8),
+            child: ClipRRect(
+                borderRadius: BorderRadius.circular(4.0),
+                child: MouseRegion(
+                    child: TextButton(
+                        onPressed: () {
+                          setState(() {
+                            selectedIndex = 2;
+                          });
+                        },
+                        style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(
+                                selectedIndex == 2 || hoveredIndex == 2
+                                    ? selectedColor
+                                    : defaultColor)),
+                        child: Container(
+                            padding: const EdgeInsets.all(8),
+                            child: Row(children: [
+                              SvgPicture.asset(
+                                "images/svg/sun.svg",
+                                color: iconColor,
+                              ),
+                              const SizedBox(width: 8),
+                              const Text("明天")
+                            ]))),
+                    onHover: (value) {
+                      setState(() {
+                        hoveredIndex = 2;
+                      });
+                    },
+                    onExit: (value) {
+                      setState(() {
+                        hoveredIndex = selectedIndex;
+                      });
+                    })),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 8, right: 8),
+            child: ClipRRect(
+                borderRadius: BorderRadius.circular(4.0),
+                child: MouseRegion(
+                    child: TextButton(
+                        onPressed: () {
+                          setState(() {
+                            selectedIndex = 3;
+                          });
+                        },
+                        style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(
+                                selectedIndex == 3 || hoveredIndex == 3
+                                    ? selectedColor
+                                    : defaultColor)),
+                        child: Container(
+                            padding: const EdgeInsets.all(8),
+                            child: Row(children: [
+                              SvgPicture.asset(
+                                "images/svg/archive_drawer.svg",
+                                color: iconColor,
+                              ),
+                              const SizedBox(width: 8),
+                              const Text("最近7天")
+                            ]))),
+                    onHover: (value) {
+                      setState(() {
+                        hoveredIndex = 3;
+                      });
+                    },
+                    onExit: (value) {
+                      setState(() {
+                        hoveredIndex = selectedIndex;
+                      });
+                    })),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 8, right: 8),
+            child: ClipRRect(
+                borderRadius: BorderRadius.circular(4.0),
+                child: MouseRegion(
+                    child: TextButton(
+                        onPressed: () {
+                          setState(() {
+                            selectedIndex = 4;
+                          });
+                        },
+                        style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(
+                                selectedIndex == 4 || hoveredIndex == 4
+                                    ? selectedColor
+                                    : defaultColor)),
+                        child: Container(
+                            padding: const EdgeInsets.all(8),
+                            child: Row(children: [
+                              SvgPicture.asset(
+                                "images/svg/stack.svg",
+                                color: iconColor,
+                              ),
+                              const SizedBox(width: 8),
+                              const Text("收集箱")
+                            ]))),
+                    onHover: (value) {
+                      setState(() {
+                        hoveredIndex = 4;
+                      });
+                    },
+                    onExit: (value) {
+                      setState(() {
+                        hoveredIndex = selectedIndex;
+                      });
+                    })),
+          ),
         ]));
   }
 }
