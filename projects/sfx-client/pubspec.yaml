@@ -18,6 +18,9 @@ flutter:
     - images/svg/todo.svg
     - images/svg/calendar.svg
     - images/svg/booklet.svg
+    - images/svg/wallet.svg
+    - images/svg/calendar_todo.svg
+    - images/svg/bill.svg
 
 dependencies:
   flutter:

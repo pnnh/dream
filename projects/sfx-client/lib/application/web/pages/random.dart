@@ -77,11 +77,11 @@ class _MyStatefulWidgetState extends State<RandomWidget> {
                   });
                 },
               ),
-              Text(
+              const Text(
                 "小写字母",
                 style: TextStyle(fontSize: 14, height: 1),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 8,
               ),
               Checkbox(
@@ -96,11 +96,11 @@ class _MyStatefulWidgetState extends State<RandomWidget> {
                   });
                 },
               ),
-              Text(
+              const Text(
                 "大写字母",
                 style: TextStyle(fontSize: 14, height: 1),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 8,
               ),
               Checkbox(
@@ -115,11 +115,11 @@ class _MyStatefulWidgetState extends State<RandomWidget> {
                   });
                 },
               ),
-              Text(
+              const Text(
                 "数字",
                 style: TextStyle(fontSize: 14, height: 1),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 8,
               ),
               Checkbox(
@@ -134,7 +134,7 @@ class _MyStatefulWidgetState extends State<RandomWidget> {
                   });
                 },
               ),
-              Text(
+              const Text(
                 "特殊符号",
                 style: TextStyle(fontSize: 14, height: 1),
               )
@@ -147,7 +147,7 @@ class _MyStatefulWidgetState extends State<RandomWidget> {
               width: 48,
               height: 32,
               child: TextField(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     contentPadding: EdgeInsets.all(8),
                     border: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.teal))),
@@ -170,9 +170,8 @@ class _MyStatefulWidgetState extends State<RandomWidget> {
             style: ElevatedButton.styleFrom(fixedSize: Size(100, 32)),
             onPressed: () async {
               //var result = await promiseToFuture(sayHello());
-              var result = await promiseToFuture(
-                  randomString(length, hasNumber, hasLetter, hasUppercaseLetter,
-                      hasSymbol));
+              var result = await promiseToFuture(randomString(
+                  length, hasNumber, hasLetter, hasUppercaseLetter, hasSymbol));
               // var result = await promiseToFuture(
               //     randomString(length, false, false, false, false));
               print("--> $result");
@@ -180,17 +179,17 @@ class _MyStatefulWidgetState extends State<RandomWidget> {
                 password = result;
               });
             },
-            child: Text(
+            child: const Text(
               "生成密码",
               style: TextStyle(fontSize: 14, height: 1),
             ),
           ),
         ),
         Padding(
-          padding: EdgeInsets.all(8),
+          padding: const EdgeInsets.all(8),
           child: Text(
             password,
-            style: TextStyle(fontSize: 20),
+            style: const TextStyle(fontSize: 20),
           ),
         )
       ],

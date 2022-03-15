@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../components/filter_group.dart';
 import '../components/work_group.dart';
 
 class HomePageWidget extends StatelessWidget {
@@ -10,20 +11,21 @@ class HomePageWidget extends StatelessWidget {
         child: Row(children: [
           Container(
               width: 56,
-              padding: EdgeInsets.only(top: 8),
-              color: Color.fromRGBO(242, 246, 255, 100),
-              child: WorkGroupWidget()),
+              padding: const EdgeInsets.only(top: 8),
+              color: const Color.fromRGBO(242, 246, 255, 100),
+              child: const WorkGroupWidget()),
           Container(
               width: 240,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   border: Border(
                       right: BorderSide(
                 color: Color.fromRGBO(229, 229, 229, 100),
                 width: 1,
-              )))),
+              ))),
+              child: const FilterGroupWidget()),
           Container(
               width: 380,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   border: Border(
                       right: BorderSide(
                 color: Color.fromRGBO(229, 229, 229, 100),
