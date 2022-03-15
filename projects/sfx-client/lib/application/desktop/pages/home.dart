@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../components/avatar.dart';
-import '../components/booklet.dart';
-import '../components/calendar.dart';
-import '../components/todo.dart';
+import '../components/work_group.dart';
 
 class HomePageWidget extends StatelessWidget {
   @override
@@ -15,15 +12,7 @@ class HomePageWidget extends StatelessWidget {
               width: 56,
               padding: EdgeInsets.only(top: 8),
               color: Color.fromRGBO(242, 246, 255, 100),
-              child: Column(children: [
-                AvatarWidget(),
-                SizedBox(height: 24),
-                TodoWidget(),
-                SizedBox(height: 24),
-                BookletWidget(),
-                SizedBox(height: 24),
-                CalendarWidget()
-              ])),
+              child: WorkGroupWidget()),
           Container(
               width: 240,
               decoration: BoxDecoration(
