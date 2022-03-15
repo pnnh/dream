@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../components/filter_group.dart';
+import '../components/todo_list.dart';
 import '../components/work_group.dart';
 
 class HomePageWidget extends StatelessWidget {
@@ -30,7 +31,8 @@ class HomePageWidget extends StatelessWidget {
                       right: BorderSide(
                 color: Color.fromRGBO(229, 229, 229, 100),
                 width: 1,
-              )))),
+              ))),
+              child: const TodoListWidget()),
           Container(
             color: Colors.white,
           )
