@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../components/filter_group.dart';
 import '../components/todo_list.dart';
 import '../components/work_group.dart';
+import '../provider/Counter.dart';
 
 class HomePageWidget extends StatelessWidget {
+  const HomePageWidget({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
+    final counter = Provider.of<Counter>(context);
     return Container(
         color: Colors.white,
         child: Row(children: [
@@ -34,8 +39,17 @@ class HomePageWidget extends StatelessWidget {
               ))),
               child: const TodoListWidget()),
           Container(
-            color: Colors.white,
-          )
+              color: Colors.white,
+              child: Row(
+                children: [
+                  FloatingActionButton(
+                      child: Icon(Icons.add),
+                      onPressed: () {
+                        counter.increment();
+                      }),
+                  Text("counter 的值:${counter.count}")
+                ],
+              ))
         ]));
   }
 }

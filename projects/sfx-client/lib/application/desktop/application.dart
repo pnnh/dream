@@ -1,15 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sfxui/application/desktop/pages/home.dart';
 
-class Application extends StatelessWidget {
+import 'provider/Counter.dart';
+
+class Application extends StatefulWidget {
+  const Application({Key? key}) : super(key: key);
+
+  @override
+  _ApplicationState createState() => _ApplicationState();
+}
+
+class _ApplicationState extends State<Application> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: '桌面应用',
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: HomePageWidget(),
-      ),
+    return MultiProvider(
+      providers: [
+// Provider<Counter>.value(value: foo),
+        ChangeNotifierProvider(
+          create: (_) => Counter(),
+        ),
+      ],
+      child: MaterialApp(
+          title: '桌面应用',
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(primaryColor: Colors.white),
+          home: const Scaffold(
+            body: HomePageWidget(),
+          )),
     );
   }
 }
