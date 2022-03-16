@@ -1,0 +1,44 @@
+name: dream
+
+publish_to: 'none'
+
+version: 1.0.0
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+flutter:
+  uses-material-design: true
+  fonts:
+    - family: Cookie
+      fonts:
+        - asset: fonts/Cookie-Regular.ttf
+  assets:
+    - images/avatar.jpeg
+    - images/svg/todo.svg
+    - images/svg/calendar.svg
+    - images/svg/booklet.svg
+    - images/svg/wallet.svg
+    - images/svg/calendar_todo.svg
+    - images/svg/bill.svg
+    - images/svg/sun.svg
+    - images/svg/archive_drawer.svg
+    - images/svg/stack.svg
+
+dependencies:
+  flutter:
+    sdk: flutter
+  http:
+  provider:
+  url_launcher: ^6.0.20
+  js:
+  path:
+  ffi:
+  hive:
+  hive_flutter:
+  flutter_svg:
+
+dev_dependencies:
+  flutter_lints:
+  hive_generator:
+  build_runner:
