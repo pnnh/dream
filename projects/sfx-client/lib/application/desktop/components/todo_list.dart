@@ -12,6 +12,8 @@ class TodoListWidget extends StatefulWidget {
 }
 
 class _TodoListWidget extends State<TodoListWidget> {
+  final List<TextEditingController> _controllers =
+      List.generate(10, (i) => TextEditingController());
   int selectedIndex = 0;
   int hoveredIndex = 0;
   final Color selectedColor = const Color.fromRGBO(238, 243, 254, 100);
@@ -19,7 +21,7 @@ class _TodoListWidget extends State<TodoListWidget> {
   final Color iconColor = const Color.fromRGBO(153, 153, 153, 100);
 
   String content = "啊啊啊啊啊啊";
-  final items = new List<String>.generate(10, (i) => "Item $i");
+  final items = List<String>.generate(10, (i) => "Item $i");
 
   @override
   Widget build(BuildContext context) {
@@ -30,17 +32,24 @@ class _TodoListWidget extends State<TodoListWidget> {
           child: ListView.builder(
             itemCount: items.length,
             itemBuilder: (context, index) {
-              // return new ListTile(
-              //   title: new Text('${items[index]}'),
-              // );
+              var controller = _controllers[index];
+              controller.text = items[index];
               return Padding(
                   padding: const EdgeInsets.only(left: 8, right: 8),
                   child: TodoItemWidget(
                     id: index,
-                    content2: '${items[index]}',
+                    controller: controller,
                   ));
             },
           ),
         ));
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    for (TextEditingController c in _controllers) {
+      c.dispose();
+    }
   }
 }

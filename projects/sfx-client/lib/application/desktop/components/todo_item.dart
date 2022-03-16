@@ -5,9 +5,9 @@ import '../provider/todo_list.dart';
 
 class TodoItemWidget extends StatefulWidget {
   final int id;
-  final String content2;
+  final TextEditingController controller;
 
-  const TodoItemWidget({Key? key, required this.id, this.content2 = "啊啊啊啊"})
+  const TodoItemWidget({Key? key, required this.id, required this.controller})
       : super(key: key);
 
   @override
@@ -15,7 +15,6 @@ class TodoItemWidget extends StatefulWidget {
 }
 
 class _TodoItemWidget extends State<TodoItemWidget> {
-  int hoveredIndex = 0;
   String content = "啊啊啊啊啊啊";
   final Color hoveredColor = const Color.fromRGBO(248, 249, 255, 100);
 
@@ -34,7 +33,7 @@ class _TodoItemWidget extends State<TodoItemWidget> {
             : Colors.white,
         hoverColor: const Color.fromRGBO(238, 243, 254, 100),
       ),
-      controller: TextEditingController(text: widget.content2),
+      controller: widget.controller,
       onTap: () {
         print("item tap ${widget.id}");
         todoList.selectedIndex = widget.id;
