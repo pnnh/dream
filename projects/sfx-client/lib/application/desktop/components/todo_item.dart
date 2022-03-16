@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
 class TodoItemWidget extends StatefulWidget {
-  String content2 = "哈哈哈";
+  final String content2;
+  final bool selected;
 
-  TodoItemWidget({Key? key, this.content2 = "啊啊啊啊"}) : super(key: key);
+  const TodoItemWidget(
+      {Key? key, this.content2 = "啊啊啊啊", this.selected = false})
+      : super(key: key);
 
   @override
   State<TodoItemWidget> createState() => _TodoItemWidget();
@@ -19,10 +22,13 @@ class _TodoItemWidget extends State<TodoItemWidget> {
     return MouseRegion(
         child: TextField(
           keyboardType: TextInputType.text,
-          decoration: const InputDecoration(
-            contentPadding: EdgeInsets.all(4),
+          decoration: InputDecoration(
+            contentPadding: const EdgeInsets.all(4),
             border: InputBorder.none,
-            fillColor: Color.fromRGBO(238, 243, 254, 100),
+            filled: true,
+            fillColor: widget.selected
+                ? const Color.fromRGBO(238, 243, 254, 100)
+                : Colors.white,
           ),
           controller: TextEditingController(text: widget.content2),
           onTap: () {},
