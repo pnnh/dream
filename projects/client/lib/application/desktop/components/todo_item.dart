@@ -1,13 +1,14 @@
+import 'package:dream/services/models/task.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/todo_list.dart';
 
 class TodoItemWidget extends StatefulWidget {
-  final int id;
+  final Task task;
   final TextEditingController controller;
 
-  const TodoItemWidget({Key? key, required this.id, required this.controller})
+  const TodoItemWidget({Key? key, required this.task, required this.controller})
       : super(key: key);
 
   @override
@@ -20,23 +21,27 @@ class _TodoItemWidget extends State<TodoItemWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final todoList = Provider.of<TodoListModel>(context);
-    print("item build ${todoList.selectedIndex} ${widget.id}");
+    final todoList = Provider.of<TodoListProvider>(context);
+    print("item build ${todoList.selectedKey} ${widget.task.key}");
     return TextField(
       keyboardType: TextInputType.text,
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.all(4),
         border: InputBorder.none,
         filled: true,
-        fillColor: todoList.selectedIndex == widget.id
+        fillColor: todoList.selectedKey == widget.task.key
             ? const Color.fromRGBO(238, 243, 254, 100)
             : Colors.white,
         hoverColor: const Color.fromRGBO(238, 243, 254, 100),
       ),
       controller: widget.controller,
       onTap: () {
-        print("item tap ${widget.id}");
-        todoList.selectedIndex = widget.id;
+        print("item tap ${widget.task.key}");
+        todoList.selectedKey = widget.task.key;
+      },
+      onChanged: (text) {
+        print('First text field: ${widget.task.key} $text');
+        todoList.putItem(widget.task.key, text);
       },
     );
   }

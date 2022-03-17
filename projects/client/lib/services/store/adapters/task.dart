@@ -1,16 +1,7 @@
 import 'dart:async';
 
+import 'package:dream/services/models/task.dart';
 import 'package:hive/hive.dart';
-
-class Task {
-  String key;
-  String name;
-
-  Task(this.key, this.name);
-
-  @override
-  String toString() => name;
-}
 
 class TaskAdapter extends TypeAdapter<Task> {
   @override

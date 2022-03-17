@@ -20,7 +20,7 @@ class _TodoListWidget extends State<TodoListWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final todoListModel = Provider.of<TodoListModel>(context);
+    final todoListModel = Provider.of<TodoListProvider>(context);
 
     return Container(
       padding: const EdgeInsets.all(16),
@@ -54,7 +54,7 @@ class _TodoListWidget extends State<TodoListWidget> {
                 itemBuilder: (context, index) {
                   var controller = todoListModel.controllers[index];
                   return TodoItemWidget(
-                    id: index,
+                    task: todoListModel.items[index],
                     controller: controller,
                   );
                 },

@@ -1,40 +1,44 @@
-import 'package:dream/services/store/models/task.dart';
+import 'package:dream/services/models/task.dart';
+import 'package:dream/services/store/adapters/task.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
-class TodoListModel with ChangeNotifier {
-  int _selectedIndex = 0;
+class TodoListProvider with ChangeNotifier {
+  String _selectedKey = "";
 
-  int get selectedIndex => _selectedIndex;
+  String get selectedKey => _selectedKey;
+  set selectedKey(String key) {
+    _selectedKey = key;
+    notifyListeners();
+  }
 
-  List<String> _items = List.empty();
-  List<String> get items => _items;
+  List<Task> _items = List.empty();
+  List<Task> get items => _items;
   List<TextEditingController> _controllers = List.empty();
   List<TextEditingController> get controllers => _controllers;
 
 
-  TodoListModel() {
+  TodoListProvider() {
     queryTask().then((tasks) {
-      _items = tasks.map((task) => task.name).toList();
+      _items = tasks.map((task) => task).toList();
       _controllers = List.generate(
-          _items.length, (i) => TextEditingController(text: _items[i]));
+          _items.length, (i) => TextEditingController(text: _items[i].name));
       notifyListeners();
     });
-  }
-
-  set selectedIndex(value) {
-    _selectedIndex = value;
-    notifyListeners();
   }
 
   void addItem(String item) async {
     var uuid =  const Uuid();
     var key = uuid.v4().toString();
-
-    await putTask(key, Task(key, item));
-    _items.add(item);
+    var task = Task(key, item);
+    await putTask(key, task);
+    _items.add(task);
     _controllers.add(TextEditingController());
     notifyListeners();
+  }
+
+  void putItem(String key, String item) async {
+    await putTask(key, Task(key, item));
   }
 
   @override

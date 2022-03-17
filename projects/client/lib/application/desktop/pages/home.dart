@@ -14,7 +14,7 @@ class HomePageWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final counter = Provider.of<Counter>(context);
     return ChangeNotifierProvider(
-        create: (_) => TodoListModel(),
+        create: (_) => TodoListProvider(),
         child: Container(
             color: Colors.white,
             child: Row(children: [
