@@ -41,13 +41,13 @@ Future<List<Article>> loadArticles(int created) async {
     return result;
   }
 
-  data.forEach((element) {
-    var info = new Article();
+  for (var element in data) {
+    var info = Article();
     info.content = element['data']['content'];
     info.created = element['created'];
     result.add(info);
     print("jjjj2 ${info.content} ${info.created}");
-  });
+  }
   return result;
 }
 

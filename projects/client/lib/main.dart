@@ -1,5 +1,6 @@
 import 'dart:io' show Platform;
 
+import 'package:dream/services/store/hive.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:dream/application/desktop/application.dart'
@@ -8,6 +9,7 @@ import 'package:dream/application/desktop/application.dart'
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await initStore();
   var platformName = '';
   if (kIsWeb) {
     platformName = "Web";

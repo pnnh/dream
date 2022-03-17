@@ -30,4 +30,4 @@ app.*.symbols
 app.*.map.json
 node_modules/
 web/assets
-/run
+run/*

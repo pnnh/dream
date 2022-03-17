@@ -1,81 +1,49 @@
 import 'package:hive/hive.dart';
 
+
 void main() async {
-  Hive.init('somePath');
+  // Hive.init('somePath');
+  //
+  // var box = await Hive.openBox('testBox');
+  //
+  // box.put('name', 'David');
+  //
+  // print('Name: ${box.get('name')}');
+  //var path = Directory.current.path;
 
-  var box = await Hive.openBox('testBox');
+  Hive
+    ..init('somePath')
+    ..registerAdapter(UserAdapter());
 
-  box.put('name', 'David');
+  var box = await Hive.openBox<User>('userBox');
 
-  print('Name: ${box.get('name')}');
+  box.put('david', User('David'));
+  box.put('sandy', User('Sandy'));
 
-  // Future<void> insertDog(Dog dog) async {
-  //   final db = await database;
-  //   await db.insert('dogs', dog.toMap(),
-  //       conflictAlgorithm: ConflictAlgorithm.replace);
-  // }
-  //
-  // Future<List<Dog>> dogs() async {
-  //   final db = await database;
-  //   final List<Map<String, dynamic>> maps = await db.query('dogs');
-  //   return List.generate(maps.length, (i) {
-  //     return Dog(
-  //       id: maps[i]['id'],
-  //       name: maps[i]['name'],
-  //       age: maps[i]['age'],
-  //     );
-  //   });
-  // }
-  //
-  // Future<void> updateDog(Dog dog) async {
-  //   final db = await database;
-  //   await db.update('dogs', dog.toMap(), where: 'id=?', whereArgs: [dog.id]);
-  // }
-  //
-  // Future<void> deleteDog(int id) async {
-  //   final db = await database;
-  //   await db.delete('dogs', where: 'id=?', whereArgs: [id]);
-  // }
-  //
-  // var fido = const Dog(
-  //   id: 0,
-  //   name: 'Fido',
-  //   age: 35,
-  // );
-  // await insertDog(fido);
-  // print(await dogs());
-  //
-  // fido = Dog(id: fido.id, name: fido.name, age: fido.age + 7);
-  // await updateDog(fido);
-  //
-  // print(await dogs());
-  //
-  // await deleteDog(fido.id);
-  //
-  // print(await dogs());
+  print(box.values);
 }
 
-class Dog {
-  final int id;
-  final String name;
-  final int age;
+class User {
+  String name;
 
-  const Dog({
-    required this.id,
-    required this.name,
-    required this.age,
-  });
+  User(this.name);
 
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'name': name,
-      'age': age,
-    };
+  @override
+  String toString() => name; // Just for print()
+}
+
+// Can be generated automatically
+class UserAdapter extends TypeAdapter<User> {
+  @override
+  final typeId = 0;
+
+  @override
+  User read(BinaryReader reader) {
+    return User(reader.read());
   }
 
   @override
-  String toString() {
-    return 'Dog{id: $id, name: $name, age: $age}';
+  void write(BinaryWriter writer, User obj) {
+    writer.write(obj.name);
   }
 }
