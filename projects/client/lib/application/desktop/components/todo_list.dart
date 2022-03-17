@@ -12,22 +12,15 @@ class TodoListWidget extends StatefulWidget {
 }
 
 class _TodoListWidget extends State<TodoListWidget> {
-  List<TextEditingController> _controllers = List.empty();
-  int selectedIndex = 0;
-  int hoveredIndex = 0;
   final Color selectedColor = const Color.fromRGBO(238, 243, 254, 100);
   final Color defaultColor = Colors.white;
   final Color iconColor = const Color.fromRGBO(153, 153, 153, 100);
   final contentController = TextEditingController(text: "啊啊啊啊啊啊");
-  late FocusNode myFocusNode = FocusNode();
+  FocusNode myFocusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
     final todoListModel = Provider.of<TodoListModel>(context);
-
-    var items = todoListModel.items;
-    _controllers = List.generate(
-        items.length, (i) => TextEditingController());
 
     return Container(
       padding: const EdgeInsets.all(16),
@@ -46,7 +39,7 @@ class _TodoListWidget extends State<TodoListWidget> {
                 controller: contentController,
                 onSubmitted: (value) {
                   print("Go button is clicked $value");
-                  todoListModel.putItem(value);
+                  todoListModel.addItem(value);
                   contentController.text = "";
                   myFocusNode.requestFocus();
                 },
@@ -57,10 +50,9 @@ class _TodoListWidget extends State<TodoListWidget> {
           const SizedBox(height: 16),
           Expanded(
               child: ListView.builder(
-                itemCount: items.length,
+                itemCount: todoListModel.items.length,
                 itemBuilder: (context, index) {
-                  var controller = _controllers[index];
-                  controller.text = items[index];
+                  var controller = todoListModel.controllers[index];
                   return TodoItemWidget(
                     id: index,
                     controller: controller,
@@ -74,10 +66,7 @@ class _TodoListWidget extends State<TodoListWidget> {
 
   @override
   void dispose() {
-    myFocusNode.dispose();
-    for (TextEditingController c in _controllers) {
-      c.dispose();
-    }
     super.dispose();
+    myFocusNode.dispose();
   }
 }
