@@ -38,8 +38,11 @@ dependencies:
   hive_flutter:
   flutter_svg:
   uuid:
+  isar:
+  isar_flutter_libs:
 
 dev_dependencies:
   flutter_lints:
   hive_generator:
+  isar_generator:
   build_runner:
