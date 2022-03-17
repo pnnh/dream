@@ -7,9 +7,15 @@ class TodoListModel with ChangeNotifier {
 
   int get selectedIndex => _selectedIndex;
 
-  Future<List<String>> queryItems() async {
-    var tasks = await queryTask();
-    return tasks.map((task) => task.name).toList();
+  List<String> _items = List.empty();
+
+  List<String> get items => _items;
+
+  TodoListModel() {
+    queryTask().then((tasks) {
+      _items = tasks.map((task) => task.name).toList();
+      notifyListeners();
+    });
   }
 
   set selectedIndex(value) {
@@ -17,15 +23,12 @@ class TodoListModel with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<Task?> getItem(String key) async {
-    return getTask(key);
-  }
-
   void putItem(String item) async {
     var uuid =  const Uuid();
     var key = uuid.v4().toString();
 
     await putTask(key, Task(key, item));
+    _items.add(item);
     notifyListeners();
   }
 }

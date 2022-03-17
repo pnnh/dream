@@ -23,8 +23,8 @@ class TaskAdapter extends TypeAdapter<Task> {
 
   @override
   void write(BinaryWriter writer, Task obj) {
-    writer.write(obj.key);
-    writer.write(obj.name);
+    writer.writeString(obj.key);
+    writer.writeString(obj.name);
   }
 }
 
