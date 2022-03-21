@@ -22,14 +22,13 @@ class _TodoItemWidget extends State<TodoItemWidget> {
   @override
   Widget build(BuildContext context) {
     final todoList = Provider.of<HomeProvider>(context);
-    print("item build ${todoList.selectedKey} ${widget.task.key}");
     return TextField(
       keyboardType: TextInputType.text,
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.all(4),
         border: InputBorder.none,
         filled: true,
-        fillColor: todoList.selectedKey == widget.task.key
+        fillColor: todoList.selectedTask?.key == widget.task.key
             ? const Color.fromRGBO(238, 243, 254, 100)
             : Colors.white,
         hoverColor: const Color.fromRGBO(238, 243, 254, 100),
@@ -37,7 +36,7 @@ class _TodoItemWidget extends State<TodoItemWidget> {
       controller: widget.controller,
       onTap: () {
         print("item tap ${widget.task.key}");
-        todoList.selectedKey = widget.task.key;
+        todoList.selectedTask = widget.task;
       },
       onChanged: (text) {
         print('First text field: ${widget.task.key} $text');

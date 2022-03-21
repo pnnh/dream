@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
 class HomeProvider with ChangeNotifier {
-  String _selectedKey = "";
+  Task? _selectedTask;
 
-  String get selectedKey => _selectedKey;
-  set selectedKey(String key) {
-    _selectedKey = key;
+  Task? get selectedTask => _selectedTask;
+  set selectedTask(Task? task) {
+    _selectedTask = task;
     notifyListeners();
   }
 
@@ -16,7 +16,6 @@ class HomeProvider with ChangeNotifier {
   List<Task> get items => _items;
   List<TextEditingController> _controllers = List.empty();
   List<TextEditingController> get controllers => _controllers;
-
 
   HomeProvider() {
     queryTask().then((tasks) {
