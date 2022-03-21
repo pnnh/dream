@@ -1,8 +1,8 @@
+import 'package:dream/application/desktop/provider/home.dart';
 import 'package:dream/services/models/task.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../provider/todo_list.dart';
 
 class TodoItemWidget extends StatefulWidget {
   final Task task;
@@ -21,7 +21,7 @@ class _TodoItemWidget extends State<TodoItemWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final todoList = Provider.of<TodoListProvider>(context);
+    final todoList = Provider.of<HomeProvider>(context);
     print("item build ${todoList.selectedKey} ${widget.task.key}");
     return TextField(
       keyboardType: TextInputType.text,

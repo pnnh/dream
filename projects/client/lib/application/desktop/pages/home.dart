@@ -1,20 +1,19 @@
+import 'package:dream/application/desktop/provider/home.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../components/filter_group.dart';
 import '../components/todo_list.dart';
+import '../components/work_body.dart';
 import '../components/work_group.dart';
-import '../provider/Counter.dart';
-import '../provider/todo_list.dart';
 
 class HomePageWidget extends StatelessWidget {
   const HomePageWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final counter = Provider.of<Counter>(context);
     return ChangeNotifierProvider(
-        create: (_) => TodoListProvider(),
+        create: (_) => HomeProvider(),
         child: Container(
             color: Colors.white,
             child: Row(children: [
@@ -41,18 +40,11 @@ class HomePageWidget extends StatelessWidget {
                     width: 1,
                   ))),
                   child: const TodoListWidget()),
-              Container(
-                  color: Colors.white,
-                  child: Row(
-                    children: [
-                      FloatingActionButton(
-                          child: Icon(Icons.add),
-                          onPressed: () {
-                            counter.increment();
-                          }),
-                      Text("counter 的值:${counter.count}")
-                    ],
-                  ))
-            ])));
+              Expanded(
+                child: Container(
+                    color: Colors.white,
+                    child: WorkBodyWidget()
+                )
+              ) ])));
   }
 }

@@ -3,7 +3,7 @@ import 'package:dream/services/store/adapters/task.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
-class TodoListProvider with ChangeNotifier {
+class HomeProvider with ChangeNotifier {
   String _selectedKey = "";
 
   String get selectedKey => _selectedKey;
@@ -18,7 +18,7 @@ class TodoListProvider with ChangeNotifier {
   List<TextEditingController> get controllers => _controllers;
 
 
-  TodoListProvider() {
+  HomeProvider() {
     queryTask().then((tasks) {
       _items = tasks.map((task) => task).toList();
       _controllers = List.generate(

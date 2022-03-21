@@ -1,8 +1,8 @@
+import 'package:dream/application/desktop/provider/home.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:dream/application/desktop/components/todo_item.dart';
 
-import '../provider/todo_list.dart';
 
 class TodoListWidget extends StatefulWidget {
   const TodoListWidget({Key? key}) : super(key: key);
@@ -20,7 +20,7 @@ class _TodoListWidget extends State<TodoListWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final todoListModel = Provider.of<TodoListProvider>(context);
+    final todoListModel = Provider.of<HomeProvider>(context);
 
     return Container(
       padding: const EdgeInsets.all(16),

@@ -24,6 +24,7 @@ flutter:
     - images/svg/sun.svg
     - images/svg/archive_drawer.svg
     - images/svg/stack.svg
+    - images/ui/empty.png
 
 dependencies:
   flutter:
