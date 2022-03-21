@@ -9,13 +9,14 @@ class TaskAdapter extends TypeAdapter<Task> {
 
   @override
   Task read(BinaryReader reader) {
-    return Task(reader.readString(), reader.readString());
+    return Task(reader.readString(), reader.readString(), reader.readString());
   }
 
   @override
   void write(BinaryWriter writer, Task obj) {
     writer.writeString(obj.key);
-    writer.writeString(obj.name);
+    writer.writeString(obj.title);
+    writer.writeString(obj.body);
   }
 }
 

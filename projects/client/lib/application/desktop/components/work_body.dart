@@ -3,11 +3,11 @@ import 'package:dream/services/models/task.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'empty.dart';
 
 class WorkBodyWidget extends StatefulWidget {
-  final TextEditingController? controller;
-  const WorkBodyWidget({Key? key, required this.controller }) : super(key: key);
+  final Task task;
+  final TextEditingController controller;
+  const WorkBodyWidget({Key? key, required Task this.task, required this.controller }) : super(key: key);
 
   @override
   State<WorkBodyWidget> createState() => _WorkBodyWidget();
@@ -16,16 +16,11 @@ class WorkBodyWidget extends StatefulWidget {
 class _WorkBodyWidget extends State<WorkBodyWidget> {
   final Color selectedColor = const Color.fromRGBO(0, 119, 212, 100);
   final Color defaultColor = const Color.fromRGBO(146, 148, 152, 100);
+  final bodyController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    final todoList = Provider.of<HomeProvider>(context);
-    if (todoList.selectedTask == null) {
-      return const EmptyWidget(message: "点击左侧标题查看详情");
-    }
-    if (widget.controller == null) {
-      throw Exception("WorkBodyWidget找不到controller");
-    }
+    bodyController.text = widget.task.body;
     return Padding(
       padding: const EdgeInsets.all(16),
       child:Column(children: [
@@ -37,6 +32,7 @@ class _WorkBodyWidget extends State<WorkBodyWidget> {
             filled: true,
             fillColor: Colors.white,
             hoverColor: Colors.white,
+            hintText: "任务标题",
           ),
           style: const TextStyle(
             fontSize: 24,
@@ -44,10 +40,7 @@ class _WorkBodyWidget extends State<WorkBodyWidget> {
           ),
           controller: widget.controller,
           onChanged: (text) {
-            var key = todoList.selectedTask?.key ?? "";
-            if (key.isNotEmpty) {
-              todoList.putItem(key, text);
-            }
+            Task.putItem(widget.task.key, text, widget.task.body);
           },
         ),
         const SizedBox(height: 24),
@@ -59,13 +52,12 @@ class _WorkBodyWidget extends State<WorkBodyWidget> {
             filled: true,
             fillColor: Colors.white,
             hoverColor: Colors.white,
+            hintText: "任务正文",
           ),
-          controller: widget.controller,
+          controller: bodyController,
           onChanged: (text) {
-            var key = todoList.selectedTask?.key ?? "";
-            if (key.isNotEmpty) {
-              todoList.putItem(key, text);
-            }
+            print("WorkBodyWidget body update $text");
+            Task.putItem(widget.task.key, widget.task.title, text);
           },
         )
 

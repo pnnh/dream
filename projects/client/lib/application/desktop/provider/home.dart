@@ -1,7 +1,6 @@
 import 'package:dream/services/models/task.dart';
 import 'package:dream/services/store/adapters/task.dart';
 import 'package:flutter/material.dart';
-import 'package:uuid/uuid.dart';
 
 class HomeProvider with ChangeNotifier {
   Task? _selectedTask;
@@ -21,23 +20,16 @@ class HomeProvider with ChangeNotifier {
   HomeProvider() {
     queryTask().then((tasks) {
       _items = tasks.map((task) => task).toList();
-      _controllers = { for (var e in items) e.key : TextEditingController(text: e.name) };
+      _controllers = { for (var e in items) e.key : TextEditingController(text: e.title) };
       notifyListeners();
     });
   }
 
   void addItem(String item) async {
-    var uuid =  const Uuid();
-    var key = uuid.v4().toString();
-    var task = Task(key, item);
-    await putTask(key, task);
+    var task = await Task.addItem(item, "");
     _items.add(task);
-    _controllers[key] = TextEditingController();
+    _controllers[task.key] = TextEditingController(text: task.title);
     notifyListeners();
-  }
-
-  void putItem(String key, String item) async {
-    await putTask(key, Task(key, item));
   }
 
   @override

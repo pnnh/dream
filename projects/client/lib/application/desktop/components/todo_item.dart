@@ -40,7 +40,7 @@ class _TodoItemWidget extends State<TodoItemWidget> {
       },
       onChanged: (text) {
         print('First text field: ${widget.task.key} $text');
-        todoList.putItem(widget.task.key, text);
+        Task.putItem(widget.task.key, widget.task.title, text);
       },
     );
   }

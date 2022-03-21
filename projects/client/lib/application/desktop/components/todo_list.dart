@@ -6,7 +6,6 @@ import 'package:dream/application/desktop/components/todo_item.dart';
 
 import 'empty.dart';
 
-
 class TodoListWidget extends StatefulWidget {
   const TodoListWidget({Key? key}) : super(key: key);
 
@@ -24,6 +23,8 @@ class _TodoListWidget extends State<TodoListWidget> {
   @override
   Widget build(BuildContext context) {
     final todoListModel = Provider.of<HomeProvider>(context);
+    print("TodoListWidget build ${todoListModel.items.length}");
+    final currentTask = todoListModel.selectedTask;
     final currentController = todoListModel.controllers[todoListModel.selectedTask?.key];
 
     return Expanded(child: Container(
@@ -31,7 +32,7 @@ class _TodoListWidget extends State<TodoListWidget> {
       child: Row(
         children: [
           Container(
-              width: 380,
+              width: 360,
               decoration: const BoxDecoration(
                   border: Border(
                       right: BorderSide(
@@ -46,7 +47,7 @@ class _TodoListWidget extends State<TodoListWidget> {
                         autofocus: true,
                         focusNode: myFocusNode,
                         decoration: const InputDecoration(
-                            contentPadding: EdgeInsets.all(8),
+                            contentPadding: EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 4),
                             border: OutlineInputBorder(
                                 borderSide: BorderSide(color: Colors.teal))),
                         keyboardType: TextInputType.number,
@@ -82,7 +83,9 @@ class _TodoListWidget extends State<TodoListWidget> {
           Expanded(
               child: Container(
                   color: Colors.white,
-                  child: WorkBodyWidget(controller: currentController)
+                  child: currentTask != null && currentController != null ?
+                  WorkBodyWidget(task: currentTask, controller: currentController)
+                      : const EmptyWidget(message: "点击左侧标题查看详情")
               )
           )
         ],
