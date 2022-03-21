@@ -1,15 +1,15 @@
 import 'dart:io' show Platform;
 
-import 'package:dream/services/store/hive.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
-import 'package:flutter/material.dart';
 import 'package:dream/application/desktop/application.dart'
     if (dart.library.html) 'package:dream/application/web/application.dart'
     as application;
+import 'package:dream/services/store/hive.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:flutter/material.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await initStore();
+  await HiveStore.init();
   var platformName = '';
   if (kIsWeb) {
     platformName = "Web";

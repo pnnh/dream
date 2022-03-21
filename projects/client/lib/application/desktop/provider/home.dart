@@ -23,12 +23,12 @@ class HomeProvider with ChangeNotifier {
   }
 
   final TaskStore _store = TaskStore();
-  Map<String, HomeItem> _items = {};
+  final Map<String, HomeItem> _items = {};
 
   Map<String, HomeItem> get items => _items;
 
   HomeProvider() {
-    _store.query().then((tasks) {
+    _store.queryValues().then((tasks) {
       for (var i = 0; i < tasks.toList().length; i++) {
         var task = tasks[i];
         var controller = TextEditingController(text: task.title);
@@ -57,12 +57,14 @@ class HomeProvider with ChangeNotifier {
     return _items[key];
   }
 
-  void putItem(String key, String item, String body) async {
+  void putItem(String key, String title, String body) {
     var item = items[key];
     if (item == null) {
       return;
     }
-    await _store.putItem(key, item.task);
+    item.task.title = title;
+    item.task.body = body;
+    _store.putItem(key, item.task);
   }
 
   @override
