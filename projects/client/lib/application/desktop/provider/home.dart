@@ -1,40 +1,75 @@
 import 'package:dream/services/models/task.dart';
-import 'package:dream/services/store/adapters/task.dart';
 import 'package:flutter/material.dart';
 
-class HomeProvider with ChangeNotifier {
-  Task? _selectedTask;
+class HomeItem {
+  TextEditingController controller;
+  Task task;
 
-  Task? get selectedTask => _selectedTask;
-  set selectedTask(Task? task) {
-    _selectedTask = task;
+  HomeItem(this.task, this.controller);
+}
+
+class HomeProvider with ChangeNotifier {
+  HomeItem? _currentItem;
+
+  HomeItem? get currentItem => _currentItem;
+
+  selectItem(String key) {
+    var item = items[key];
+    if (item == null) {
+      return;
+    }
+    _currentItem = item;
     notifyListeners();
   }
 
-  List<Task> _items = List.empty();
-  List<Task> get items => _items;
+  final TaskStore _store = TaskStore();
+  Map<String, HomeItem> _items = {};
 
-  Map<String, TextEditingController> _controllers = {};
-  Map<String, TextEditingController> get controllers => _controllers;
+  Map<String, HomeItem> get items => _items;
 
   HomeProvider() {
-    queryTask().then((tasks) {
-      _items = tasks.map((task) => task).toList();
-      _controllers = { for (var e in items) e.key : TextEditingController(text: e.title) };
+    _store.query().then((tasks) {
+      for (var i = 0; i < tasks.toList().length; i++) {
+        var task = tasks[i];
+        var controller = TextEditingController(text: task.title);
+        controller.addListener(() {
+          putItem(task.key, controller.text, task.body);
+        });
+        var item = HomeItem(task, controller);
+        _items[task.key] = item;
+      }
       notifyListeners();
     });
   }
 
-  void addItem(String item) async {
-    var task = await Task.addItem(item, "");
-    _items.add(task);
-    _controllers[task.key] = TextEditingController(text: task.title);
-    notifyListeners();
+  void addItem(String item, String body) {
+    _store.addItem(item, body).then((task) {
+      var controller = TextEditingController(text: task.title);
+      controller.addListener(() {
+        putItem(task.key, controller.text, task.body);
+      });
+      _items[task.key] = HomeItem(task, controller);
+      notifyListeners();
+    });
+  }
+
+  HomeItem? getItem(String key) {
+    return _items[key];
+  }
+
+  void putItem(String key, String item, String body) async {
+    var item = items[key];
+    if (item == null) {
+      return;
+    }
+    await _store.putItem(key, item.task);
   }
 
   @override
   void dispose() {
     super.dispose();
-    _controllers.forEach((key, value) { value.dispose(); });
+    items.forEach((key, value) {
+      value.controller.dispose();
+    });
   }
 }

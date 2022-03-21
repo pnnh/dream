@@ -19,20 +19,20 @@ class TaskAdapter extends TypeAdapter<Task> {
     writer.writeString(obj.body);
   }
 }
-
-Future<Task?> getTask(String key) async {
-  var box = await Hive.openBox<Task>('tasks');
-
-  return box.get(key);
-}
-
-Future<void> putTask(String key, Task task) async {
-  var box = await Hive.openBox<Task>('tasks');
-
-  box.put(key, task);
-}
-
-Future<Iterable<Task>> queryTask() async {
-  var box = await Hive.openBox<Task>('tasks');
-  return box.values;
-}
+//
+// Future<Task?> getTask(String key) async {
+//   var box = await Hive.openBox<Task>('tasks');
+//
+//   return box.get(key);
+// }
+//
+// Future<void> putTask(String key, Task task) async {
+//   var box = await Hive.openBox<Task>('tasks');
+//
+//   box.put(key, task);
+// }
+//
+// Future<Iterable<Task>> queryTask() async {
+//   var box = await Hive.openBox<Task>('tasks');
+//   return box.values;
+// }

@@ -20,6 +20,7 @@ class _WorkBodyWidget extends State<WorkBodyWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final todoListModel = Provider.of<HomeProvider>(context);
     bodyController.text = widget.task.body;
     return Padding(
       padding: const EdgeInsets.all(16),
@@ -40,7 +41,7 @@ class _WorkBodyWidget extends State<WorkBodyWidget> {
           ),
           controller: widget.controller,
           onChanged: (text) {
-            Task.putItem(widget.task.key, text, widget.task.body);
+            todoListModel.putItem(widget.task.key, text, widget.task.body);
           },
         ),
         const SizedBox(height: 24),
@@ -57,7 +58,7 @@ class _WorkBodyWidget extends State<WorkBodyWidget> {
           controller: bodyController,
           onChanged: (text) {
             print("WorkBodyWidget body update $text");
-            Task.putItem(widget.task.key, widget.task.title, text);
+            todoListModel.putItem(widget.task.key, widget.task.title, text);
           },
         )
 

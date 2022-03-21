@@ -1,8 +1,8 @@
+import 'package:dream/application/desktop/components/todo_item.dart';
 import 'package:dream/application/desktop/components/work_body.dart';
 import 'package:dream/application/desktop/provider/home.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:dream/application/desktop/components/todo_item.dart';
 
 import 'empty.dart';
 
@@ -23,11 +23,12 @@ class _TodoListWidget extends State<TodoListWidget> {
   @override
   Widget build(BuildContext context) {
     final todoListModel = Provider.of<HomeProvider>(context);
-    print("TodoListWidget build ${todoListModel.items.length}");
-    final currentTask = todoListModel.selectedTask;
-    final currentController = todoListModel.controllers[todoListModel.selectedTask?.key];
+    var items = todoListModel.items.values.toList();
+    print("TodoListWidget build ${items.length}");
+    final currrentItem = todoListModel.currentItem;
 
-    return Expanded(child: Container(
+    return Expanded(
+        child: Container(
       padding: const EdgeInsets.all(16),
       child: Row(
         children: [
@@ -36,9 +37,9 @@ class _TodoListWidget extends State<TodoListWidget> {
               decoration: const BoxDecoration(
                   border: Border(
                       right: BorderSide(
-                        color: Color.fromRGBO(229, 229, 229, 100),
-                        width: 1,
-                      ))),
+                color: Color.fromRGBO(229, 229, 229, 100),
+                width: 1,
+              ))),
               child: Column(
                 children: [
                   SizedBox(
@@ -47,14 +48,15 @@ class _TodoListWidget extends State<TodoListWidget> {
                         autofocus: true,
                         focusNode: myFocusNode,
                         decoration: const InputDecoration(
-                            contentPadding: EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 4),
+                            contentPadding: EdgeInsets.only(
+                                left: 8, right: 8, top: 4, bottom: 4),
                             border: OutlineInputBorder(
                                 borderSide: BorderSide(color: Colors.teal))),
                         keyboardType: TextInputType.number,
                         controller: contentController,
-                        onSubmitted: (value) {
-                          print("Go button is clicked $value");
-                          todoListModel.addItem(value);
+                        onSubmitted: (text) {
+                          print("Go button is clicked $text");
+                          todoListModel.addItem(text, "");
                           contentController.text = "";
                           myFocusNode.requestFocus();
                         },
@@ -65,29 +67,28 @@ class _TodoListWidget extends State<TodoListWidget> {
                   const SizedBox(height: 16),
                   Expanded(
                       child: ListView.builder(
-                        itemCount: todoListModel.items.length,
-                        itemBuilder: (context, index) {
-                          var controller = todoListModel.controllers[todoListModel.items[index].key];
-                          if (controller == null) {
-                            throw Exception("找不到controller");
-                          }
-                          return TodoItemWidget(
-                            task: todoListModel.items[index],
-                            controller: controller,
-                          );
-                        },
-                      ))
+                    itemCount: items.length,
+                    itemBuilder: (context, index) {
+                      var item = items[index];
+                      if (item == null || item.task == null) {
+                        throw Exception("找不到item");
+                      }
+                      return TodoItemWidget(
+                        task: item.task,
+                        controller: item.controller,
+                      );
+                    },
+                  ))
                 ],
               )),
-
           Expanded(
               child: Container(
                   color: Colors.white,
-                  child: currentTask != null && currentController != null ?
-                  WorkBodyWidget(task: currentTask, controller: currentController)
-                      : const EmptyWidget(message: "点击左侧标题查看详情")
-              )
-          )
+                  child: currrentItem != null
+                      ? WorkBodyWidget(
+                          task: currrentItem.task,
+                          controller: currrentItem.controller)
+                      : const EmptyWidget(message: "点击左侧标题查看详情")))
         ],
       ),
     ));

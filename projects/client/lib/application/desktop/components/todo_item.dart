@@ -3,7 +3,6 @@ import 'package:dream/services/models/task.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-
 class TodoItemWidget extends StatefulWidget {
   final Task task;
   final TextEditingController controller;
@@ -28,7 +27,7 @@ class _TodoItemWidget extends State<TodoItemWidget> {
         contentPadding: const EdgeInsets.all(4),
         border: InputBorder.none,
         filled: true,
-        fillColor: todoList.selectedTask?.key == widget.task.key
+        fillColor: todoList.currentItem?.task.key == widget.task.key
             ? const Color.fromRGBO(238, 243, 254, 100)
             : Colors.white,
         hoverColor: const Color.fromRGBO(238, 243, 254, 100),
@@ -36,11 +35,11 @@ class _TodoItemWidget extends State<TodoItemWidget> {
       controller: widget.controller,
       onTap: () {
         print("item tap ${widget.task.key}");
-        todoList.selectedTask = widget.task;
+        todoList.selectItem(widget.task.key);
       },
       onChanged: (text) {
-        print('First text field: ${widget.task.key} $text');
-        Task.putItem(widget.task.key, widget.task.title, text);
+        // print('First text field: ${widget.task.key} $text');
+        // todoList.putItem(widget.task.key, widget.task.title, text);
       },
     );
   }
