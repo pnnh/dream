@@ -3,36 +3,29 @@ import 'package:dream/services/models/task.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'empty.dart';
+
 class WorkBodyWidget extends StatefulWidget {
-  const WorkBodyWidget({Key? key }) : super(key: key);
+  final TextEditingController? controller;
+  const WorkBodyWidget({Key? key, required this.controller }) : super(key: key);
 
   @override
   State<WorkBodyWidget> createState() => _WorkBodyWidget();
 }
 
 class _WorkBodyWidget extends State<WorkBodyWidget> {
-  int selectedIndex = 0;
   final Color selectedColor = const Color.fromRGBO(0, 119, 212, 100);
   final Color defaultColor = const Color.fromRGBO(146, 148, 152, 100);
-  final titleController = TextEditingController();
-  final bodyController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     final todoList = Provider.of<HomeProvider>(context);
     if (todoList.selectedTask == null) {
-      return Center(child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: const [Image(image: AssetImage('images/ui/empty.png')),
-        Text("点击左侧标题查看详情",
-        style: TextStyle(
-        fontSize: 14,
-        fontWeight: FontWeight.w600,
-        ),)]
-      ));
+      return const EmptyWidget(message: "点击左侧标题查看详情");
     }
-    titleController.text = todoList.selectedTask?.name ?? "默认标题";
-    bodyController.text = todoList.selectedTask?.name ?? "默认正文";
+    if (widget.controller == null) {
+      throw Exception("WorkBodyWidget找不到controller");
+    }
     return Padding(
       padding: const EdgeInsets.all(16),
       child:Column(children: [
@@ -49,7 +42,7 @@ class _WorkBodyWidget extends State<WorkBodyWidget> {
             fontSize: 24,
             fontWeight: FontWeight.w600,
           ),
-          controller: titleController,
+          controller: widget.controller,
           onChanged: (text) {
             var key = todoList.selectedTask?.key ?? "";
             if (key.isNotEmpty) {
@@ -67,7 +60,7 @@ class _WorkBodyWidget extends State<WorkBodyWidget> {
             fillColor: Colors.white,
             hoverColor: Colors.white,
           ),
-          controller: bodyController,
+          controller: widget.controller,
           onChanged: (text) {
             var key = todoList.selectedTask?.key ?? "";
             if (key.isNotEmpty) {
@@ -75,6 +68,7 @@ class _WorkBodyWidget extends State<WorkBodyWidget> {
             }
           },
         )
+
       ])
     );
   }

@@ -14,14 +14,14 @@ class HomeProvider with ChangeNotifier {
 
   List<Task> _items = List.empty();
   List<Task> get items => _items;
-  List<TextEditingController> _controllers = List.empty();
-  List<TextEditingController> get controllers => _controllers;
+
+  Map<String, TextEditingController> _controllers = {};
+  Map<String, TextEditingController> get controllers => _controllers;
 
   HomeProvider() {
     queryTask().then((tasks) {
       _items = tasks.map((task) => task).toList();
-      _controllers = List.generate(
-          _items.length, (i) => TextEditingController(text: _items[i].name));
+      _controllers = { for (var e in items) e.key : TextEditingController(text: e.name) };
       notifyListeners();
     });
   }
@@ -32,7 +32,7 @@ class HomeProvider with ChangeNotifier {
     var task = Task(key, item);
     await putTask(key, task);
     _items.add(task);
-    _controllers.add(TextEditingController());
+    _controllers[key] = TextEditingController();
     notifyListeners();
   }
 
@@ -43,8 +43,6 @@ class HomeProvider with ChangeNotifier {
   @override
   void dispose() {
     super.dispose();
-    for (TextEditingController c in _controllers) {
-      c.dispose();
-    }
+    _controllers.forEach((key, value) { value.dispose(); });
   }
 }

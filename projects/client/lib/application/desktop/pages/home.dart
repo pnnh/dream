@@ -31,20 +31,7 @@ class HomePageWidget extends StatelessWidget {
                     width: 1,
                   ))),
                   child: const FilterGroupWidget()),
-              Container(
-                  width: 380,
-                  decoration: const BoxDecoration(
-                      border: Border(
-                          right: BorderSide(
-                    color: Color.fromRGBO(229, 229, 229, 100),
-                    width: 1,
-                  ))),
-                  child: const TodoListWidget()),
-              Expanded(
-                child: Container(
-                    color: Colors.white,
-                    child: WorkBodyWidget()
-                )
-              ) ])));
+              const TodoListWidget(),
+              ])));
   }
 }
