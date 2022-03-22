@@ -32,11 +32,11 @@ class _TodoListWidget extends State<TodoListWidget> {
 
     return Expanded(
         child: Container(
-      padding: const EdgeInsets.all(16),
       child: Row(
         children: [
           Container(
               width: 360,
+              padding: const EdgeInsets.all(16),
               decoration: const BoxDecoration(
                   border: Border(
                       right: BorderSide(
@@ -63,16 +63,29 @@ class _TodoListWidget extends State<TodoListWidget> {
                           fontWeight: FontWeight.w500,
                         ))
                   ]),
+                  SizedBox(height: 16),
                   SizedBox(
-                      height: 48,
+                      height: 40,
                       child: TextField(
                         autofocus: true,
                         focusNode: myFocusNode,
-                        decoration: const InputDecoration(
-                            contentPadding: EdgeInsets.only(
-                                left: 8, right: 8, top: 4, bottom: 4),
+                        minLines: 1,
+                        maxLines: 1,
+                        style: const TextStyle(fontSize: 14),
+                        decoration: InputDecoration(
+                            hintText: "回车创建笔记",
+                            contentPadding: const EdgeInsets.only(
+                                left: 8, right: 8, top: 8, bottom: 8),
                             border: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.teal))),
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: const BorderSide(
+                                  width: 0,
+                                  style: BorderStyle.none,
+                                )),
+                            filled: true,
+                            fillColor: const Color.fromRGBO(242, 242, 242, 100),
+                            hoverColor:
+                                const Color.fromRGBO(242, 242, 242, 100)),
                         keyboardType: TextInputType.number,
                         controller: contentController,
                         onSubmitted: (text) {
