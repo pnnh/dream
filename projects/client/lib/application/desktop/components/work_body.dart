@@ -1,4 +1,4 @@
-import 'package:dream/application/desktop/provider/home.dart';
+import 'package:dream/application/desktop/provider/todo.dart';
 import 'package:dream/services/models/task.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -22,7 +22,7 @@ class _WorkBodyWidget extends State<WorkBodyWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final todoListModel = Provider.of<HomeProvider>(context);
+    final todoListModel = Provider.of<TodoProvider>(context);
     bodyController.text = widget.task.body;
     return Padding(
         padding: const EdgeInsets.all(16),

@@ -1,8 +1,10 @@
+import 'package:dream/application/desktop/pages/home.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:dream/application/desktop/pages/home.dart';
 
 import 'provider/Counter.dart';
+import 'provider/home.dart';
+import 'provider/todo.dart';
 
 class Application extends StatefulWidget {
   const Application({Key? key}) : super(key: key);
@@ -20,6 +22,12 @@ class _ApplicationState extends State<Application> {
         ChangeNotifierProvider(
           create: (_) => Counter(),
         ),
+        ChangeNotifierProvider(
+          create: (_) => TodoProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => HomeProvider(),
+        )
       ],
       child: MaterialApp(
           title: '桌面应用',

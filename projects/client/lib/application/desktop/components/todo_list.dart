@@ -1,7 +1,9 @@
 import 'package:dream/application/desktop/components/todo_item.dart';
 import 'package:dream/application/desktop/components/work_body.dart';
 import 'package:dream/application/desktop/provider/home.dart';
+import 'package:dream/application/desktop/provider/todo.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 import 'empty.dart';
@@ -22,10 +24,11 @@ class _TodoListWidget extends State<TodoListWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final todoListModel = Provider.of<HomeProvider>(context);
+    final todoListModel = Provider.of<TodoProvider>(context);
     var items = todoListModel.items.values.toList();
     print("TodoListWidget build ${items.length}");
     final currrentItem = todoListModel.currentItem;
+    final homeProvider = Provider.of<HomeProvider>(context);
 
     return Expanded(
         child: Container(
@@ -42,6 +45,24 @@ class _TodoListWidget extends State<TodoListWidget> {
               ))),
               child: Column(
                 children: [
+                  Row(children: [
+                    IconButton(
+                        icon: SvgPicture.asset(
+                          homeProvider.showFilter
+                              ? "images/svg/menu_unfold.svg"
+                              : "images/svg/menu_fold.svg",
+                          color: Color.fromRGBO(153, 153, 153, 100),
+                        ),
+                        iconSize: 24,
+                        onPressed: () {
+                          homeProvider.switchFilter();
+                        }),
+                    Text("收集箱",
+                        style: const TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.w500,
+                        ))
+                  ]),
                   SizedBox(
                       height: 48,
                       child: TextField(

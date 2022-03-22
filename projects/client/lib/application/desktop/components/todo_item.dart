@@ -1,4 +1,4 @@
-import 'package:dream/application/desktop/provider/home.dart';
+import 'package:dream/application/desktop/provider/todo.dart';
 import 'package:dream/services/models/task.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -20,7 +20,7 @@ class _TodoItemWidget extends State<TodoItemWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final todoList = Provider.of<HomeProvider>(context);
+    final todoList = Provider.of<TodoProvider>(context);
     return TextField(
       keyboardType: TextInputType.text,
       decoration: InputDecoration(
