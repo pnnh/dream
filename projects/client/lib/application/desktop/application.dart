@@ -2,7 +2,7 @@ import 'package:dream/application/desktop/pages/home.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'provider/Counter.dart';
+import 'provider/counter.dart';
 import 'provider/home.dart';
 import 'provider/todo.dart';
 
