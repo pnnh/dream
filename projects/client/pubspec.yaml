@@ -43,6 +43,7 @@ dependencies:
   uuid:
   isar:
   isar_flutter_libs:
+  bitsdojo_window:
 
 dev_dependencies:
   flutter_lints:

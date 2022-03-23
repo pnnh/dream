@@ -27,104 +27,101 @@ class _TodoListWidget extends State<TodoListWidget> {
     final todoListModel = Provider.of<TodoProvider>(context);
     var items = todoListModel.items.values.toList();
     print("TodoListWidget build ${items.length}");
-    final currrentItem = todoListModel.currentItem;
+    final currentItem = todoListModel.currentItem;
     final homeProvider = Provider.of<HomeProvider>(context);
 
     return Expanded(
-        child: Container(
-      child: Row(
-        children: [
-          Container(
-              width: 360,
-              padding: const EdgeInsets.all(16),
-              decoration: const BoxDecoration(
-                  border: Border(
-                      right: BorderSide(
-                color: Color.fromRGBO(229, 229, 229, 100),
-                width: 1,
-              ))),
-              child: Column(
-                children: [
-                  Row(children: [
-                    IconButton(
-                        icon: SvgPicture.asset(
-                          homeProvider.showFilter
-                              ? "images/svg/menu_unfold.svg"
-                              : "images/svg/menu_fold.svg",
-                          color: Color.fromRGBO(153, 153, 153, 100),
-                        ),
-                        iconSize: 24,
-                        onPressed: () {
-                          homeProvider.switchFilter();
-                        }),
-                    Text("收集箱",
-                        style: const TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w500,
-                        ))
-                  ]),
-                  SizedBox(height: 16),
-                  SizedBox(
-                      height: 40,
-                      child: TextField(
-                        autofocus: true,
-                        focusNode: myFocusNode,
-                        minLines: 1,
-                        maxLines: 1,
-                        style: const TextStyle(fontSize: 14),
-                        decoration: InputDecoration(
-                            hintText: "回车创建笔记",
-                            contentPadding: const EdgeInsets.only(
-                                left: 8, right: 8, top: 8, bottom: 8),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
-                                borderSide: const BorderSide(
-                                  width: 0,
-                                  style: BorderStyle.none,
-                                )),
-                            filled: true,
-                            fillColor: const Color.fromRGBO(242, 242, 242, 100),
-                            hoverColor:
-                                const Color.fromRGBO(242, 242, 242, 100)),
-                        keyboardType: TextInputType.number,
-                        controller: contentController,
-                        onSubmitted: (text) {
-                          print("Go button is clicked $text");
-                          todoListModel.addItem(text, "");
-                          contentController.text = "";
-                          myFocusNode.requestFocus();
-                        },
-                        onChanged: (text) {
-                          print("onChanged $text");
-                        },
-                      )),
-                  const SizedBox(height: 16),
-                  Expanded(
-                      child: ListView.builder(
-                    itemCount: items.length,
-                    itemBuilder: (context, index) {
-                      var item = items[index];
-                      if (item == null || item.task == null) {
-                        throw Exception("找不到item");
-                      }
-                      return TodoItemWidget(
-                        task: item.task,
-                        controller: item.controller,
-                      );
-                    },
-                  ))
-                ],
-              )),
-          Expanded(
-              child: Container(
-                  color: Colors.white,
-                  child: currrentItem != null
-                      ? WorkBodyWidget(
-                          task: currrentItem.task,
-                          controller: currrentItem.controller)
-                      : const EmptyWidget(message: "点击左侧标题查看详情")))
-        ],
-      ),
+        child: Row(
+      children: [
+        Container(
+            width: 360,
+            padding: const EdgeInsets.all(16),
+            decoration: const BoxDecoration(
+                border: Border(
+                    right: BorderSide(
+              color: Color.fromRGBO(229, 229, 229, 100),
+              width: 1,
+            ))),
+            child: Column(
+              children: [
+                Row(children: [
+                  IconButton(
+                      icon: SvgPicture.asset(
+                        homeProvider.showFilter
+                            ? "images/svg/menu_unfold.svg"
+                            : "images/svg/menu_fold.svg",
+                        color: const Color.fromRGBO(153, 153, 153, 100),
+                      ),
+                      iconSize: 24,
+                      onPressed: () {
+                        homeProvider.switchFilter();
+                      }),
+                  const Text("收集箱",
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.w500,
+                      ))
+                ]),
+                const SizedBox(height: 16),
+                SizedBox(
+                    height: 40,
+                    child: TextField(
+                      autofocus: true,
+                      focusNode: myFocusNode,
+                      minLines: 1,
+                      maxLines: 1,
+                      style: const TextStyle(fontSize: 14),
+                      decoration: InputDecoration(
+                          hintText: "回车创建笔记",
+                          contentPadding: const EdgeInsets.only(
+                              left: 8, right: 8, top: 8, bottom: 8),
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: const BorderSide(
+                                width: 0,
+                                style: BorderStyle.none,
+                              )),
+                          filled: true,
+                          fillColor: const Color.fromRGBO(242, 242, 242, 100),
+                          hoverColor: const Color.fromRGBO(242, 242, 242, 100)),
+                      keyboardType: TextInputType.number,
+                      controller: contentController,
+                      onSubmitted: (text) {
+                        print("Go button is clicked $text");
+                        todoListModel.addItem(text, "");
+                        contentController.text = "";
+                        myFocusNode.requestFocus();
+                      },
+                      onChanged: (text) {
+                        print("onChanged $text");
+                      },
+                    )),
+                const SizedBox(height: 16),
+                Expanded(
+                    child: ListView.builder(
+                  itemCount: items.length,
+                  itemBuilder: (context, index) {
+                    var item = items[index];
+                    if (item == null) {
+                      throw Exception("找不到item");
+                    }
+                    return TodoItemWidget(
+                      task: item.task,
+                      controller: item.controller,
+                    );
+                  },
+                ))
+              ],
+            )),
+        Expanded(
+            child: Container(
+                color: Colors.white,
+                child: currentItem != null
+                    ? WorkBodyWidget(
+                        task: currentItem.task,
+                        controller: currentItem.controller)
+                    : const EmptyWidget(message: "点击左侧标题查看详情")))
+      ],
     ));
   }
 
