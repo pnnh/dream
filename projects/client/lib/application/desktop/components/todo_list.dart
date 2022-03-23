@@ -118,8 +118,8 @@ class _TodoListWidget extends State<TodoListWidget> {
                 color: Colors.white,
                 child: currentItem != null
                     ? WorkBodyWidget(
-                        task: currentItem.task,
-                        controller: currentItem.controller)
+                    task: currentItem.task,
+                    controller: currentItem.controller)
                     : const EmptyWidget(message: "点击左侧标题查看详情")))
       ],
     ));
