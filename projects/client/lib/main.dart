@@ -55,7 +55,7 @@ class MyApp extends StatelessWidget {
             body: WindowBorder(
                 color: borderColor,
                 width: 1,
-                child: Row(children: [LeftSide(), RightSide()]))));
+                child: Row(children: [LeftSide()]))));
   }
 }
 
@@ -64,14 +64,31 @@ const sidebarColor = Color(0xFFF6A00C);
 class LeftSide extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-        width: 200,
+    return Expanded(
         child: Container(
             color: sidebarColor,
             child: Column(
               children: [
-                WindowTitleBarBox(child: MoveWindow()),
-                Expanded(child: Container())
+                Row(children: [
+                  //WindowTitleBarBox(child: MoveWindow()),
+                  Expanded(
+                      child: WindowTitleBarBox(
+                          child: Row(children: [
+                    Expanded(child: MoveWindow()),
+                    WindowButtons() // 似乎在macOS下不太需要
+                  ])))
+                ]),
+                Row(children: [
+                  Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [backgroundStartColor, backgroundEndColor],
+                            stops: [0.0, 1.0]),
+                      ),
+                      child: Container())
+                ])
               ],
             )));
   }
@@ -79,28 +96,6 @@ class LeftSide extends StatelessWidget {
 
 const backgroundStartColor = Color(0xFFFFD500);
 const backgroundEndColor = Color(0xFFF6A00C);
-
-class RightSide extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-        child: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [backgroundStartColor, backgroundEndColor],
-                  stops: [0.0, 1.0]),
-            ),
-            child: Column(children: [
-              WindowTitleBarBox(
-                  child: Row(children: [
-                Expanded(child: MoveWindow()),
-                WindowButtons()
-              ])),
-            ])));
-  }
-}
 
 final buttonColors = WindowButtonColors(
     iconNormal: Color(0xFF805306),
@@ -113,7 +108,7 @@ final closeButtonColors = WindowButtonColors(
     mouseOver: Color(0xFFD32F2F),
     mouseDown: Color(0xFFB71C1C),
     iconNormal: Color(0xFF805306),
-    iconMouseOver: Colors.white);
+    iconMouseOver: Colors.red);
 
 class WindowButtons extends StatelessWidget {
   @override
