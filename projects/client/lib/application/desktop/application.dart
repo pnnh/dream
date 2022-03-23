@@ -62,15 +62,18 @@ class LeftSide extends StatelessWidget {
         color: Colors.white,
         child: Column(
           children: [
-            Row(children: [
-              Expanded(
-                  child: WindowTitleBarBox(
-                      child: Row(children: [
-                Expanded(child: MoveWindow()),
-                WindowButtons() // 似乎在macOS下不太需要
-              ])))
-              //Container(height: 32)
-            ]),
+            Container(
+                height: 40,
+                color: Color.fromRGBO(231, 231, 231, 100),
+                child: WindowTitleBarBox(
+                    child: Row(children: [
+                  Expanded(
+                      child: MoveWindow(
+                          child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [Text("筑梦笔记")]))),
+                  WindowButtons() // 似乎在macOS下不太需要
+                ]))),
             HomePageWidget()
           ],
         ));
