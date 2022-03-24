@@ -6,6 +6,7 @@ import 'provider/counter.dart';
 import 'provider/home.dart';
 import 'provider/todo.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
+import 'package:dream/services/store/hive.dart';
 
 class Application extends StatefulWidget {
   const Application({Key? key}) : super(key: key);
@@ -41,9 +42,9 @@ class _ApplicationState extends State<Application> {
   }
 }
 
-Future initApp() async {
-  //await DesktopWindow.setWindowSize(Size(1200, 900));
+Future<void> initApp() async {
 
+  await HiveStore.init();
   doWhenWindowReady(() {
     appWindow.minSize = Size(640, 480);
     appWindow.size = Size(1280, 960);

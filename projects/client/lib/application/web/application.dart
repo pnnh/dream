@@ -12,4 +12,4 @@ class Application extends StatelessWidget {
   }
 }
 
-void initApp() async {}
+Future<void> initApp() async {}
