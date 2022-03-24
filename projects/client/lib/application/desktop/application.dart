@@ -47,7 +47,7 @@ Future<void> initApp() async {
   await HiveStore.init();
   doWhenWindowReady(() {
     appWindow.minSize = Size(640, 480);
-    appWindow.size = Size(1280, 960);
+    appWindow.size = Size(1280, 900);
     appWindow.maxSize = Size(2560, 1920);
     appWindow.alignment = Alignment.center;
     appWindow.show();
