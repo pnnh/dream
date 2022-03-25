@@ -8,8 +8,16 @@ class TodoItem {
   TodoItem(this.task, this.controller);
 }
 
+enum FilterType {
+  all,
+  today,
+  lastSevenDays,
+  inbox,
+}
+
 class TodoProvider with ChangeNotifier {
   TodoItem? _currentItem;
+  FilterType filterType = FilterType.all;
 
   TodoItem? get currentItem => _currentItem;
 
@@ -29,8 +37,28 @@ class TodoProvider with ChangeNotifier {
 
   TodoProvider() {
     _store.queryValues().then((tasks) {
+      var now = DateTime.now();
       for (var i = 0; i < tasks.toList().length; i++) {
         var task = tasks[i];
+
+        switch(filterType) {
+          case FilterType.today:
+            if (task.time.year != now.year || task.time.month != now.month ||
+                task.time.day != now.day) {
+              continue;
+            }
+            break;
+          case FilterType.lastSevenDays:
+            if  (task.time.isBefore(DateTime(now.year, now.month, now.day)) ||
+                task.time.isAfter(now.add(const Duration(days: 7)))) {
+              continue;
+            }
+            break;
+          case FilterType.all:
+            break;
+          case FilterType.inbox:
+            break;
+        }
         var controller = TextEditingController(text: task.title);
         controller.addListener(() {
           putItem(task.key, controller.text, task.body);

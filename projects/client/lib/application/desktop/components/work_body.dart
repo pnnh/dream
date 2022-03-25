@@ -1,6 +1,7 @@
 import 'package:dream/application/desktop/provider/todo.dart';
 import 'package:dream/services/models/task.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 class WorkBodyWidget extends StatefulWidget {
@@ -27,6 +28,29 @@ class _WorkBodyWidget extends State<WorkBodyWidget> {
     return Padding(
         padding: const EdgeInsets.all(16),
         child: Column(children: [
+          SizedBox(
+              height: 32,
+              child: Row(children: [
+                SizedBox(
+                    height: 20,
+                    width: 20,
+                    child: SvgPicture.asset(
+                      "images/svg/calendar_2.svg",
+                      color: const Color.fromRGBO(153, 153, 153, 100),
+                    )),
+                const SizedBox(width: 8),
+                TextButton(
+                  child: Text("设置提醒",
+                      style: TextStyle(
+                        color: Colors.black,
+                      )),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(Colors.white),
+                    overlayColor: MaterialStateProperty.all(Colors.white),
+                  ),
+                  onPressed: () {},
+                )
+              ])),
           TextField(
             keyboardType: TextInputType.text,
             decoration: const InputDecoration(

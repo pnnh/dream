@@ -27,6 +27,7 @@ flutter:
     - images/svg/menu_fold.svg
     - images/svg/menu_unfold.svg
     - images/ui/empty.png
+    - images/svg/calendar_2.svg
 
 dependencies:
   flutter:

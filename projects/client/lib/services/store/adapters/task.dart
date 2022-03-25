@@ -9,7 +9,8 @@ class TaskAdapter extends TypeAdapter<Task> {
 
   @override
   Task read(BinaryReader reader) {
-    return Task(reader.readString(), reader.readString(), reader.readString());
+    return Task(reader.readString(), reader.readString(), reader.readString(),
+    DateTime.fromMicrosecondsSinceEpoch(reader.readInt()));
   }
 
   @override
@@ -17,22 +18,6 @@ class TaskAdapter extends TypeAdapter<Task> {
     writer.writeString(obj.key);
     writer.writeString(obj.title);
     writer.writeString(obj.body);
+    writer.writeInt(obj.time.millisecondsSinceEpoch);
   }
 }
-//
-// Future<Task?> getTask(String key) async {
-//   var box = await Hive.openBox<Task>('tasks');
-//
-//   return box.get(key);
-// }
-//
-// Future<void> putTask(String key, Task task) async {
-//   var box = await Hive.openBox<Task>('tasks');
-//
-//   box.put(key, task);
-// }
-//
-// Future<Iterable<Task>> queryTask() async {
-//   var box = await Hive.openBox<Task>('tasks');
-//   return box.values;
-// }
