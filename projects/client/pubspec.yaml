@@ -45,6 +45,7 @@ dependencies:
   isar:
   isar_flutter_libs:
   bitsdojo_window:
+  syncfusion_flutter_datepicker:
 
 dev_dependencies:
   flutter_lints:
