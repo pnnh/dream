@@ -1,9 +1,6 @@
 {
   "name": "sfxui",
   "version": "1.0.0",
-  "workspaces": [
-    "../common/pkg"
-  ],
   "scripts": {
     "build": "vite build --watch"
   },

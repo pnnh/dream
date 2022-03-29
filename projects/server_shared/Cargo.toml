@@ -17,6 +17,8 @@ console_error_panic_hook = "0.1.7"
 base64 = "0.13.0"
 libc = "0.2.119"
 reqwest = { version = "0.11.9", features = ["blocking"] }
+axum = "0.4.6"
+tokio = { version = "1.0", features = ["full"] }
 handlebars = "4.2.1"
 serde_json = "1.0.79"
 
