@@ -11,6 +11,12 @@ use handlebars::Handlebars;
 use libc::c_char;
 use serde_json::json;
 
+#[link(name = "sfx_server_common")]
+extern {
+    fn list_file(input: libc::c_int) -> libc::c_int;
+    fn return_string() -> *const c_char;
+}
+
 async fn index() -> Result<Html<String>, String> {
     let mut reg = Handlebars::new();
     let result = reg.render_template("Hello {{name}}", &json!({"name": "World"})).map_err(|err| err.to_string())?;
@@ -28,9 +34,38 @@ async fn index() -> Result<Html<String>, String> {
     Ok(Html(html))
 }
 
+async fn html_file() -> Result<Html<String>, String> {
+    let mut reg = Handlebars::new();
+    reg.register_template_file("index", "assets/templates/index.html").unwrap();
+    let result = reg.render("index", &json!({"name": "World"}))
+        .map_err(|err| err.to_string())?;
+    println!("{}", result);
+
+    Ok(Html(result))
+}
+
+#[tokio::main]
 async fn main() {
     let result = random::random_string(16, false,
                                        false, false, false);
 
     println!("value: {}", result);
+    
+    let input = 4;
+    let output = unsafe { list_file(input) };
+    println!("{} * 2 = {}", input, output);
+
+    let c_buf: *const c_char = unsafe { return_string() };
+    let c_str: &CStr = unsafe { CStr::from_ptr(c_buf) };
+    let str_slice: &str = c_str.to_str().unwrap();
+    println!("return_string: {}", str_slice);
+
+    let app = axum::Router::new().route("/", axum::routing::get(|| async { "Hello, World!" }))
+        .route("/html", get(index))
+        .route("/file", get(html_file));
+
+    axum::Server::bind(&"0.0.0.0:5500".parse().unwrap())
+        .serve(app.into_make_service())
+        .await
+        .unwrap();
 }
