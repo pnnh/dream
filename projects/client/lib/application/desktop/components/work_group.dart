@@ -18,6 +18,7 @@ class _WorkGroupWidget extends State<WorkGroupWidget> {
 
   @override
   Widget build(BuildContext context) {
+    var routerDelegate = BookRouterDelegate.of(context);
     return Column(children: [
       AvatarWidget(),
       const SizedBox(height: 24),
@@ -31,6 +32,7 @@ class _WorkGroupWidget extends State<WorkGroupWidget> {
             setState(() {
               selectedIndex = 0;
             });
+            routerDelegate.handleBookTapped("");
           }),
       const SizedBox(height: 24),
       IconButton(
@@ -43,8 +45,7 @@ class _WorkGroupWidget extends State<WorkGroupWidget> {
             setState(() {
               selectedIndex = 1;
             });
-            var routerDelegate = BookRouterDelegate.of(context);
-            routerDelegate.handleBookTapped();
+            routerDelegate.handleBookTapped("detail");
           }),
       const SizedBox(height: 24),
       IconButton(

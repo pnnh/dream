@@ -1,7 +1,9 @@
 import 'package:bitsdojo_window/bitsdojo_window.dart';
+import 'package:dream/application/desktop/pages/calendar.dart';
 import 'package:dream/application/desktop/pages/home.dart';
 import 'package:dream/application/desktop/provider/home.dart';
 import 'package:dream/application/desktop/provider/todo.dart';
+import 'package:dream/application/desktop/route.dart';
 import 'package:dream/services/store/hive.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -16,7 +18,7 @@ class Application extends StatefulWidget {
 class _ApplicationState extends State<Application> {
   BookRouterDelegate _routerDelegate = BookRouterDelegate();
   BookRouteInformationParser _routeInformationParser =
-  BookRouteInformationParser();
+      BookRouteInformationParser();
 
   @override
   Widget build(BuildContext context) {
@@ -73,9 +75,7 @@ class BookRouterDelegate extends RouterDelegate<BookRoutePath>
   BookRouterDelegate() : navigatorKey = GlobalKey<NavigatorState>() {}
 
   static BookRouterDelegate of(BuildContext context) {
-    final delegate = Router
-        .of(context)
-        .routerDelegate;
+    final delegate = Router.of(context).routerDelegate;
     assert(delegate is BookRouterDelegate, 'Delegate type must match');
     return delegate as BookRouterDelegate;
   }
@@ -90,15 +90,7 @@ class BookRouterDelegate extends RouterDelegate<BookRoutePath>
   Widget build(BuildContext context) {
     return Navigator(
       key: navigatorKey,
-      pages: [
-        if (_selectedBook.isEmpty)
-          MaterialPage(
-            key: ValueKey('BooksListPage'),
-            child: BooksListScreen(),
-          )
-        else
-          BookDetailsPage()
-      ],
+      pages: [if (_selectedBook.isEmpty) HomePage() else CalendarPage()],
       onPopPage: (route, result) {
         if (!route.didPop(result)) {
           return false;
@@ -120,74 +112,9 @@ class BookRouterDelegate extends RouterDelegate<BookRoutePath>
     }
   }
 
-  void handleBookTapped() {
-    _selectedBook = "detail";
+  void handleBookTapped(String page) {
+    _selectedBook = page;
     notifyListeners();
-  }
-}
-
-class BookDetailsPage extends Page {
-  BookDetailsPage() : super(key: ValueKey(""));
-
-  Route createRoute(BuildContext context) {
-    return MaterialPageRoute(
-      settings: this,
-      builder: (BuildContext context) {
-        return BookDetailsScreen();
-      },
-    );
-  }
-}
-
-class BookRoutePath {
-  final int id;
-
-  BookRoutePath.home() : id = 0;
-
-  BookRoutePath.details(this.id);
-
-  bool get isHomePage => id == 0;
-
-  bool get isDetailsPage => id != 0;
-}
-
-class BooksListScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MultiProvider(
-        providers: [
-// Provider<Counter>.value(value: foo),
-          ChangeNotifierProvider(
-            create: (_) => TodoProvider(),
-          ),
-          ChangeNotifierProvider(
-            create: (_) => HomeProvider(),
-          )
-        ],
-        child: Scaffold(
-          body: WindowBorder(color: borderColor, width: 1, child: LeftSide()),
-        ));
-  }
-}
-
-class BookDetailsScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text("哈哈哈 book", style: Theme
-                .of(context)
-                .textTheme
-                .headline6),
-          ],
-        ),
-      ),
-    );
   }
 }
 
@@ -201,57 +128,4 @@ Future<void> initApp() async {
     appWindow.alignment = Alignment.center;
     appWindow.show();
   });
-}
-
-const borderColor = Color(0xFF805306);
-
-class LeftSide extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        color: Colors.white,
-        child: Column(
-          children: [
-            Container(
-                height: 40,
-                color: Color.fromRGBO(231, 231, 231, 100),
-                child: WindowTitleBarBox(
-                    child: Row(children: [
-                      Expanded(
-                          child: MoveWindow(
-                              child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [Text("筑梦笔记")]))),
-                      WindowButtons() // 似乎在macOS下不太需要
-                    ]))),
-            HomePageWidget()
-          ],
-        ));
-  }
-}
-
-final buttonColors = WindowButtonColors(
-    iconNormal: Color(0xFF805306),
-    mouseOver: Color(0xFFF6A00C),
-    mouseDown: Color(0xFF805306),
-    iconMouseOver: Color(0xFF805306),
-    iconMouseDown: Color(0xFFFFD500));
-
-final closeButtonColors = WindowButtonColors(
-    mouseOver: Color(0xFFD32F2F),
-    mouseDown: Color(0xFFB71C1C),
-    iconNormal: Color(0xFF805306),
-    iconMouseOver: Colors.red);
-
-class WindowButtons extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        MinimizeWindowButton(colors: buttonColors),
-        MaximizeWindowButton(colors: buttonColors),
-        CloseWindowButton(colors: closeButtonColors),
-      ],
-    );
-  }
 }
