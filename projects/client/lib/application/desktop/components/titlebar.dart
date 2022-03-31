@@ -38,17 +38,14 @@ class _TitleBarWidget extends State<TitleBarWidget> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           TextButton(
-                              child: SizedBox(
-                                  height: 16,
-                                  width: 16,
-                                  child: SvgPicture.asset(
-                                    "images/svg/arrow_left.svg",
-                                  )),
+                              child: SvgPicture.asset(
+                                "images/svg/arrow_left_s.svg",
+                              ),
                               style: ButtonStyle(
                                 minimumSize:
                                     MaterialStateProperty.all(Size.zero),
                                 padding: MaterialStateProperty.all(
-                                    EdgeInsets.all(4)),
+                                    EdgeInsets.all(2)),
                                 fixedSize:
                                     MaterialStateProperty.all(Size(24, 24)),
                                 backgroundColor: MaterialStateProperty.all(
@@ -60,13 +57,13 @@ class _TitleBarWidget extends State<TitleBarWidget> {
                           SizedBox(width: 4),
                           TextButton(
                               child: SvgPicture.asset(
-                                "images/svg/arrow_right.svg",
+                                "images/svg/arrow_right_s.svg",
                               ),
                               style: ButtonStyle(
                                 minimumSize:
                                     MaterialStateProperty.all(Size.zero),
                                 padding: MaterialStateProperty.all(
-                                    EdgeInsets.all(4)),
+                                    EdgeInsets.all(2)),
                                 fixedSize:
                                     MaterialStateProperty.all(Size(24, 24)),
                                 backgroundColor: MaterialStateProperty.all(

@@ -30,6 +30,8 @@ flutter:
     - images/svg/calendar_2.svg
     - images/svg/arrow_left.svg
     - images/svg/arrow_right.svg
+    - images/svg/arrow_left_s.svg
+    - images/svg/arrow_right_s.svg
 
 dependencies:
   flutter:
