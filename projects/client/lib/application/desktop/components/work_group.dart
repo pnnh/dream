@@ -1,3 +1,4 @@
+import 'package:dream/application/desktop/application.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -42,6 +43,8 @@ class _WorkGroupWidget extends State<WorkGroupWidget> {
             setState(() {
               selectedIndex = 1;
             });
+            var routerDelegate = BookRouterDelegate.of(context);
+            routerDelegate.handleBookTapped(routerDelegate.books[0]);
           }),
       const SizedBox(height: 24),
       IconButton(
