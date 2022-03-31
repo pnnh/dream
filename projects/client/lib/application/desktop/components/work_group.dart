@@ -44,7 +44,7 @@ class _WorkGroupWidget extends State<WorkGroupWidget> {
               selectedIndex = 1;
             });
             var routerDelegate = BookRouterDelegate.of(context);
-            routerDelegate.handleBookTapped(routerDelegate.books[0]);
+            routerDelegate.handleBookTapped();
           }),
       const SizedBox(height: 24),
       IconButton(
