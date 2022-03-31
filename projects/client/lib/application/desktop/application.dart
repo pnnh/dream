@@ -32,24 +32,13 @@ class _ApplicationState extends State<Application> {
   }
 }
 
-class Book {
-  final String title;
-  final String author;
-
-  Book(this.title, this.author);
-}
-
 class BookRouteInformationParser extends RouteInformationParser<BookRoutePath> {
   @override
   Future<BookRoutePath> parseRouteInformation(
       RouteInformation routeInformation) async {
     final uri = Uri.parse(routeInformation.location ?? "/");
-    // Handle '/'
-    // Handle '/book/:id'
     if (uri.pathSegments.length == 2) {
-      var remaining = uri.pathSegments[1];
-      var id = int.tryParse(remaining);
-      return BookRoutePath.details(id ?? 1);
+      return BookRoutePath.details();
     }
 
     return BookRoutePath.home();
@@ -57,12 +46,10 @@ class BookRouteInformationParser extends RouteInformationParser<BookRoutePath> {
 
   @override
   RouteInformation restoreRouteInformation(BookRoutePath path) {
-    if (path.isDetailsPage) {
-      return RouteInformation(location: '/book/${path.id}');
+    if (path.pathName == Pages.detail) {
+      return RouteInformation(location: '/detail');
     }
-    //if (path.isHomePage) {
     return RouteInformation(location: '/');
-    //}
   }
 }
 
@@ -70,7 +57,7 @@ class BookRouterDelegate extends RouterDelegate<BookRoutePath>
     with ChangeNotifier, PopNavigatorRouterDelegateMixin<BookRoutePath> {
   final GlobalKey<NavigatorState> navigatorKey;
 
-  String _selectedBook = "";
+  BookRoutePath currentPath = BookRoutePath.home();
 
   BookRouterDelegate() : navigatorKey = GlobalKey<NavigatorState>() {}
 
@@ -81,21 +68,22 @@ class BookRouterDelegate extends RouterDelegate<BookRoutePath>
   }
 
   BookRoutePath get currentConfiguration {
-    return _selectedBook == null
-        ? BookRoutePath.home()
-        : BookRoutePath.details(0);
+    return currentPath;
   }
 
   @override
   Widget build(BuildContext context) {
     return Navigator(
       key: navigatorKey,
-      pages: [if (_selectedBook.isEmpty) HomePage() else CalendarPage()],
+      pages: [
+        if (currentPath.pathName == Pages.home) HomePage() else CalendarPage()
+      ],
       onPopPage: (route, result) {
+        print('onPopPage $route ');
         if (!route.didPop(result)) {
           return false;
         }
-        _selectedBook = "";
+        currentPath = BookRoutePath.home();
         notifyListeners();
 
         return true;
@@ -105,15 +93,18 @@ class BookRouterDelegate extends RouterDelegate<BookRoutePath>
 
   @override
   Future<void> setNewRoutePath(BookRoutePath path) async {
-    if (path.isDetailsPage) {
-      _selectedBook = "detail";
-    } else {
-      _selectedBook = "";
-    }
+    print('setNewRoutePath ${path.pathName}');
+    currentPath = path;
   }
 
   void handleBookTapped(String page) {
-    _selectedBook = page;
+    switch (page) {
+      case "detail":
+        currentPath = BookRoutePath.details();
+        break;
+      default:
+        currentPath = BookRoutePath.home();
+    }
     notifyListeners();
   }
 }

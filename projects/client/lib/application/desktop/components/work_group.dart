@@ -1,4 +1,5 @@
 import 'package:dream/application/desktop/application.dart';
+import 'package:dream/application/desktop/route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -12,7 +13,6 @@ class WorkGroupWidget extends StatefulWidget {
 }
 
 class _WorkGroupWidget extends State<WorkGroupWidget> {
-  int selectedIndex = 0;
   final Color selectedColor = const Color.fromRGBO(0, 119, 212, 100);
   final Color defaultColor = const Color.fromRGBO(146, 148, 152, 100);
 
@@ -25,40 +25,36 @@ class _WorkGroupWidget extends State<WorkGroupWidget> {
       IconButton(
           icon: SvgPicture.asset(
             "images/svg/todo.svg",
-            color: selectedIndex == 0 ? selectedColor : defaultColor,
+            color: routerDelegate.currentPath.pathName == Pages.home
+                ? selectedColor
+                : defaultColor,
           ),
           iconSize: 24,
           onPressed: () {
-            setState(() {
-              selectedIndex = 0;
-            });
-            routerDelegate.handleBookTapped("");
+            routerDelegate.handleBookTapped("home");
           }),
       const SizedBox(height: 24),
       IconButton(
           icon: SvgPicture.asset(
             "images/svg/booklet.svg",
-            color: selectedIndex == 1 ? selectedColor : defaultColor,
+            color: routerDelegate.currentPath.pathName == Pages.detail
+                ? selectedColor
+                : defaultColor,
           ),
           iconSize: 24,
           onPressed: () {
-            setState(() {
-              selectedIndex = 1;
-            });
             routerDelegate.handleBookTapped("detail");
           }),
       const SizedBox(height: 24),
       IconButton(
           icon: SvgPicture.asset(
             "images/svg/todo.svg",
-            color: selectedIndex == 2 ? selectedColor : defaultColor,
+            color: routerDelegate.currentPath.pathName == Pages.other
+                ? selectedColor
+                : defaultColor,
           ),
           iconSize: 24,
-          onPressed: () {
-            setState(() {
-              selectedIndex = 2;
-            });
-          }),
+          onPressed: () {}),
     ]);
   }
 }

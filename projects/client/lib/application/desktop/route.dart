@@ -1,22 +1,18 @@
 import 'package:flutter/material.dart';
 
 class CustomPageRoute extends MaterialPageRoute {
-  CustomPageRoute({settings, builder}) : super(settings: settings, builder: builder);
+  CustomPageRoute({settings, builder})
+      : super(settings: settings, builder: builder);
 
   @override
   Duration get transitionDuration => const Duration(milliseconds: 0);
 }
 
+enum Pages { home, detail, other }
 
 class BookRoutePath {
-  final int id;
+  Pages pathName = Pages.home;
 
-  BookRoutePath.home() : id = 0;
-
-  BookRoutePath.details(this.id);
-
-  bool get isHomePage => id == 0;
-
-  bool get isDetailsPage => id != 0;
+  BookRoutePath.home();
+  BookRoutePath.details() : pathName = Pages.detail;
 }
-
