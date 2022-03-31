@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../components/filter_group.dart';
+import '../components/titlebar.dart';
 import '../components/todo_list.dart';
 import '../components/work_group.dart';
 
@@ -43,18 +44,7 @@ class HomeScreen extends StatelessWidget {
         color: Colors.white,
         child: Column(
           children: [
-            Container(
-                height: 40,
-                color: Color.fromRGBO(231, 231, 231, 100),
-                child: WindowTitleBarBox(
-                    child: Row(children: [
-                  Expanded(
-                      child: MoveWindow(
-                          child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [Text("筑梦笔记")]))),
-                  WindowButtons() // 似乎在macOS下不太需要
-                ]))),
+            TitleBarWidget(),
             Expanded(
                 child: GestureDetector(
                     onTapDown: (detail) {

@@ -28,6 +28,8 @@ flutter:
     - images/svg/menu_unfold.svg
     - images/ui/empty.png
     - images/svg/calendar_2.svg
+    - images/svg/arrow_left.svg
+    - images/svg/arrow_right.svg
 
 dependencies:
   flutter:
