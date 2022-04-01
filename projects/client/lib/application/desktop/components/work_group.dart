@@ -25,7 +25,7 @@ class _WorkGroupWidget extends State<WorkGroupWidget> {
       IconButton(
           icon: SvgPicture.asset(
             "images/svg/todo.svg",
-            color: routerDelegate.currentPath.pathName == Pages.home
+            color: routerDelegate.currentConfiguration.pathName == Pages.home
                 ? selectedColor
                 : defaultColor,
           ),
@@ -37,7 +37,7 @@ class _WorkGroupWidget extends State<WorkGroupWidget> {
       IconButton(
           icon: SvgPicture.asset(
             "images/svg/booklet.svg",
-            color: routerDelegate.currentPath.pathName == Pages.detail
+            color: routerDelegate.currentConfiguration.pathName == Pages.detail
                 ? selectedColor
                 : defaultColor,
           ),
@@ -49,7 +49,7 @@ class _WorkGroupWidget extends State<WorkGroupWidget> {
       IconButton(
           icon: SvgPicture.asset(
             "images/svg/todo.svg",
-            color: routerDelegate.currentPath.pathName == Pages.other
+            color: routerDelegate.currentConfiguration.pathName == Pages.other
                 ? selectedColor
                 : defaultColor,
           ),

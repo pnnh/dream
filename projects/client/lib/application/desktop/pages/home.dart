@@ -1,8 +1,4 @@
-import 'package:bitsdojo_window/bitsdojo_window.dart';
-import 'package:dream/application/desktop/components/window.dart';
 import 'package:dream/application/desktop/provider/home.dart';
-import 'package:dream/application/desktop/provider/todo.dart';
-import 'package:dream/application/desktop/route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -11,32 +7,18 @@ import '../components/titlebar.dart';
 import '../components/todo_list.dart';
 import '../components/work_group.dart';
 
-class HomePage extends Page {
-  HomePage() : super(key: ValueKey(""));
+class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key);
 
-  Route createRoute(BuildContext context) {
-    return CustomPageRoute(
-      settings: this,
-      builder: (BuildContext context) {
-        return MultiProvider(
-            providers: [
-              ChangeNotifierProvider(
-                create: (_) => TodoProvider(),
-              ),
-              ChangeNotifierProvider(
-                create: (_) => HomeProvider(),
-              )
-            ],
-            child: Scaffold(
-              body: WindowBorder(
-                  color: Color(0xFF805306), width: 1, child: HomeScreen()),
-            ));
-      },
-    );
+  @override
+  Widget build(BuildContext context) {
+    return HomeScreen();
   }
 }
 
 class HomeScreen extends StatelessWidget {
+  const HomeScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final homeProvider = Provider.of<HomeProvider>(context);
