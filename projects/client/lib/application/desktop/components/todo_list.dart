@@ -101,10 +101,10 @@ class _TodoListWidget extends State<TodoListWidget> {
                     child: ListView.builder(
                   itemCount: items.length,
                   itemBuilder: (context, index) {
-                    var item = items[index];
-                    if (item == null) {
+                    if (items.length <= index) {
                       throw Exception("找不到item");
                     }
+                    var item = items[index];
                     return TodoItemWidget(
                       task: item.task,
                       controller: item.controller,
@@ -118,8 +118,8 @@ class _TodoListWidget extends State<TodoListWidget> {
                 color: Colors.white,
                 child: currentItem != null
                     ? WorkBodyWidget(
-                    task: currentItem.task,
-                    controller: currentItem.controller)
+                        task: currentItem.task,
+                        controller: currentItem.controller)
                     : const EmptyWidget(message: "点击左侧标题查看详情")))
       ],
     ));
