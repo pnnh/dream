@@ -9,19 +9,18 @@ import 'other.dart';
 class MyPage extends Page {
   final BookRoutePath routePath;
 
-  MyPage(
-    this.routePath,
-  ) : super(name: routePath.pathName.toString(), key: ValueKey(routePath));
+  MyPage(this.routePath,)
+      : super(name: routePath.uri.toString(), key: ValueKey(routePath));
 
   @override
   Route createRoute(BuildContext context) {
     return CustomPageRoute(
-      (BuildContext context) {
+          (BuildContext context) {
         return Scaffold(
           body: WindowBorder(
               color: Color(0xFF805306),
               width: 1,
-              child: selectPage(routePath.pathName)),
+              child: selectPage(routePath.uri)),
         );
       },
       settings: this,
@@ -29,13 +28,14 @@ class MyPage extends Page {
   }
 }
 
-Widget selectPage(Pages page) {
-  switch (page) {
-    case Pages.home:
-      return HomePage();
-    case Pages.detail:
+Widget selectPage(Uri uri) {
+  print("uri path ${uri.path}");
+  switch (uri.path) {
+    case "/calendar":
       return CalendarPage();
-    case Pages.other:
+    case "/other":
       return OtherPage();
+    default:
+      return HomePage();
   }
 }

@@ -10,39 +10,33 @@ class CustomPageRoute extends MaterialPageRoute {
   Duration get transitionDuration => const Duration(milliseconds: 0);
 }
 
-enum Pages { home, detail, other }
-
 class BookRoutePath {
-  Pages pathName = Pages.home;
-  String location = "/";
+  late Uri uri;
 
-  BookRoutePath(this.pathName, this.location);
+  BookRoutePath(String location) {
+    uri = Uri.parse(location);
+  }
 
-  BookRoutePath.home();
+  BookRoutePath.home() : this("/");
 
-  BookRoutePath.details()
-      : pathName = Pages.detail,
-        location = "/detail";
+  BookRoutePath.calendar() : this("/calendar");
+
+  BookRoutePath.other() : this("/other");
 }
 
 class BookRouteInformationParser extends RouteInformationParser<BookRoutePath> {
   @override
   Future<BookRoutePath> parseRouteInformation(
       RouteInformation routeInformation) async {
-    final uri = Uri.parse(routeInformation.location ?? "/");
-    if (uri.pathSegments.length == 2) {
-      return BookRoutePath.details();
-    }
-
-    return BookRoutePath.home();
+    print('BookRouteInformationParser ${routeInformation.location}');
+    return routeInformation.location != null
+        ? BookRoutePath(routeInformation.location!)
+        : BookRoutePath.home();
   }
 
   @override
   RouteInformation restoreRouteInformation(BookRoutePath path) {
-    if (path.pathName == Pages.detail) {
-      return const RouteInformation(location: '/detail');
-    }
-    return const RouteInformation(location: '/');
+    return RouteInformation(location: path.uri.toString());
   }
 }
 
@@ -85,7 +79,7 @@ class BookRouterDelegate extends RouterDelegate<BookRoutePath>
 
   @override
   Future<void> setNewRoutePath(BookRoutePath configuration) async {
-    print('setNewRoutePath ${configuration.pathName}');
+    print('setNewRoutePath ${configuration.uri}');
     _stack
       ..clear()
       ..add(configuration);
@@ -95,10 +89,8 @@ class BookRouterDelegate extends RouterDelegate<BookRoutePath>
   bool _onPopPage(Route<dynamic> route, dynamic result) {
     print('_onPopPage ${route.settings}');
     if (_stack.length > 1) {
-      if (_stack.last.pathName.toString() == route.settings.name) {
-        _stack.removeLast();
-        notifyListeners();
-      }
+      _stack.removeLast();
+      notifyListeners();
     }
     return route.didPop(result);
   }
@@ -114,20 +106,8 @@ class BookRouterDelegate extends RouterDelegate<BookRoutePath>
     );
   }
 
-  void handleBookTapped(Pages page) {
-    String location = "";
-    switch (page) {
-      case Pages.detail:
-        location = "/detail";
-        break;
-      case Pages.other:
-        location = "/other";
-        break;
-      default:
-        location = "/";
-        break;
-    }
-    push(BookRoutePath(page, location));
+  void handleBookTapped(String location) {
+    push(BookRoutePath(location));
     notifyListeners();
   }
 }

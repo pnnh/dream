@@ -24,37 +24,40 @@ class _WorkGroupWidget extends State<WorkGroupWidget> {
       IconButton(
           icon: SvgPicture.asset(
             "images/svg/todo.svg",
-            color: routerDelegate.currentConfiguration.pathName == Pages.home
+            color: routerDelegate.currentConfiguration.uri.path ==
+                    BookRoutePath.home().uri.path
                 ? selectedColor
                 : defaultColor,
           ),
           iconSize: 24,
           onPressed: () {
-            routerDelegate.handleBookTapped(Pages.home);
+            routerDelegate.handleBookTapped("/");
           }),
       const SizedBox(height: 24),
       IconButton(
           icon: SvgPicture.asset(
             "images/svg/booklet.svg",
-            color: routerDelegate.currentConfiguration.pathName == Pages.detail
+            color: routerDelegate.currentConfiguration.uri.path ==
+                    BookRoutePath.calendar().uri.path
                 ? selectedColor
                 : defaultColor,
           ),
           iconSize: 24,
           onPressed: () {
-            routerDelegate.handleBookTapped(Pages.detail);
+            routerDelegate.handleBookTapped("/calendar");
           }),
       const SizedBox(height: 24),
       IconButton(
           icon: SvgPicture.asset(
             "images/svg/todo.svg",
-            color: routerDelegate.currentConfiguration.pathName == Pages.other
+            color: routerDelegate.currentConfiguration.uri.path ==
+                    BookRoutePath.other().uri.path
                 ? selectedColor
                 : defaultColor,
           ),
           iconSize: 24,
           onPressed: () {
-            routerDelegate.handleBookTapped(Pages.other);
+            routerDelegate.handleBookTapped("/other");
           }),
     ]);
   }
