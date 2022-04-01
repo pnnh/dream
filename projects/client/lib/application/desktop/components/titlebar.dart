@@ -15,7 +15,18 @@ class TitleBarWidget extends StatefulWidget {
 
 class _TitleBarWidget extends State<TitleBarWidget> {
   String content = "搜索笔记";
-  final hoverColor = const Color.fromRGBO(204, 204, 204, 100);
+
+  final normalColor = const Color.fromRGBO(70, 70, 70, 100);
+  final hoverBackground = const Color.fromRGBO(204, 204, 204, 100);
+  final disableColor = const Color.fromRGBO(165, 165, 165, 100);
+  final disableBackground = const Color.fromRGBO(217, 217, 217, 100);
+  final searchBorder = OutlineInputBorder(
+    borderSide: BorderSide(
+        color: Color.fromRGBO(240, 240, 240, 100),
+        width: 1,
+        style: BorderStyle.solid),
+    borderRadius: BorderRadius.circular(4),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +50,10 @@ class _TitleBarWidget extends State<TitleBarWidget> {
                         children: [
                           TextButton(
                               child: SvgPicture.asset(
-                                "images/svg/arrow_left_s.svg",
-                              ),
+                                  "images/svg/arrow_left_s.svg",
+                                  color: routerDelegate.isFirst()
+                                      ? disableColor
+                                      : normalColor),
                               style: ButtonStyle(
                                 minimumSize:
                                     MaterialStateProperty.all(Size.zero),
@@ -51,16 +64,20 @@ class _TitleBarWidget extends State<TitleBarWidget> {
                                 backgroundColor: MaterialStateProperty.all(
                                     Colors.transparent),
                                 overlayColor:
-                                    MaterialStateProperty.all(hoverColor),
+                                    MaterialStateProperty.all(hoverBackground),
                               ),
-                              onPressed: () {
-                                routerDelegate.pop();
-                              }),
+                              onPressed: routerDelegate.isFirst()
+                                  ? null
+                                  : () {
+                                      routerDelegate.back();
+                                    }),
                           SizedBox(width: 4),
                           TextButton(
                               child: SvgPicture.asset(
-                                "images/svg/arrow_right_s.svg",
-                              ),
+                                  "images/svg/arrow_right_s.svg",
+                                  color: routerDelegate.isLast()
+                                      ? disableColor
+                                      : normalColor),
                               style: ButtonStyle(
                                 minimumSize:
                                     MaterialStateProperty.all(Size.zero),
@@ -71,22 +88,35 @@ class _TitleBarWidget extends State<TitleBarWidget> {
                                 backgroundColor: MaterialStateProperty.all(
                                     Colors.transparent),
                                 overlayColor:
-                                    MaterialStateProperty.all(hoverColor),
+                                    MaterialStateProperty.all(hoverBackground),
                               ),
-                              onPressed: () {}),
+                              onPressed: routerDelegate.isLast()
+                                  ? null
+                                  : () {
+                                      routerDelegate.forward();
+                                    }),
                         ])),
                 Container(
                   child: Text("筑梦笔记"),
                 ),
                 Container(
                     width: 120,
+                    height: 24,
+                    padding: EdgeInsets.only(right: 16),
                     child: TextField(
                       keyboardType: TextInputType.text,
-                      decoration: const InputDecoration(
+                      style: TextStyle(fontSize: 14),
+                      decoration: InputDecoration(
+                        hoverColor: Colors.white,
                         hintText: '搜索笔记',
-                        enabledBorder: InputBorder.none,
-                        focusedBorder: InputBorder.none,
-                        focusedErrorBorder: InputBorder.none,
+                        hintStyle: TextStyle(fontSize: 14),
+                        contentPadding: EdgeInsets.only(left: 8, top: 4),
+                        enabledBorder: searchBorder,
+                        focusedBorder: searchBorder,
+                        focusedErrorBorder: searchBorder,
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: searchBorder,
                       ),
                       controller: TextEditingController(text: ""),
                     ))

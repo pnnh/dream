@@ -46,6 +46,7 @@ class BookRouterDelegate extends RouterDelegate<BookRoutePath>
   GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   final _stack = <BookRoutePath>[BookRoutePath.home()];
+  int _currentIndex = 0;
 
   List<String> get stack => List.unmodifiable(_stack);
 
@@ -58,16 +59,36 @@ class BookRouterDelegate extends RouterDelegate<BookRoutePath>
   }
 
   @override
-  BookRoutePath get currentConfiguration => _stack.last;
+  BookRoutePath get currentConfiguration => _stack[_currentIndex];
 
-  void push(BookRoutePath newRoute) {
+  bool isFirst() {
+    return _currentIndex == 0;
+  }
+
+  bool isLast() {
+    return _currentIndex == _stack.length - 1;
+  }
+
+  void go(String location) {
+    var newRoute = BookRoutePath(location);
+    for (var i = _currentIndex + 1; i < _stack.length; i++) {
+      _stack.removeAt(i);
+    }
     _stack.add(newRoute);
+    _currentIndex++;
     notifyListeners();
   }
 
-  void pop() {
-    if (_stack.length > 1) {
-      _stack.remove(_stack.last);
+  void back() {
+    if (_stack.length > 1 && _currentIndex > 0) {
+      _currentIndex--;
+    }
+    notifyListeners();
+  }
+
+  void forward() {
+    if (_currentIndex < _stack.length - 1) {
+      _currentIndex++;
     }
     notifyListeners();
   }
@@ -97,17 +118,17 @@ class BookRouterDelegate extends RouterDelegate<BookRoutePath>
 
   @override
   Widget build(BuildContext context) {
+    List<Page<dynamic>> pages = [];
+    for (var i = 0; i < _stack.length; i++) {
+      if (i <= _currentIndex) {
+        pages.add(MyPage(_stack[i]));
+      }
+    }
     return Navigator(
       key: navigatorKey,
-      pages: [
-        for (final name in _stack) MyPage(name),
-      ],
+      pages: pages,
+      //pages: [MyPage(_stack[_currentIndex])],
       onPopPage: _onPopPage,
     );
-  }
-
-  void handleBookTapped(String location) {
-    push(BookRoutePath(location));
-    notifyListeners();
   }
 }

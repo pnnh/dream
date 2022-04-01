@@ -18,6 +18,7 @@ class _WorkGroupWidget extends State<WorkGroupWidget> {
   @override
   Widget build(BuildContext context) {
     var routerDelegate = BookRouterDelegate.of(context);
+    print("work_group ${routerDelegate.currentConfiguration.uri}");
     return Column(children: [
       AvatarWidget(),
       const SizedBox(height: 24),
@@ -31,7 +32,7 @@ class _WorkGroupWidget extends State<WorkGroupWidget> {
           ),
           iconSize: 24,
           onPressed: () {
-            routerDelegate.handleBookTapped("/");
+            routerDelegate.go("/");
           }),
       const SizedBox(height: 24),
       IconButton(
@@ -44,7 +45,7 @@ class _WorkGroupWidget extends State<WorkGroupWidget> {
           ),
           iconSize: 24,
           onPressed: () {
-            routerDelegate.handleBookTapped("/calendar");
+            routerDelegate.go("/calendar");
           }),
       const SizedBox(height: 24),
       IconButton(
@@ -57,7 +58,7 @@ class _WorkGroupWidget extends State<WorkGroupWidget> {
           ),
           iconSize: 24,
           onPressed: () {
-            routerDelegate.handleBookTapped("/other");
+            routerDelegate.go("/other");
           }),
     ]);
   }
