@@ -1,4 +1,3 @@
-import 'package:dream/application/desktop/application.dart';
 import 'package:dream/application/desktop/route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -31,7 +30,7 @@ class _WorkGroupWidget extends State<WorkGroupWidget> {
           ),
           iconSize: 24,
           onPressed: () {
-            routerDelegate.handleBookTapped("home");
+            routerDelegate.handleBookTapped(Pages.home);
           }),
       const SizedBox(height: 24),
       IconButton(
@@ -43,7 +42,7 @@ class _WorkGroupWidget extends State<WorkGroupWidget> {
           ),
           iconSize: 24,
           onPressed: () {
-            routerDelegate.handleBookTapped("detail");
+            routerDelegate.handleBookTapped(Pages.detail);
           }),
       const SizedBox(height: 24),
       IconButton(
@@ -54,7 +53,9 @@ class _WorkGroupWidget extends State<WorkGroupWidget> {
                 : defaultColor,
           ),
           iconSize: 24,
-          onPressed: () {}),
+          onPressed: () {
+            routerDelegate.handleBookTapped(Pages.other);
+          }),
     ]);
   }
 }

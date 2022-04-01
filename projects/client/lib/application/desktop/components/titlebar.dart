@@ -1,11 +1,10 @@
+import 'dart:io' show Platform;
+
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:dream/application/desktop/components/window.dart';
-import 'package:dream/application/desktop/provider/todo.dart';
-import 'package:dream/services/models/task.dart';
+import 'package:dream/application/desktop/route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:provider/provider.dart';
-import 'dart:io' show Platform;
 
 class TitleBarWidget extends StatefulWidget {
   const TitleBarWidget({Key? key}) : super(key: key);
@@ -20,6 +19,7 @@ class _TitleBarWidget extends State<TitleBarWidget> {
 
   @override
   Widget build(BuildContext context) {
+    var routerDelegate = BookRouterDelegate.of(context);
     return Container(
         height: 40,
         color: Color.fromRGBO(231, 231, 231, 100),
@@ -53,7 +53,9 @@ class _TitleBarWidget extends State<TitleBarWidget> {
                                 overlayColor:
                                     MaterialStateProperty.all(hoverColor),
                               ),
-                              onPressed: () {}),
+                              onPressed: () {
+                                routerDelegate.pop();
+                              }),
                           SizedBox(width: 4),
                           TextButton(
                               child: SvgPicture.asset(
