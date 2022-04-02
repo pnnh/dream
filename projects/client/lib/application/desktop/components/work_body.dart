@@ -110,9 +110,9 @@ class _WorkBodyWidget extends State<WorkBodyWidget> {
                   ),
                   borderRadius: const BorderRadius.all(Radius.circular(4)),
                 ),
-                child: MyDatePickerApp(),
+                child: const MyDatePickerApp(),
               ),
-              left: 00,
+              left: 0,
               top: 40,
             )
         ],

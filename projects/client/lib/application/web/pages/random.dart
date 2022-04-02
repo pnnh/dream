@@ -174,7 +174,7 @@ class _MyStatefulWidgetState extends State<RandomWidget> {
                   length, hasNumber, hasLetter, hasUppercaseLetter, hasSymbol));
               // var result = await promiseToFuture(
               //     randomString(length, false, false, false, false));
-              print("--> $result");
+              debugPrint("--> $result");
               setState(() {
                 password = result;
               });

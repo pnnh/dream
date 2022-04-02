@@ -1,13 +1,15 @@
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:dream/editor/models/node.dart';
 import 'package:dream/editor/models/states.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SFPlus extends StatelessWidget {
+  const SFPlus({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Consumer<RowState>(
-        builder: (context, state, child) => Container(
+        builder: (context, state, child) => SizedBox(
               height: 48,
               width: 96,
               child: state.show
@@ -17,8 +19,8 @@ class SFPlus extends StatelessWidget {
                       children: [
                         IconButton(
                             iconSize: 24,
-                            constraints:
-                                BoxConstraints(maxHeight: 24, maxWidth: 24),
+                            constraints: const BoxConstraints(
+                                maxHeight: 24, maxWidth: 24),
                             padding: EdgeInsets.zero,
                             highlightColor: Colors.transparent,
                             splashColor: Colors.transparent,
@@ -28,17 +30,17 @@ class SFPlus extends StatelessWidget {
                               var editorState = context.read<SFEditorState>();
                               editorState.insertNode(state.index + 1, node);
                             },
-                            icon: Icon(Icons.add)),
+                            icon: const Icon(Icons.add)),
                         IconButton(
                             iconSize: 24,
-                            constraints:
-                                BoxConstraints(maxHeight: 24, maxWidth: 24),
+                            constraints: const BoxConstraints(
+                                maxHeight: 24, maxWidth: 24),
                             padding: EdgeInsets.zero,
                             highlightColor: Colors.transparent,
                             splashColor: Colors.transparent,
                             hoverColor: Colors.transparent,
                             onPressed: () {},
-                            icon: Icon(Icons.article)),
+                            icon: const Icon(Icons.article)),
                         PopupMenuButton(
                             initialValue: '语文',
                             itemBuilder: (context) {
@@ -49,9 +51,10 @@ class SFPlus extends StatelessWidget {
                                     children: [
                                       TextButton(
                                           onPressed: () {},
-                                          child: Text('一号标题')),
+                                          child: const Text('一号标题')),
                                       TextButton(
-                                          onPressed: () {}, child: Text('二号标题'))
+                                          onPressed: () {},
+                                          child: const Text('二号标题'))
                                     ],
                                   ),
                                 ),

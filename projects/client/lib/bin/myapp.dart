@@ -25,7 +25,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List _list = [];
+  final List _list = [];
   String _loadingText = "";
   bool _isLoading = false;
   int minCreated = 0;
@@ -33,11 +33,11 @@ class _MyHomePageState extends State<MyHomePage> {
   final myController = TextEditingController();
 
   void _loadMore() {
-    print("_loadMore()");
+    debugPrint("_loadMore()");
     if (_isLoading) {
       return;
     }
-    print("_loadMore() start $minCreated");
+    debugPrint("_loadMore() start $minCreated");
     _isLoading = true;
     _showLoadingTip("正在加载更多");
     loadArticles(minCreated)
@@ -48,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
               }
               _incrementCounter(el);
             }))
-        .catchError((err) => print("加载内容出错 $err"))
+        .catchError((err) => debugPrint("加载内容出错 $err"))
         .whenComplete(() => {_isLoading = false, _showLoadingTip("")});
   }
 
@@ -59,10 +59,10 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _saveArticle(String content) {
-    if (content == null || content == "") return;
-    var article = new Article();
+    if (content == "") return;
+    var article = Article();
     article.content = content;
-    article.created = new DateTime.now().microsecondsSinceEpoch * 1000; // 纳秒
+    article.created = DateTime.now().microsecondsSinceEpoch * 1000; // 纳秒
     // 保存至服务器
     saveArticle(content)
         .then((value) => {
@@ -79,10 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _incrementCounter(Article article) {
-    if (article == null ||
-        article.content == "" ||
-        article.content == null ||
-        article.created <= 0) {
+    if (article.content == "" || article.created <= 0) {
       return;
     }
     setState(() {
@@ -179,7 +176,7 @@ class _MyHomePageState extends State<MyHomePage> {
   // main 是否主内容容器
   int _mainRowFlex(BuildContext context, bool main) {
     var mediaQueryData = MediaQuery.of(context);
-    print("media ${mediaQueryData.size}");
+    debugPrint("media ${mediaQueryData.size}");
     // 主内容容器
     if (main) {
       if (mediaQueryData.size.width < 640) {
@@ -199,168 +196,165 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color(0xfff6f6f6),
+        backgroundColor: const Color(0xfff6f6f6),
         //backgroundColor: Colors.white,
-        body: Container(
-          //color: Colors.amber,
-          child: Row(
-            children: [
-              Expanded(
-                child: Container(),
-                flex: _mainRowFlex(context, false),
-              ),
-              Expanded(
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  // crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                        //color: Colors.blue,
-                        height: 100.0,
-                        width: double.infinity,
-                        alignment: Alignment.centerLeft,
-                        //padding: EdgeInsets.only(left: 20, right: 20),
-                        child: const SelectableText(
-                          '诉记',
-                          style: TextStyle(
-                              color: Colors.black,
-                              decoration: TextDecoration.none,
-                              fontSize: 28),
-                        )),
-
-                    // Expanded(
-                    //   child:
-                    Container(
-                      //color: Colors.purpleAccent,
-                      //height: double.infinity,
-                      padding: const EdgeInsets.all(10),
-                      decoration: const BoxDecoration(
-                        // border: new Border.all(color: Color(0xFFFFFFFF), width: 1),
-                        borderRadius: BorderRadius.all(Radius.circular(3)),
-                        // boxShadow: [
-                        //   BoxShadow(
-                        //     color: Colors.grey.withOpacity(0.5),
-                        //     spreadRadius: 5,
-                        //     blurRadius: 7,
-                        //     offset: Offset(0, 3), // changes position of shadow
-                        //   ),
-                        // ],
-                        color: Colors.white,
-                      ),
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Expanded(
-                                child: TextField(
-                                  autofocus: true,
-                                  maxLines: null,
-                                  keyboardType: TextInputType.multiline,
-                                  decoration: const InputDecoration(
-                                    fillColor: Colors.white,
-                                    focusColor: Colors.white,
-                                    hoverColor: Colors.white,
-                                    border: OutlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: Colors.teal)),
-                                    suffixStyle: TextStyle(color: Colors.green),
-                                    filled: true,
-                                    labelText: '写下想说的话',
-                                  ),
-                                  controller: myController,
-                                ),
-                                flex: 1,
-                              )
-                            ],
-                          ),
-                          Row(
-                            children: <Widget>[
-                              Expanded(
-                                child: Container(
-                                    //color: Colors.lime,
-                                    // child: FlatButton(
-                                    //   child: Text("normal"),
-                                    //   onPressed: () {},
-                                    // ),
-                                    // alignment: Alignment.centerLeft,
-                                    ),
-                                flex: 1,
-                              ),
-                              Expanded(
-                                child: Container(
-                                    padding: const EdgeInsets.only(
-                                        top: 10, bottom: 10),
-                                    //color: Colors.greenAccent,
-                                    child: FlatButton(
-                                      //splashColor: Colors.blue,
-                                      color: Colors.blue,
-                                      hoverColor: Colors.blue,
-                                      textColor: Colors.white,
-                                      child: Text("发布"),
-                                      onPressed: () {
-                                        _saveArticle(myController.text);
-                                      },
-                                    ),
-                                    alignment: Alignment.centerRight),
-                                flex: 2,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    //   flex: 1,
-                    // ),
-
-                    Expanded(
-                      child: Container(
-                          padding: const EdgeInsets.only(top: 10),
-                          //color: Colors.lime,
-                          // decoration: new BoxDecoration(
-                          //   border:
-                          //       new Border.all(color: Color(0xFFFFFFFF), width: 1),
-                          //   borderRadius: BorderRadius.all(Radius.circular(5)),
-                          //   boxShadow: [
-                          //     BoxShadow(
-                          //       color: Colors.grey.withOpacity(0.5),
-                          //       spreadRadius: 5,
-                          //       blurRadius: 7,
-                          //       offset: Offset(0, 3), // changes position of shadow
-                          //     ),
-                          //   ],
-                          //   color: Colors.white,
-                          // ),
-                          child: Scrollbar(
-                            child: SizedBox(
-                                //color: Colors.purpleAccent,
-                                width: double.infinity,
-                                child: buildList(context) //Text("dddd"),
-                                ),
-                          )
-                          //  alignment: Alignment.topRight,
-                          ),
-                      flex: 3,
-                    ),
-
-                    Container(
+        body: Row(
+          children: [
+            Expanded(
+              child: Container(),
+              flex: _mainRowFlex(context, false),
+            ),
+            Expanded(
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                // crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                      //color: Colors.blue,
+                      height: 100.0,
                       width: double.infinity,
-                      //color: Colors.lime,
-                      margin: const EdgeInsets.only(bottom: 10),
-                      child: Center(
-                        child: Text(_loadingText),
-                      ),
-                    )
-                  ],
-                ),
-                flex: _mainRowFlex(context, true),
+                      alignment: Alignment.centerLeft,
+                      //padding: EdgeInsets.only(left: 20, right: 20),
+                      child: const SelectableText(
+                        '诉记',
+                        style: TextStyle(
+                            color: Colors.black,
+                            decoration: TextDecoration.none,
+                            fontSize: 28),
+                      )),
+
+                  // Expanded(
+                  //   child:
+                  Container(
+                    //color: Colors.purpleAccent,
+                    //height: double.infinity,
+                    padding: const EdgeInsets.all(10),
+                    decoration: const BoxDecoration(
+                      // border: new Border.all(color: Color(0xFFFFFFFF), width: 1),
+                      borderRadius: BorderRadius.all(Radius.circular(3)),
+                      // boxShadow: [
+                      //   BoxShadow(
+                      //     color: Colors.grey.withOpacity(0.5),
+                      //     spreadRadius: 5,
+                      //     blurRadius: 7,
+                      //     offset: Offset(0, 3), // changes position of shadow
+                      //   ),
+                      // ],
+                      color: Colors.white,
+                    ),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Expanded(
+                              child: TextField(
+                                autofocus: true,
+                                maxLines: null,
+                                keyboardType: TextInputType.multiline,
+                                decoration: const InputDecoration(
+                                  fillColor: Colors.white,
+                                  focusColor: Colors.white,
+                                  hoverColor: Colors.white,
+                                  border: OutlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.teal)),
+                                  suffixStyle: TextStyle(color: Colors.green),
+                                  filled: true,
+                                  labelText: '写下想说的话',
+                                ),
+                                controller: myController,
+                              ),
+                              flex: 1,
+                            )
+                          ],
+                        ),
+                        Row(
+                          children: <Widget>[
+                            Expanded(
+                              child: Container(
+                                  //color: Colors.lime,
+                                  // child: FlatButton(
+                                  //   child: Text("normal"),
+                                  //   onPressed: () {},
+                                  // ),
+                                  // alignment: Alignment.centerLeft,
+                                  ),
+                              flex: 1,
+                            ),
+                            Expanded(
+                              child: Container(
+                                  padding: const EdgeInsets.only(
+                                      top: 10, bottom: 10),
+                                  //color: Colors.greenAccent,
+                                  child: FlatButton(
+                                    //splashColor: Colors.blue,
+                                    color: Colors.blue,
+                                    hoverColor: Colors.blue,
+                                    textColor: Colors.white,
+                                    child: const Text("发布"),
+                                    onPressed: () {
+                                      _saveArticle(myController.text);
+                                    },
+                                  ),
+                                  alignment: Alignment.centerRight),
+                              flex: 2,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  //   flex: 1,
+                  // ),
+
+                  Expanded(
+                    child: Container(
+                        padding: const EdgeInsets.only(top: 10),
+                        //color: Colors.lime,
+                        // decoration: new BoxDecoration(
+                        //   border:
+                        //       new Border.all(color: Color(0xFFFFFFFF), width: 1),
+                        //   borderRadius: BorderRadius.all(Radius.circular(5)),
+                        //   boxShadow: [
+                        //     BoxShadow(
+                        //       color: Colors.grey.withOpacity(0.5),
+                        //       spreadRadius: 5,
+                        //       blurRadius: 7,
+                        //       offset: Offset(0, 3), // changes position of shadow
+                        //     ),
+                        //   ],
+                        //   color: Colors.white,
+                        // ),
+                        child: Scrollbar(
+                          child: SizedBox(
+                              //color: Colors.purpleAccent,
+                              width: double.infinity,
+                              child: buildList(context) //Text("dddd"),
+                              ),
+                        )
+                        //  alignment: Alignment.topRight,
+                        ),
+                    flex: 3,
+                  ),
+
+                  Container(
+                    width: double.infinity,
+                    //color: Colors.lime,
+                    margin: const EdgeInsets.only(bottom: 10),
+                    child: Center(
+                      child: Text(_loadingText),
+                    ),
+                  )
+                ],
               ),
-              Expanded(
-                child: Container(),
-                flex: _mainRowFlex(context, false),
-              ),
-            ],
-          ),
+              flex: _mainRowFlex(context, true),
+            ),
+            Expanded(
+              child: Container(),
+              flex: _mainRowFlex(context, false),
+            ),
+          ],
         ));
   }
 }

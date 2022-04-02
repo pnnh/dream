@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 class SFNode {
   String type = 'text';
 
@@ -10,7 +12,7 @@ class SFTextNode extends SFNode {
   SFTextNode(this.content) : super('text');
 
   void onChange(String text) {
-    print('onchange $text');
-    this.content = text;
+    debugPrint('onchange $text');
+    content = text;
   }
 }

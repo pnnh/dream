@@ -1,8 +1,9 @@
 import 'dart:io' show Platform;
 
 import 'package:dream/application/desktop/application.dart'
-if (dart.library.html) 'package:dream/application/web/application.dart'
-as application;import 'package:flutter/foundation.dart' show kIsWeb;
+    if (dart.library.html) 'package:dream/application/web/application.dart'
+    as application;
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 
 void main() async {
@@ -23,8 +24,8 @@ void main() async {
       platformName = "Windows";
     }
   }
-  print("platformName :- " + platformName.toString());
+  debugPrint("platformName :- " + platformName.toString());
 
   await application.initApp();
-  runApp(application.Application());
+  runApp(const application.Application());
 }

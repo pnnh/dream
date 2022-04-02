@@ -66,7 +66,7 @@ void main() {
   debugPrint(message);
 
   final reverse = dylib.lookupFunction<ReverseNative, Reverse>('reverse');
-  final backwards = 'backwards';
+  const backwards = 'backwards';
   final backwardsUtf8 = backwards.toNativeUtf8();
   final reversedMessageUtf8 = reverse(backwardsUtf8, backwards.length);
   final reversedMessage = reversedMessageUtf8.toDartString();

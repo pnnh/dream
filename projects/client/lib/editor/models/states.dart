@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:dream/editor/models/node.dart';
+import 'package:flutter/material.dart';
 
 class SFEditorState with ChangeNotifier {
   int value = 0;
@@ -12,7 +12,7 @@ class SFEditorState with ChangeNotifier {
   }
 
   void insertNode(int index, SFNode node) {
-    this.children.insert(index, node);
+    children.insert(index, node);
     notifyListeners();
   }
 }
@@ -20,6 +20,7 @@ class SFEditorState with ChangeNotifier {
 class RowState with ChangeNotifier {
   bool show;
   int index;
+
   RowState(this.index, this.show);
 
   void setShow(bool show) {

@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:dream/services/models/task.dart';
 import 'package:hive/hive.dart';
 
@@ -10,7 +8,7 @@ class TaskAdapter extends TypeAdapter<Task> {
   @override
   Task read(BinaryReader reader) {
     return Task(reader.readString(), reader.readString(), reader.readString(),
-    DateTime.fromMicrosecondsSinceEpoch(reader.readInt()));
+        DateTime.fromMicrosecondsSinceEpoch(reader.readInt()));
   }
 
   @override
