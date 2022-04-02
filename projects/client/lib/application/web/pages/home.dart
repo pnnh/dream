@@ -1,8 +1,10 @@
-import 'package:flutter/material.dart';
 import 'package:dream/application/web/pages/random.dart';
+import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomePageWidget extends StatelessWidget {
+  const HomePageWidget({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -14,13 +16,13 @@ class HomePageWidget extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
+              SizedBox(
                 width: 1024,
                 child: Row(
                   // mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     TextButton(
-                      child: Text(
+                      child: const Text(
                         "sfx.xyz",
                         style: TextStyle(
                             color: Colors.black,
@@ -40,7 +42,7 @@ class HomePageWidget extends StatelessWidget {
                       },
                     ),
                     TextButton(
-                      child: Text(
+                      child: const Text(
                         "文章",
                         style: TextStyle(
                             color: Colors.black,
@@ -59,7 +61,7 @@ class HomePageWidget extends StatelessWidget {
                       },
                     ),
                     TextButton(
-                      child: Text(
+                      child: const Text(
                         "动态",
                         style: TextStyle(
                             color: Colors.black,
@@ -78,7 +80,7 @@ class HomePageWidget extends StatelessWidget {
                       },
                     ),
                     TextButton(
-                      child: Text(
+                      child: const Text(
                         "随机值",
                         style: TextStyle(
                             color: Colors.black,
@@ -102,7 +104,7 @@ class HomePageWidget extends StatelessWidget {
             ],
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 16,
         ),
         Row(
@@ -110,14 +112,14 @@ class HomePageWidget extends StatelessWidget {
           children: [
             Container(
               width: 1024,
-              padding: EdgeInsets.all(8),
-              decoration: BoxDecoration(
+              padding: const EdgeInsets.all(8),
+              decoration: const BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.all(const Radius.circular(4)),
+                borderRadius: BorderRadius.all(Radius.circular(4)),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
-                children: [RandomWidget()],
+                children: const [RandomWidget()],
               ),
             )
           ],

@@ -18,9 +18,9 @@ class _WorkGroupWidget extends State<WorkGroupWidget> {
   @override
   Widget build(BuildContext context) {
     var routerDelegate = BookRouterDelegate.of(context);
-    print("work_group ${routerDelegate.currentConfiguration.uri}");
+    debugPrint("work_group ${routerDelegate.currentConfiguration.uri}");
     return Column(children: [
-      AvatarWidget(),
+      const AvatarWidget(),
       const SizedBox(height: 24),
       IconButton(
           icon: SvgPicture.asset(

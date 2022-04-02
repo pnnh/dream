@@ -17,10 +17,10 @@ class MyPage extends Page {
   Route createRoute(BuildContext context) {
     return CustomPageRoute(
       (BuildContext context) {
-        print("createRoute ${routePath.uri}");
+        debugPrint("createRoute ${routePath.uri}");
         return Scaffold(
           body: WindowBorder(
-              color: Color(0xFF805306),
+              color: const Color(0xFF805306),
               width: 1,
               child: selectPage(routePath.uri)),
         );
@@ -31,13 +31,13 @@ class MyPage extends Page {
 }
 
 Widget selectPage(Uri uri) {
-  print("uri_path ${uri.path}");
+  debugPrint("uri_path ${uri.path}");
   switch (uri.path) {
     case "/calendar":
-      return CalendarPage();
+      return const CalendarPage();
     case "/other":
-      return OtherPage();
+      return const OtherPage();
     default:
-      return HomePage();
+      return const HomePage();
   }
 }

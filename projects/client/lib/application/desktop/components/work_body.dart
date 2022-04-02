@@ -10,8 +10,7 @@ class WorkBodyWidget extends StatefulWidget {
   final Task task;
   final TextEditingController controller;
 
-  const WorkBodyWidget(
-      {Key? key, required Task this.task, required this.controller})
+  const WorkBodyWidget({Key? key, required this.task, required this.controller})
       : super(key: key);
 
   @override
@@ -30,8 +29,7 @@ class _WorkBodyWidget extends State<WorkBodyWidget> {
     bodyController.text = widget.task.body;
     return Padding(
       padding: const EdgeInsets.all(16),
-      child:
-      Stack(
+      child: Stack(
         children: [
           Column(children: [
             SizedBox(
@@ -46,7 +44,7 @@ class _WorkBodyWidget extends State<WorkBodyWidget> {
                       )),
                   const SizedBox(width: 8),
                   TextButton(
-                    child: Text("设置提醒",
+                    child: const Text("设置提醒",
                         style: TextStyle(
                           color: Colors.black,
                         )),
@@ -83,32 +81,34 @@ class _WorkBodyWidget extends State<WorkBodyWidget> {
             const SizedBox(height: 24),
             Expanded(
                 child: TextField(
-                  keyboardType: TextInputType.multiline,
-                  decoration: const InputDecoration(
-                    contentPadding: EdgeInsets.all(4),
-                    border: InputBorder.none,
-                    filled: true,
-                    fillColor: Colors.white,
-                    hoverColor: Colors.white,
-                    hintText: "任务正文",
-                  ),
-                  controller: bodyController,
-                  onChanged: (text) {
-                    print("WorkBodyWidget body update $text");
-                    todoProvider.putItem(
-                        widget.task.key, widget.task.title, text);
-                  },
-                ))
+              keyboardType: TextInputType.multiline,
+              decoration: const InputDecoration(
+                contentPadding: EdgeInsets.all(4),
+                border: InputBorder.none,
+                filled: true,
+                fillColor: Colors.white,
+                hoverColor: Colors.white,
+                hintText: "任务正文",
+              ),
+              controller: bodyController,
+              onChanged: (text) {
+                debugPrint("WorkBodyWidget body update $text");
+                todoProvider.putItem(widget.task.key, widget.task.title, text);
+              },
+            ))
           ]),
           if (homeProvider.showDatePicker)
             Positioned(
               child: Container(
-                height: 200, width: 200,
-                decoration: BoxDecoration(color: Colors.white,
+                height: 200,
+                width: 200,
+                decoration: BoxDecoration(
+                  color: Colors.white,
                   border: Border.all(
-                    color: Color.fromRGBO(229, 229, 229, 100),
-                    width: 1,),
-                  borderRadius: BorderRadius.all(const Radius.circular(4)),
+                    color: const Color.fromRGBO(229, 229, 229, 100),
+                    width: 1,
+                  ),
+                  borderRadius: const BorderRadius.all(Radius.circular(4)),
                 ),
                 child: MyDatePickerApp(),
               ),

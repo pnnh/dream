@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dream/services/store/adapters/task.dart';
+import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class CacheStore<K, V> extends HiveStore {
@@ -28,7 +29,7 @@ class HiveStore {
 
   static Future<void> init() async {
     Directory current = Directory.current;
-    print('current: ${current.path}');
+    debugPrint('current: ${current.path}');
     await Hive.initFlutter('store');
     Hive.registerAdapter(TaskAdapter());
   }

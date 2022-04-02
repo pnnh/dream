@@ -21,7 +21,7 @@ class _TitleBarWidget extends State<TitleBarWidget> {
   final disableColor = const Color.fromRGBO(165, 165, 165, 100);
   final disableBackground = const Color.fromRGBO(217, 217, 217, 100);
   final searchBorder = OutlineInputBorder(
-    borderSide: BorderSide(
+    borderSide: const BorderSide(
         color: Color.fromRGBO(240, 240, 240, 100),
         width: 1,
         style: BorderStyle.solid),
@@ -33,7 +33,7 @@ class _TitleBarWidget extends State<TitleBarWidget> {
     var routerDelegate = BookRouterDelegate.of(context);
     return Container(
         height: 40,
-        color: Color.fromRGBO(231, 231, 231, 100),
+        color: const Color.fromRGBO(231, 231, 231, 100),
         child: WindowTitleBarBox(
             child: Row(children: [
           Expanded(
@@ -58,9 +58,9 @@ class _TitleBarWidget extends State<TitleBarWidget> {
                                 minimumSize:
                                     MaterialStateProperty.all(Size.zero),
                                 padding: MaterialStateProperty.all(
-                                    EdgeInsets.all(2)),
-                                fixedSize:
-                                    MaterialStateProperty.all(Size(24, 24)),
+                                    const EdgeInsets.all(2)),
+                                fixedSize: MaterialStateProperty.all(
+                                    const Size(24, 24)),
                                 backgroundColor: MaterialStateProperty.all(
                                     Colors.transparent),
                                 overlayColor:
@@ -71,7 +71,7 @@ class _TitleBarWidget extends State<TitleBarWidget> {
                                   : () {
                                       routerDelegate.back();
                                     }),
-                          SizedBox(width: 4),
+                          const SizedBox(width: 4),
                           TextButton(
                               child: SvgPicture.asset(
                                   "images/svg/arrow_right_s.svg",
@@ -82,9 +82,9 @@ class _TitleBarWidget extends State<TitleBarWidget> {
                                 minimumSize:
                                     MaterialStateProperty.all(Size.zero),
                                 padding: MaterialStateProperty.all(
-                                    EdgeInsets.all(2)),
-                                fixedSize:
-                                    MaterialStateProperty.all(Size(24, 24)),
+                                    const EdgeInsets.all(2)),
+                                fixedSize: MaterialStateProperty.all(
+                                    const Size(24, 24)),
                                 backgroundColor: MaterialStateProperty.all(
                                     Colors.transparent),
                                 overlayColor:
@@ -96,21 +96,19 @@ class _TitleBarWidget extends State<TitleBarWidget> {
                                       routerDelegate.forward();
                                     }),
                         ])),
-                Container(
-                  child: Text("筑梦笔记"),
-                ),
+                const Text("筑梦笔记"),
                 Container(
                     width: 120,
                     height: 24,
-                    padding: EdgeInsets.only(right: 16),
+                    padding: const EdgeInsets.only(right: 16),
                     child: TextField(
                       keyboardType: TextInputType.text,
-                      style: TextStyle(fontSize: 14),
+                      style: const TextStyle(fontSize: 14),
                       decoration: InputDecoration(
                         hoverColor: Colors.white,
                         hintText: '搜索笔记',
-                        hintStyle: TextStyle(fontSize: 14),
-                        contentPadding: EdgeInsets.only(left: 8, top: 4),
+                        hintStyle: const TextStyle(fontSize: 14),
+                        contentPadding: const EdgeInsets.only(left: 8, top: 4),
                         enabledBorder: searchBorder,
                         focusedBorder: searchBorder,
                         focusedErrorBorder: searchBorder,
@@ -121,7 +119,7 @@ class _TitleBarWidget extends State<TitleBarWidget> {
                       controller: TextEditingController(text: ""),
                     ))
               ]))),
-          WindowButtons() // 似乎在macOS下不太需要
+          const WindowButtons() // 似乎在macOS下不太需要
         ])));
   }
 }

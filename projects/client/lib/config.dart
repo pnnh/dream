@@ -4,18 +4,18 @@ class AppConfig {
   String hostUrl;
 
   AppConfig({required this.hostUrl}) {
-    this.loadArticlesUrl = this.hostUrl + this.loadArticlesUrl;
-    this.saveArticleUrl = this.hostUrl + this.saveArticleUrl;
+    loadArticlesUrl = hostUrl + loadArticlesUrl;
+    saveArticleUrl = hostUrl + saveArticleUrl;
   }
 }
 
-var productConfig = new AppConfig(hostUrl: "");
-var debugConfig = new AppConfig(
+var productConfig = AppConfig(hostUrl: "");
+var debugConfig = AppConfig(
   hostUrl: "http://localhost:8080",
 );
 
 AppConfig loadConfig() {
-  const bool inProduction = const bool.fromEnvironment("dart.vm.product");
+  const bool inProduction = bool.fromEnvironment("dart.vm.product");
   if (!inProduction) {
     return debugConfig;
   }

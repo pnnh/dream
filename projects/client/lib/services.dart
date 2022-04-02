@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
 import 'config.dart';
@@ -52,22 +53,22 @@ Future<List<Article>> loadArticles(int created) async {
 }
 
 Future<void> saveArticle(String content) async {
-  if (content == null || content == "") return;
+  if (content == "") return;
 
   var config = loadConfig();
-  print("jjjj33 ${config.loadArticlesUrl}");
+  debugPrint("jjjj33 ${config.loadArticlesUrl}");
 
-  var article = new Article();
+  var article = Article();
   article.content = content;
 
   var artJson = json.encode(article);
 
-  print("jjj $artJson");
+  debugPrint("jjj $artJson");
 
   var loadUri = Uri.dataFromString(config.saveArticleUrl);
   var resp = await http.post(loadUri, body: artJson);
 
-  print("cccc $resp");
+  debugPrint("cccc $resp");
 }
 
 // 将纳秒时间戳转换为友好格式

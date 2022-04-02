@@ -6,6 +6,7 @@ import 'dart:ffi';
 import 'dart:io' show Directory, Platform;
 
 import 'package:ffi/ffi.dart';
+import 'package:flutter/foundation.dart';
 import 'package:path/path.dart' as path;
 
 // Example of handling a simple C struct
@@ -62,7 +63,7 @@ void main() {
   final helloWorld =
       dylib.lookupFunction<HelloWorld, HelloWorld>('hello_world');
   final message = helloWorld().toDartString();
-  print(message);
+  debugPrint(message);
 
   final reverse = dylib.lookupFunction<ReverseNative, Reverse>('reverse');
   final backwards = 'backwards';
@@ -70,7 +71,7 @@ void main() {
   final reversedMessageUtf8 = reverse(backwardsUtf8, backwards.length);
   final reversedMessage = reversedMessageUtf8.toDartString();
   calloc.free(backwardsUtf8);
-  print('$backwards reversed is $reversedMessage');
+  debugPrint('$backwards reversed is $reversedMessage');
 
   final freeString =
       dylib.lookupFunction<FreeStringNative, FreeString>('free_string');
@@ -80,7 +81,7 @@ void main() {
       dylib.lookupFunction<CreateCoordinateNative, CreateCoordinate>(
           'create_coordinate');
   final coordinate = createCoordinate(3.5, 4.6);
-  print(
+  debugPrint(
       'Coordinate is lat ${coordinate.latitude}, long ${coordinate.longitude}');
 
   final myHomeUtf8 = 'My Home'.toNativeUtf8();
@@ -89,7 +90,7 @@ void main() {
   final place = createPlace(myHomeUtf8, 42.0, 24.0);
   final name = place.name.toDartString();
   final coord = place.coordinate;
-  print(
+  debugPrint(
       'The name of my place is $name at ${coord.latitude}, ${coord.longitude}');
   calloc.free(myHomeUtf8);
 }

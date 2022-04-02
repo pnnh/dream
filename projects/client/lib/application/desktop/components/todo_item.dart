@@ -34,7 +34,7 @@ class _TodoItemWidget extends State<TodoItemWidget> {
       ),
       controller: widget.controller,
       onTap: () {
-        print("item tap ${widget.task.key}");
+        debugPrint("item tap ${widget.task.key}");
         todoList.selectItem(widget.task.key);
       },
       onChanged: (text) {

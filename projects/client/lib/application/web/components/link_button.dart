@@ -5,7 +5,7 @@ class HomePageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      child: Text(
+      child: const Text(
         "sfx.xyz",
         style: TextStyle(
             color: Colors.black,

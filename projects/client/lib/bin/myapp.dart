@@ -109,9 +109,9 @@ class _MyHomePageState extends State<MyHomePage> {
             title: Container(
               width: double.infinity,
               //color: Colors.lime,
-              decoration: new BoxDecoration(
-                border: new Border.all(color: Color(0xFFFFFFFF), width: 1),
-                borderRadius: BorderRadius.all(Radius.circular(3)),
+              decoration: BoxDecoration(
+                border: Border.all(color: const Color(0xFFFFFFFF), width: 1),
+                borderRadius: const BorderRadius.all(Radius.circular(3)),
                 // boxShadow: [
                 //   BoxShadow(
                 //     color: Colors.grey.withOpacity(0.5),
@@ -123,15 +123,15 @@ class _MyHomePageState extends State<MyHomePage> {
                 color: Colors.white,
               ),
               //padding: EdgeInsets.all(10),
-              margin: EdgeInsets.only(bottom: 10),
+              margin: const EdgeInsets.only(bottom: 10),
               child: Column(
                 children: [
                   Container(
                     //color: Colors.green,
                     width: double.infinity,
                     child: Text('${(_list[index] as Article).content}'),
-                    padding: EdgeInsets.all(10),
-                    margin: EdgeInsets.only(bottom: 5),
+                    padding: const EdgeInsets.all(10),
+                    margin: const EdgeInsets.only(bottom: 5),
                   ),
                   Container(
                     width: double.infinity,

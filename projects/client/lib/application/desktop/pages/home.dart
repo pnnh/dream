@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../components/filter_group.dart';
-import '../components/titlebar.dart';
+import '../components/title_bar.dart';
 import '../components/todo_list.dart';
 import '../components/work_group.dart';
 
@@ -12,7 +12,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return HomeScreen();
+    return const HomeScreen();
   }
 }
 
@@ -26,11 +26,11 @@ class HomeScreen extends StatelessWidget {
         color: Colors.white,
         child: Column(
           children: [
-            TitleBarWidget(),
+            const TitleBarWidget(),
             Expanded(
                 child: GestureDetector(
                     onTapDown: (detail) {
-                      print("out click");
+                      debugPrint("out click");
                       homeProvider.closeDatePicker();
                     },
                     child: Row(children: [

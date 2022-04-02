@@ -1,4 +1,4 @@
-import 'package:dream/application/desktop/components/titlebar.dart';
+import 'package:dream/application/desktop/components/title_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
@@ -21,10 +21,9 @@ class _CalendarPageState extends State<CalendarPage> {
         color: Colors.white,
         child: Column(
           children: [
-            TitleBarWidget(),
+            const TitleBarWidget(),
             Expanded(
-                child: Container(
-                    child: Row(children: [
+                child: Row(children: [
               Container(
                   width: 56,
                   padding: const EdgeInsets.only(top: 8),
@@ -33,7 +32,7 @@ class _CalendarPageState extends State<CalendarPage> {
               Expanded(
                   child: SfCalendar(
                 view: CalendarView.month,
-                headerStyle: CalendarHeaderStyle(
+                headerStyle: const CalendarHeaderStyle(
                     textAlign: TextAlign.center,
                     backgroundColor: Color(0xFF7fcd91),
                     textStyle: TextStyle(
@@ -53,7 +52,7 @@ class _CalendarPageState extends State<CalendarPage> {
                   showTrailingAndLeadingDates: false,
                 ),
               ))
-            ])))
+            ]))
           ],
         ));
   }

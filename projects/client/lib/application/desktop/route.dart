@@ -1,4 +1,4 @@
-import 'package:dream/application/desktop/pages/mypage.dart';
+import 'package:dream/application/desktop/pages/base.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -28,15 +28,15 @@ class BookRouteInformationParser extends RouteInformationParser<BookRoutePath> {
   @override
   Future<BookRoutePath> parseRouteInformation(
       RouteInformation routeInformation) async {
-    print('BookRouteInformationParser ${routeInformation.location}');
+    debugPrint('BookRouteInformationParser ${routeInformation.location}');
     return routeInformation.location != null
         ? BookRoutePath(routeInformation.location!)
         : BookRoutePath.home();
   }
 
   @override
-  RouteInformation restoreRouteInformation(BookRoutePath path) {
-    return RouteInformation(location: path.uri.toString());
+  RouteInformation restoreRouteInformation(BookRoutePath configuration) {
+    return RouteInformation(location: configuration.uri.toString());
   }
 }
 
@@ -50,7 +50,7 @@ class BookRouterDelegate extends RouterDelegate<BookRoutePath>
 
   List<String> get stack => List.unmodifiable(_stack);
 
-  BookRouterDelegate() {}
+  BookRouterDelegate();
 
   static BookRouterDelegate of(BuildContext context) {
     final delegate = Router.of(context).routerDelegate;
@@ -100,7 +100,7 @@ class BookRouterDelegate extends RouterDelegate<BookRoutePath>
 
   @override
   Future<void> setNewRoutePath(BookRoutePath configuration) async {
-    print('setNewRoutePath ${configuration.uri}');
+    debugPrint('setNewRoutePath ${configuration.uri}');
     _stack
       ..clear()
       ..add(configuration);
@@ -108,7 +108,7 @@ class BookRouterDelegate extends RouterDelegate<BookRoutePath>
   }
 
   bool _onPopPage(Route<dynamic> route, dynamic result) {
-    print('_onPopPage ${route.settings}');
+    debugPrint('_onPopPage ${route.settings}');
     if (_stack.length > 1) {
       _stack.removeLast();
       notifyListeners();

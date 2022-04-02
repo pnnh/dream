@@ -26,7 +26,7 @@ class _TodoListWidget extends State<TodoListWidget> {
   Widget build(BuildContext context) {
     final todoListModel = Provider.of<TodoProvider>(context);
     var items = todoListModel.items.values.toList();
-    print("TodoListWidget build ${items.length}");
+    debugPrint("TodoListWidget build ${items.length}");
     final currentItem = todoListModel.currentItem;
     final homeProvider = Provider.of<HomeProvider>(context);
 
@@ -87,13 +87,13 @@ class _TodoListWidget extends State<TodoListWidget> {
                       keyboardType: TextInputType.number,
                       controller: contentController,
                       onSubmitted: (text) {
-                        print("Go button is clicked $text");
+                        debugPrint("Go button is clicked $text");
                         todoListModel.addItem(text, "");
                         contentController.text = "";
                         myFocusNode.requestFocus();
                       },
                       onChanged: (text) {
-                        print("onChanged $text");
+                        debugPrint("onChanged $text");
                       },
                     )),
                 const SizedBox(height: 16),
