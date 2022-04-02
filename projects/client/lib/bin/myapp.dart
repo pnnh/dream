@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import '../services.dart';
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: '诉记',
       debugShowCheckedModeBanner: false,
       home: MyHomePage(title: '诉记'),
@@ -14,7 +16,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
@@ -73,7 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
               })
               //_loadMore()
             })
-        .catchError((err) => print("保存出错 $err"));
+        .catchError((err) => debugPrint("保存出错 $err"));
   }
 
   void _incrementCounter(Article article) {
@@ -129,24 +131,24 @@ class _MyHomePageState extends State<MyHomePage> {
                   Container(
                     //color: Colors.green,
                     width: double.infinity,
-                    child: Text('${(_list[index] as Article).content}'),
+                    child: Text((_list[index] as Article).content),
                     padding: const EdgeInsets.all(10),
                     margin: const EdgeInsets.only(bottom: 5),
                   ),
                   Container(
                     width: double.infinity,
                     alignment: Alignment.centerLeft,
-                    padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
+                    padding: const EdgeInsets.all(10),
+                    decoration: const BoxDecoration(
                         // color: Colors.tealAccent,
-                        border: new Border(
-                            top: new BorderSide(
+                        border: Border(
+                            top: BorderSide(
                                 color: Color(0xfff2f2f5),
                                 width: 0.5,
                                 style: BorderStyle.solid))),
                     child: Text(
                       "发布于 ${formatDateTime((_list[index] as Article).created)}",
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.grey,
                         fontSize: 10,
                       ),
@@ -218,7 +220,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         width: double.infinity,
                         alignment: Alignment.centerLeft,
                         //padding: EdgeInsets.only(left: 20, right: 20),
-                        child: SelectableText(
+                        child: const SelectableText(
                           '诉记',
                           style: TextStyle(
                               color: Colors.black,
@@ -231,8 +233,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     Container(
                       //color: Colors.purpleAccent,
                       //height: double.infinity,
-                      padding: EdgeInsets.all(10),
-                      decoration: new BoxDecoration(
+                      padding: const EdgeInsets.all(10),
+                      decoration: const BoxDecoration(
                         // border: new Border.all(color: Color(0xFFFFFFFF), width: 1),
                         borderRadius: BorderRadius.all(Radius.circular(3)),
                         // boxShadow: [
@@ -251,27 +253,22 @@ class _MyHomePageState extends State<MyHomePage> {
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Expanded(
-                                child: Container(
-                                  child: TextField(
-                                    autofocus: true,
-                                    maxLines: null,
-                                    keyboardType: TextInputType.multiline,
-                                    decoration: new InputDecoration(
-                                      fillColor: Colors.white,
-                                      focusColor: Colors.white,
-                                      hoverColor: Colors.white,
-                                      border: new OutlineInputBorder(
-                                          borderSide: new BorderSide(
-                                              color: Colors.teal)),
-                                      suffixStyle:
-                                          const TextStyle(color: Colors.green),
-                                      filled: true,
-                                      labelText: '写下想说的话',
-                                    ),
-                                    controller: myController,
+                                child: TextField(
+                                  autofocus: true,
+                                  maxLines: null,
+                                  keyboardType: TextInputType.multiline,
+                                  decoration: const InputDecoration(
+                                    fillColor: Colors.white,
+                                    focusColor: Colors.white,
+                                    hoverColor: Colors.white,
+                                    border: OutlineInputBorder(
+                                        borderSide:
+                                            BorderSide(color: Colors.teal)),
+                                    suffixStyle: TextStyle(color: Colors.green),
+                                    filled: true,
+                                    labelText: '写下想说的话',
                                   ),
-                                  // color: Colors.black,
-                                  // width: double.infinity,
+                                  controller: myController,
                                 ),
                                 flex: 1,
                               )
@@ -292,8 +289,8 @@ class _MyHomePageState extends State<MyHomePage> {
                               ),
                               Expanded(
                                 child: Container(
-                                    padding:
-                                        EdgeInsets.only(top: 10, bottom: 10),
+                                    padding: const EdgeInsets.only(
+                                        top: 10, bottom: 10),
                                     //color: Colors.greenAccent,
                                     child: FlatButton(
                                       //splashColor: Colors.blue,
@@ -318,7 +315,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
                     Expanded(
                       child: Container(
-                          padding: EdgeInsets.only(top: 10),
+                          padding: const EdgeInsets.only(top: 10),
                           //color: Colors.lime,
                           // decoration: new BoxDecoration(
                           //   border:
@@ -335,7 +332,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           //   color: Colors.white,
                           // ),
                           child: Scrollbar(
-                            child: Container(
+                            child: SizedBox(
                                 //color: Colors.purpleAccent,
                                 width: double.infinity,
                                 child: buildList(context) //Text("dddd"),
@@ -349,7 +346,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     Container(
                       width: double.infinity,
                       //color: Colors.lime,
-                      margin: EdgeInsets.only(bottom: 10),
+                      margin: const EdgeInsets.only(bottom: 10),
                       child: Center(
                         child: Text(_loadingText),
                       ),

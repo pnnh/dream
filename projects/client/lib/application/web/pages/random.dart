@@ -50,13 +50,13 @@ class _MyStatefulWidgetState extends State<RandomWidget> {
         Padding(
           padding: const EdgeInsets.all(8),
           child: Row(
-            children: [Text("随机密码生成器")],
+            children: const [Text("随机密码生成器")],
           ),
         ),
         Padding(
           padding: const EdgeInsets.all(8),
           child: Row(
-            children: [Text("本页生成的密码不会保持，刷新或关闭页面后消失")],
+            children: const [Text("本页生成的密码不会保持，刷新或关闭页面后消失")],
           ),
         ),
         Padding(
@@ -167,7 +167,7 @@ class _MyStatefulWidgetState extends State<RandomWidget> {
         Padding(
           padding: const EdgeInsets.all(8),
           child: ElevatedButton(
-            style: ElevatedButton.styleFrom(fixedSize: Size(100, 32)),
+            style: ElevatedButton.styleFrom(fixedSize: const Size(100, 32)),
             onPressed: () async {
               //var result = await promiseToFuture(sayHello());
               var result = await promiseToFuture(randomString(

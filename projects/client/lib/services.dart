@@ -23,22 +23,22 @@ class Article {
 }
 
 Future<List<Article>> loadArticles(int created) async {
-  var queryMap = new Map<String, dynamic>();
+  var queryMap = <String, dynamic>{};
   queryMap["created"] = created;
 
   var queryJsonStr = json.encode(queryMap);
 
-  print("queryJson $queryJsonStr");
+  debugPrint("queryJson $queryJsonStr");
 
   var config = loadConfig();
-  print("jjjj22 ${config.loadArticlesUrl}");
+  debugPrint("jjjj22 ${config.loadArticlesUrl}");
   var loadUri = Uri.dataFromString(config.loadArticlesUrl);
   var resp = await http.post(loadUri, body: queryJsonStr);
 
   List<dynamic> data = json.decode(resp.body);
-  var result = List.filled(data.length, new Article());
+  var result = List.filled(data.length, Article());
   if (resp.statusCode != 200) {
-    print("loadArticles返回错误 ${resp.statusCode}");
+    debugPrint("loadArticles返回错误 ${resp.statusCode}");
     return result;
   }
 
@@ -47,7 +47,7 @@ Future<List<Article>> loadArticles(int created) async {
     info.content = element['data']['content'];
     info.created = element['created'];
     result.add(info);
-    print("jjjj2 ${info.content} ${info.created}");
+    debugPrint("jjjj2 ${info.content} ${info.created}");
   }
   return result;
 }

@@ -17,8 +17,8 @@ class BooksApp extends StatefulWidget {
 }
 
 class _BooksAppState extends State<BooksApp> {
-  BookRouterDelegate _routerDelegate = BookRouterDelegate();
-  BookRouteInformationParser _routeInformationParser =
+  final BookRouterDelegate _routerDelegate = BookRouterDelegate();
+  final BookRouteInformationParser _routeInformationParser =
       BookRouteInformationParser();
 
   @override
@@ -37,7 +37,7 @@ class BookRouteInformationParser extends RouteInformationParser<BookRoutePath> {
       RouteInformation routeInformation) async {
     final uri = Uri.parse(routeInformation.location ?? "/");
     // Handle '/'
-    if (uri.pathSegments.length == 0) {
+    if (uri.pathSegments.isEmpty) {
       return BookRoutePath.home();
     }
 
@@ -57,16 +57,16 @@ class BookRouteInformationParser extends RouteInformationParser<BookRoutePath> {
   @override
   RouteInformation restoreRouteInformation(BookRoutePath path) {
     if (path.isUnknown) {
-      return RouteInformation(location: '/404');
+      return const RouteInformation(location: '/404');
     }
     if (path.isHomePage) {
-      return RouteInformation(location: '/');
+      return const RouteInformation(location: '/');
     }
     if (path.isDetailsPage) {
       return RouteInformation(location: '/book/${path.id}');
     }
     //if (path.isHomePage) {
-    return RouteInformation(location: '/');
+    return const RouteInformation(location: '/');
     //}
   }
 }
@@ -193,10 +193,8 @@ class BooksListScreen extends StatelessWidget {
   final List<Book> books;
   final ValueChanged<Book> onTapped;
 
-  BooksListScreen(
-    @required this.books,
-    @required this.onTapped,
-  );
+  const BooksListScreen(this.books, this.onTapped, {Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -244,11 +242,13 @@ class BookDetailsScreen extends StatelessWidget {
 }
 
 class UnknownScreen extends StatelessWidget {
+  const UnknownScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: Center(
+      body: const Center(
         child: Text('404!'),
       ),
     );
