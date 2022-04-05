@@ -13,9 +13,23 @@
 // console.log('aaa: ', aaa, Module);
 //
 // export {aaa};
-import * as lib from './webassembly/couch'
+import Couch from '@pnnh/couch'
 
-export default lib;
+console.log('aaa: ',  Couch);
+
+// const couch = Couch();
+//
+// console.log('bbb: ',  couch);
+
+Couch({
+    locateFile: (path: string, prefix: string) => {
+    console.log('locateFile', path, prefix)
+    return prefix + path
+}
+}).then(function(couch) {
+    console.log('ccc: ',  couch);
+});
+
 
 // import {Couch } from './webassembly/couch'
 // // const mymod = Module();

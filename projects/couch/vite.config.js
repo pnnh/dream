@@ -3,6 +3,9 @@ import * as path from 'path'
 
 export default defineConfig({
     base: "/",
+    optimizeDeps: {
+        include: ['@pnnh/couch']
+    },
     build: {
         emptyOutDir: true,
         outDir: 'dist',

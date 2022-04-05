@@ -2,6 +2,7 @@
   "name": "sfxui",
   "version": "1.0.0",
   "workspaces": [
+    "pkg"
   ],
   "files": [
     "dream_bg.wasm",
@@ -16,6 +17,7 @@
     "build": "tsc && rollup --config"
   },
   "dependencies": {
+    "@pnnh/couch": "^0.1.0"
   },
   "devDependencies": {
     "@rollup/plugin-strip": "^2.1.0",
