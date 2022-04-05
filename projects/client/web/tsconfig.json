@@ -1,8 +1,7 @@
 {
   "compilerOptions": {
     "types": [
-      "node",
-      "svelte"
+      "node"
     ],
     "experimentalDecorators": true,
     "useDefineForClassFields": false,

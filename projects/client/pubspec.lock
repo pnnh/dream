@@ -490,7 +490,7 @@ packages:
   pillow:
     dependency: "direct main"
     description:
-      path: "packages/pillow"
+      path: "../pillow"
       relative: true
     source: path
     version: "0.0.1"

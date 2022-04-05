@@ -52,7 +52,7 @@ dependencies:
   syncfusion_flutter_datepicker:
   syncfusion_flutter_calendar:
   pillow:
-    path: packages/pillow
+    path: ../pillow
 
 dev_dependencies:
   flutter_lints:

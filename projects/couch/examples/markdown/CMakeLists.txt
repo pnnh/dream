@@ -1,0 +1,2 @@
+add_executable(example_markdown main.cpp)
+target_link_libraries(example_markdown PRIVATE couch)
