@@ -15,14 +15,14 @@
     "esModuleInterop": true,
     "strict": true,
     "allowSyntheticDefaultImports": true,
+    "rootDir": "src",
     "outDir": "dist",
     "baseUrl": ".",
+    "declaration": true,
+    "emitDeclarationOnly": false,
     "paths": {
-      "@/*": [
-        "src/*"
-      ],
-      "~/*": [
-        "node_modules/*"
+      "/*": [
+        "./*"
       ]
     },
     "plugins": []
@@ -32,6 +32,7 @@
   ],
   "exclude": [
     "node_modules",
-    "packages"
+    "packages",
+    "build"
   ]
 }

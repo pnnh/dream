@@ -36,7 +36,8 @@ add_executable(couch  src/main.cpp
 
 # 当编译WebAssembly时修改链接参数，否则会报初始内存太小错误
 if (EMSCRIPTEN)
-    target_link_options(couch PRIVATE -s TOTAL_MEMORY=32MB)
+    #target_compile_options(couch PRIVATE "SHELL:-s MODULARIZE=1" "SHELL:-s EXPORT_NAME=Couch")
+    target_link_options(couch PRIVATE  "SHELL:-s TOTAL_MEMORY=32MB" "SHELL:-s MODULARIZE=1" "SHELL:-s EXPORT_NAME=Couch")
 endif ()
 
 #qt_finalize_executable(couch)
