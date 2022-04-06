@@ -1,6 +1,7 @@
 cmake-build-*
 target/
-pkg/
+pkg/node_modules
+pkg/dist
 .idea/
 build/
 gen/

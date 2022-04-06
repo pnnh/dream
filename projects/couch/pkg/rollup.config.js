@@ -1,14 +1,11 @@
 import commonjs from '@rollup/plugin-commonjs'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
-import scss from 'rollup-plugin-scss'
-import dts from 'rollup-plugin-dts'
-import { visualizer } from 'rollup-plugin-visualizer'
 import strip from '@rollup/plugin-strip'
-
+import copy from 'rollup-plugin-copy'
 export default [{
-  input: 'dist/index.js',
+  input: 'entry.js',
   output: {
-    file: 'lib/index.js',
+    file: 'dist/bundle.js',
     format: 'esm',
     sourcemap: true
   },
@@ -21,15 +18,11 @@ export default [{
       functions: ['console.log', 'console.debug'],
       sourceMap: true
     }),
-    visualizer({
-      filename: 'dist/status.es.html'
+    copy({
+      targets: [
+        { src: '../cmake-build-webassembly/couch.wasm', dest: 'dist' },
+      ]
     })
-  ]
-}, {
-  input: 'dist/index.d.ts',
-  output: [{ file: 'lib/index.d.ts' }],
-  plugins: [
-    dts()
   ]
 }
 ]

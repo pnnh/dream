@@ -39,7 +39,7 @@ if (EMSCRIPTEN)
     target_link_options(couch PRIVATE  "SHELL:-s TOTAL_MEMORY=32MB"
             "SHELL:-s MODULARIZE=1"
             "SHELL:-s EXPORT_NAME=Couch"
-            "SHELL:-l embind")
+            "SHELL:-lembind")
 endif ()
 
 #qt_finalize_executable(couch)
