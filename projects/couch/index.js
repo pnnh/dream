@@ -13,27 +13,31 @@
 // console.log('aaa: ', aaa, Module);
 //
 // export {aaa};
-import Couch from '@pnnh/couch'
-
+import * as Couch from './public/couch'
+//
 console.log('aaa: ',  Couch);
 
 // const couch = Couch();
 //
 // console.log('bbb: ',  couch);
 
-Couch({
-    locateFile: (path: string, prefix: string) => {
-    console.log('locateFile', path, prefix)
-    return prefix + path
-}
+Couch.default({
+    locateFile: (path, prefix) => {
+
+        // const importMeta = (import.meta as any).env as viteEnv
+        // let jsEnv = ''
+        //
+        // if (importMeta.DEV) {
+
+        console.log('locateFile', path, prefix)
+        if (import.meta.env.DEV) {
+            return "dist/couch.wasm"
+        }
+        return prefix + path
+    }
 }).then(function(couch) {
-    console.log('ccc: ',  couch);
+    console.log('ccc: ',  couch, couch.compareBig);
 });
 
 
-// import {Couch } from './webassembly/couch'
-// // const mymod = Module();
-// // const int_sqrt = mymod.cwrap('int_sqrt', 'number', ['number']);
-// // console.log(int_sqrt(64));
-//
-// console.log('bbb: ', Couch);
+

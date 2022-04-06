@@ -29,15 +29,17 @@ link_directories(${PROJECT_SOURCE_DIR}/lib)
 #qt6_add_executable(couch src/main.cpp)
 
 add_executable(couch  src/main.cpp
-        src/wasm.h
+        src/wasm/wasm.cpp
         src/markdown/mdtransform.hpp
         src/markdown/mdtransform.cpp)
 #target_link_libraries(couch PRIVATE Qt6::Core)
 
 # 当编译WebAssembly时修改链接参数，否则会报初始内存太小错误
 if (EMSCRIPTEN)
-    #target_compile_options(couch PRIVATE "SHELL:-s MODULARIZE=1" "SHELL:-s EXPORT_NAME=Couch")
-    target_link_options(couch PRIVATE  "SHELL:-s TOTAL_MEMORY=32MB" "SHELL:-s MODULARIZE=1" "SHELL:-s EXPORT_NAME=Couch")
+    target_link_options(couch PRIVATE  "SHELL:-s TOTAL_MEMORY=32MB"
+            "SHELL:-s MODULARIZE=1"
+            "SHELL:-s EXPORT_NAME=Couch"
+            "SHELL:-l embind")
 endif ()
 
 #qt_finalize_executable(couch)

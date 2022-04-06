@@ -1,11 +1,15 @@
 import {defineConfig} from 'vite'
 import * as path from 'path'
+import { viteCommonjs } from '@originjs/vite-plugin-commonjs'
 
 export default defineConfig({
     base: "/",
-    optimizeDeps: {
-        include: ['@pnnh/couch']
-    },
+    // optimizeDeps: {
+    //     include: ['couch']
+    // },
+    plugins: [
+        viteCommonjs()
+    ],
     build: {
         emptyOutDir: true,
         outDir: 'dist',
