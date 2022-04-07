@@ -5,13 +5,18 @@
 需要提前安装emscripten sdk
 
 ```bash
-mkdir build
-cd build
+mkdir build && cd build
 cmake -DCMAKE_TOOLCHAIN_FILE=/opt/emsdk/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake \
   --verbose ..
 ```
 
+## 采用Qt工具链文件
 
+```bash
+mkdir build && cd build
+cmake -DCMAKE_TOOLCHAIN_FILE=-DCMAKE_TOOLCHAIN_FILE:PATH=~/Qt/6.3.0/wasm_32/lib/cmake/Qt6/qt.toolchain.cmake \
+  --verbose ..
+```
 
 ## 其它说明
 
@@ -19,3 +24,4 @@ cmake -DCMAKE_TOOLCHAIN_FILE=/opt/emsdk/upstream/emscripten/cmake/Modules/Platfo
 * 提供Markdown转JSON功能
 * 使用embind需要在链接参数内加上-l embind
 * 通过embind暴露c++方法到js，定义需要写到.cpp文件内，只写到.h文件内似乎不行
+* 尝试将工具链文件改回qt，因为需要使用一些qt的组件库

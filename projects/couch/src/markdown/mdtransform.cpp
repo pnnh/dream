@@ -5,8 +5,8 @@
 #include "mdtransform.hpp"
 #include <sstream>
 #include <map>
-//#include <QJsonDocument>
-//#include <QJsonArray>
+#include <QJsonDocument>
+#include <QJsonArray>
 #include <iostream>
 
 
@@ -18,7 +18,7 @@
 #include <string>
 #include <cctype>
 #include <cstdio>
-//#include <QJsonObject>
+#include <QJsonObject>
 
 using namespace std;
 
@@ -49,21 +49,21 @@ class MarkdownTransform {
 private:
     elementNode root;
     char s[maxLength];
-//    QJsonObject jsonObject;
+    QJsonObject jsonObject;
 
     // 判断是否为标题
     inline bool isHeading(elementNode *v) {
         return (v->type >= h1 && v->type <= h6);
     }
 
-//    void dfs(QJsonObject &jsonNode, elementNode *v);
+    void dfs(QJsonObject &jsonNode, elementNode *v);
 
     // 判断当前行的类型
     // src: 源串
     // 返回值: 当前行的类型和除去行标志性关键字的正是内容的 char* 指针组成的 std::pair
     inline pair<elementType, char *> JudgeType(char *src);
 
-//    void dfs(QJsonObject &jsonParentNode, elementNode &v);
+    void dfs(QJsonObject &jsonParentNode, elementNode &v);
 
 public:
     // 构造函数
@@ -128,7 +128,7 @@ MarkdownTransform::MarkdownTransform(const std::string &content) {
         }
     }
 
-//    dfs(jsonObject, root);
+    dfs(jsonObject, root);
 }
 
 inline pair<elementType, char *> MarkdownTransform::JudgeType(char *src) {
@@ -151,36 +151,34 @@ inline pair<elementType, char *> MarkdownTransform::JudgeType(char *src) {
     // 否则，就是普通段落
     return make_pair(paragraph, ptr);
 }
-//
-//void MarkdownTransform::dfs(QJsonObject &jsonParentNode, elementNode &v) {
-//    jsonParentNode.insert("name", v.name.c_str());
-//    QJsonArray children;
-//
-//    if (!v.text.empty()) {
-//        jsonParentNode.insert("text", v.text.c_str());
-//    }
-//
-//    // 递归遍历所有
-//    for (auto &i: v.children) {
-//        QJsonObject subNode;
-//        dfs(subNode, i);
-//        children.push_back(subNode);
-//    }
-//
-//    if (!children.empty()) {
-//        jsonParentNode.insert("children", children);
-//    }
-//}
 
-//string MarkdownTransform::getJsonString() {
-//    auto strFromObj = QJsonDocument(jsonObject).toJson(QJsonDocument::Indented).toStdString();
-//    return strFromObj;
-//}
+void MarkdownTransform::dfs(QJsonObject &jsonParentNode, elementNode &v) {
+    jsonParentNode.insert("name", v.name.c_str());
+    QJsonArray children;
+
+    if (!v.text.empty()) {
+        jsonParentNode.insert("text", v.text.c_str());
+    }
+
+    // 递归遍历所有
+    for (auto &i: v.children) {
+        QJsonObject subNode;
+        dfs(subNode, i);
+        children.push_back(subNode);
+    }
+
+    if (!children.empty()) {
+        jsonParentNode.insert("children", children);
+    }
+}
+
+string MarkdownTransform::getJsonString() {
+    auto strFromObj = QJsonDocument(jsonObject).toJson(QJsonDocument::Indented).toStdString();
+    return strFromObj;
+}
 
 std::string markdown2json(const std::string &content) {
-//    MarkdownTransform transformer(content);
-//    std::string table = transformer.getJsonString();
-//    return table;
-
-    return "内容已转换\n" + content;
+    MarkdownTransform transformer(content);
+    std::string table = transformer.getJsonString();
+    return table;
 }
