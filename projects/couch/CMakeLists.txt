@@ -24,25 +24,31 @@ link_directories(${PROJECT_SOURCE_DIR}/lib)
 #    set(THREADS_PREFER_PTHREAD_FLAG ON)
 #ENDIF()
 
-
-#qt6_add_executable(couch MANUAL_FINALIZATION src/main.cpp)
-#qt6_add_executable(couch src/main.cpp)
 find_package(Qt6 COMPONENTS Core REQUIRED)
 
-add_executable(couch  src/main.cpp
+add_library(couch
         src/wasm/wasm.cpp
         src/markdown/mdtransform.hpp
         src/markdown/mdtransform.cpp
-        src/utils/md5.cc src/utils/md5.h)
+        src/utils/md5.cc
+        src/utils/md5.h)
 target_link_libraries(couch PRIVATE Qt6::Core)
 
 # 当编译WebAssembly时修改链接参数，否则会报初始内存太小错误
 if (EMSCRIPTEN)
+    add_executable(couch_bg src/main.cpp)
+    add_dependencies(couch_bg couch)
     target_link_options(couch PRIVATE  "SHELL:-s TOTAL_MEMORY=32MB"
             "SHELL:-s MODULARIZE=1"
             "SHELL:-s EXPORT_NAME=Couch"
             "SHELL:-l embind")
+else()
+    add_library(couch_shared SHARED
+            src/markdown/markdown.cpp
+            include/markdown.h)
+    add_dependencies(couch_shared couch)
+    target_link_libraries(couch_shared PRIVATE couch)
 endif ()
 
-#qt_finalize_executable(couch)
+add_subdirectory(examples/native)
 
