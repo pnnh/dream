@@ -112,8 +112,8 @@ MarkdownTransform::MarkdownTransform(const std::string &content) {
         }
         // 如果是标题行, 则向其标签中插入属性 tag
         if (tj.first >= h1 && tj.first <= h6) {
-            elementNode headNode = elementNode{.type = static_cast<elementType>(tj.first),
-                    .name="h" + to_string(tj.first)};
+            elementNode headNode = elementNode{.type = static_cast<elementType>(tj.first - h1),
+                    .name="h" + to_string(tj.first - h1)};
             elementNode tn{.type=elementType::text};
             tn.name = "text";
             tn.text = string(tj.second);
@@ -139,7 +139,7 @@ inline pair<elementType, char *> MarkdownTransform::JudgeType(char *src) {
 
     // 如果出现空格, 则说明是 `<h>` 标签
     if (ptr - src > 0 && *ptr == ' ')
-        return make_pair(static_cast<elementType>(ptr - src + h1 - 1), ptr + 1);
+        return make_pair(static_cast<elementType>(ptr - src + h1), ptr + 1);
 
     // 重置分析位置
     ptr = src;
