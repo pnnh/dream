@@ -4,7 +4,8 @@
   "scripts": {
     "build": "rollup --config"
   },
-  "module": "dist/bundle.js",
+  "module": "dist/couch.js",
+  "types": "dist/couch.d.ts",
   "sideEffects": false,
   "devDependencies": {
     "@rollup/plugin-commonjs": "^21.0.1",

@@ -13,7 +13,7 @@
 // console.log('aaa: ', aaa, Module);
 //
 // export {aaa};
-import * as Couch from '../cmake-build-webassembly/couch'
+import * as Couch from '../../cmake-build-webassembly/couch'
 //
 console.log('aaabbb: ',  Couch);
 

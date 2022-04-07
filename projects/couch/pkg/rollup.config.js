@@ -1,28 +1,32 @@
 import commonjs from '@rollup/plugin-commonjs'
-import { nodeResolve } from '@rollup/plugin-node-resolve'
+import {nodeResolve} from '@rollup/plugin-node-resolve'
 import strip from '@rollup/plugin-strip'
 import copy from 'rollup-plugin-copy'
+
 export default [{
-  input: 'entry.js',
-  output: {
-    file: 'dist/bundle.js',
-    format: 'esm',
-    sourcemap: true
-  },
-  plugins: [
-    commonjs(),
-    nodeResolve(),
-    strip({
-      include: ['**/*.(js|mjs|ts|tsx)'],
-      debugger: true,
-      functions: ['console.log', 'console.debug'],
-      sourceMap: true
-    }),
-    copy({
-      targets: [
-        { src: '../cmake-build-webassembly/couch.wasm', dest: 'dist' },
-      ]
-    })
-  ]
+    input: 'src/entry.js',
+    output: {
+        file: 'dist/couch.js',
+        format: 'esm',
+        sourcemap: true
+    },
+    plugins: [
+        commonjs(),
+        nodeResolve(),
+        strip({
+            include: ['**/*.(js|mjs|ts|tsx)'],
+            debugger: true,
+            functions: ['console.log', 'console.debug'],
+            sourceMap: true
+        }),
+        copy({
+            targets: [
+                {
+                    src: ['../cmake-build-webassembly/couch.wasm', 'src/couch.d.ts'],
+                    dest: 'dist'
+                }
+            ]
+        })
+    ]
 }
 ]

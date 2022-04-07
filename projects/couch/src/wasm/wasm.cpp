@@ -20,6 +20,7 @@ float compareBig(int a, int b) {
 #include <emscripten/bind.h>
 #include <emscripten/val.h>
 #include "src/markdown/mdtransform.hpp"
+#include "src/utils/md5.h"
 
 
 EMSCRIPTEN_BINDINGS(my_module) {
@@ -35,36 +36,36 @@ emscripten::val tryStdString() {
     std::string str = "abc哈哈O(∩_∩)O哈哈~🐶efg☺";
     return emscripten::val(str);
 }
-//
-//emscripten::val tryCalcMd5(const std::string &content) {
-//    auto md5Val = calcMd5(content);
-//    return emscripten::val(md5Val);
-//}
-//
-//emscripten::val tryCalcBase64(const std::string &content) {
-//    auto value = calcBase64(content);
-//    return emscripten::val(value);
-//}
-//
-//emscripten::val tryCalcHex(const std::string &content) {
-//    auto value = calcHex(content);
-//    return emscripten::val(value);
-//}
-//
-//emscripten::val tryCalcSha1(const std::string &content) {
-//    auto value = calcSha1(content);
-//    return emscripten::val(value);
-//}
-//
-//emscripten::val tryCalcSha256(const std::string &content) {
-//    auto value = calcSha256(content);
-//    return emscripten::val(value);
-//}
-//
-//emscripten::val tryCalcSha512(const std::string &content) {
-//    auto value = calcSha512(content);
-//    return emscripten::val(value);
-//}
+
+emscripten::val tryCalcMd5(const std::string &content) {
+    auto md5Val = calcMd5(content);
+    return emscripten::val(md5Val);
+}
+
+emscripten::val tryCalcBase64(const std::string &content) {
+    auto value = calcBase64(content);
+    return emscripten::val(value);
+}
+
+emscripten::val tryCalcHex(const std::string &content) {
+    auto value = calcHex(content);
+    return emscripten::val(value);
+}
+
+emscripten::val tryCalcSha1(const std::string &content) {
+    auto value = calcSha1(content);
+    return emscripten::val(value);
+}
+
+emscripten::val tryCalcSha256(const std::string &content) {
+    auto value = calcSha256(content);
+    return emscripten::val(value);
+}
+
+emscripten::val tryCalcSha512(const std::string &content) {
+    auto value = calcSha512(content);
+    return emscripten::val(value);
+}
 
 emscripten::val tryMarkdown2Json(const std::string &content) {
     auto value = markdown2json(content);
@@ -74,12 +75,12 @@ emscripten::val tryMarkdown2Json(const std::string &content) {
 EMSCRIPTEN_BINDINGS(demo) {
     emscripten::function("tryCharPtr", &tryCharPtr);
     emscripten::function("tryStdString", &tryStdString);
-//    emscripten::function("tryCalcMd5", &tryCalcMd5);
-//    emscripten::function("tryCalcBase64", &tryCalcBase64);
-//    emscripten::function("tryCalcHex", &tryCalcHex);
-//    emscripten::function("tryCalcSha1", &tryCalcSha1);
-//    emscripten::function("tryCalcSha256", &tryCalcSha256);
-//    emscripten::function("tryCalcSha512", &tryCalcSha512);
+    emscripten::function("tryCalcMd5", &tryCalcMd5);
+    emscripten::function("tryCalcBase64", &tryCalcBase64);
+    emscripten::function("tryCalcHex", &tryCalcHex);
+    emscripten::function("tryCalcSha1", &tryCalcSha1);
+    emscripten::function("tryCalcSha256", &tryCalcSha256);
+    emscripten::function("tryCalcSha512", &tryCalcSha512);
     emscripten::function("tryMarkdown2Json", &tryMarkdown2Json);
 }
 

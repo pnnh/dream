@@ -51,6 +51,7 @@ dependencies:
   bitsdojo_window:
   syncfusion_flutter_datepicker:
   syncfusion_flutter_calendar:
+  markdown: ^5.0.0
   pillow:
     path: ../pillow
 
