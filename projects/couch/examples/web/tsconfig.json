@@ -25,7 +25,6 @@
     },
     "plugins": []
   },
-  //"skipLibCheck": false,
   "include": [
     "src/**/*"
   ],

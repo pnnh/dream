@@ -1,7 +1,5 @@
 import {defineConfig} from 'vite'
 import * as path from 'path'
-//import { viteCommonjs } from '@originjs/vite-plugin-commonjs'
-//import commonjs from '@rollup/plugin-commonjs'
 
 export default defineConfig({
     base: "/",
