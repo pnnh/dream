@@ -22,7 +22,7 @@ export default [{
         copy({
             targets: [
                 {
-                    src: ['../cmake-build-webassembly/couch.wasm', 'src/couch.d.ts'],
+                    src: ['../out/wasm/couch.wasm', 'src/couch.d.ts'],
                     dest: 'dist'
                 }
             ]

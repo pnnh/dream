@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <strings.h>
-#include "include/markdown.h"
+#include "markdown.h"
 
 //函数返回fname指定文件的全部内容，如果打不开文件，则返回NULL，并显示打开文件错误
 char *getfileall(char *fname)
@@ -11,7 +11,7 @@ char *getfileall(char *fname)
     char txt[1000];
     int filesize;
     //打开一个文件
-    if ((fp=fopen(fname,"r"))==NULL){
+    if ((fp=fopen(fname,"r"))==NULL) {
         printf("打开文件%s错误\n",fname);
         return NULL;
     }

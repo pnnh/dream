@@ -6,7 +6,7 @@
 #define QT_CANVAS_WASM_H
 
 #include <string>
-#include "include/markdown.h"
+#include "src/markdown/markdown.h"
 #include "src/markdown/mdtransform.hpp"
 
 extern "C" {
