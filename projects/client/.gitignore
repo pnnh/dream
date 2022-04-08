@@ -33,3 +33,4 @@ web/assets
 run/*
 
 target/*
+lib/gen/*
