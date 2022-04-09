@@ -1,10 +1,16 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:flutter/services.dart';
+import 'package:pillow/markdown/markdown.dart';
 import 'package:pillow/pillow.dart';
 
 void main() {
+  var currentDirectory = Directory.current;
+  print('Current directory: $currentDirectory');
+  runMarkdown();
   runApp(const MyApp());
 }
 
