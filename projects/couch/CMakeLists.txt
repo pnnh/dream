@@ -40,6 +40,8 @@ else()
     set_target_properties(couch_shared
             PROPERTIES
             PUBLIC_HEADER src/markdown/markdown.h)
+    set(CMAKE_INSTALL_RPATH ".")
+    set_target_properties(couch_shared PROPERTIES INSTALL_RPATH_USE_LINK_PATH TRUE)
 
     install(TARGETS couch_shared
                 RUNTIME_DEPENDENCY_SET couch_shared_dependencies

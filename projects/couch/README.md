@@ -12,10 +12,14 @@ cmake -DCMAKE_TOOLCHAIN_FILE=/opt/emsdk/upstream/emscripten/cmake/Modules/Platfo
 
 ## 采用Qt工具链文件
 
+macOS
+
 ```bash
-mkdir build && cd build
-cmake -DCMAKE_TOOLCHAIN_FILE=-DCMAKE_TOOLCHAIN_FILE:PATH=~/Qt/6.3.0/wasm_32/lib/cmake/Qt6/qt.toolchain.cmake \
-  --verbose ..
+-DCMAKE_PREFIX_PATH=~/Qt/6.3.0/macos/lib/cmake
+```
+
+```bash
+-DCMAKE_TOOLCHAIN_FILE:PATH=~/Qt/6.3.0/wasm_32/lib/cmake/Qt6/qt.toolchain.cmake
 ```
 
 ## 其它说明
