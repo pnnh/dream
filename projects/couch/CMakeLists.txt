@@ -7,6 +7,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_C_STANDARD 23)
 set(CMAKE_CXX_STANDARD 23)
 
+
 include_directories(${PROJECT_SOURCE_DIR})
 
 find_package(Qt6 COMPONENTS Core REQUIRED)
@@ -34,8 +35,12 @@ else()
             ${COUCH_SOURCES}
             src/markdown/markdown.cpp src/markdown/markdown.h)
     target_link_options(couch_shared PRIVATE "SHELL:-lm" "SHELL:-pthread")
-    target_link_options(couch_shared PRIVATE "SHELL:-mmacosx-version-min=10.14")
     target_link_libraries(couch_shared PRIVATE Qt6::Core)
+    if (APPLE)
+        message(STATUS "Apple OS")
+        set(CMAKE_OSX_ARCHITECTURES "x86_64;arm64" CACHE STRING "Build architectures for Mac OS X" FORCE)
+        set(CMAKE_OSX_DEPLOYMENT_TARGET "10.14")
+    endif()
 
     set_target_properties(couch_shared
             PROPERTIES
