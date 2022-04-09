@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:flutter/services.dart';
-import 'package:pillow/markdown/markdown.dart';
+import 'package:pillow_example/markdown/markdown.dart';
 import 'package:pillow/pillow.dart';
 
 void main() {

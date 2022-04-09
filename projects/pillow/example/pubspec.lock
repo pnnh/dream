@@ -72,14 +72,14 @@ packages:
     source: hosted
     version: "1.2.0"
   ffi:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: ffi
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.2"
   ffigen:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: ffigen
       url: "https://pub.dartlang.org"
