@@ -41,7 +41,6 @@ dependencies:
   url_launcher: 6.0.20
   js: 0.6.3
   path:
-  ffi:
   hive:
   hive_flutter:
   flutter_svg:
@@ -51,20 +50,11 @@ dependencies:
   bitsdojo_window:
   syncfusion_flutter_datepicker:
   syncfusion_flutter_calendar:
-  markdown: ^5.0.0
   pillow:
     path: ../pillow
-  ffigen: ^4.1.3
 
 dev_dependencies:
   flutter_lints:
   hive_generator:
   isar_generator:
   build_runner:
-
-ffigen:
-  name: CouchLibrary
-  output: 'lib/gen/generated_bindings.dart'
-  headers:
-    entry-points:
-      - '../couch/out/include/markdown.h'

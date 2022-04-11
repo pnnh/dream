@@ -198,14 +198,14 @@ packages:
     source: hosted
     version: "1.0.0"
   ffi:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: ffi
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.2"
   ffigen:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: ffigen
       url: "https://pub.dartlang.org"
@@ -382,13 +382,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.2"
-  markdown:
-    dependency: "direct main"
-    description:
-      name: markdown
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "5.0.0"
   matcher:
     dependency: transitive
     description:
