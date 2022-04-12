@@ -5,7 +5,7 @@
 import 'dart:ffi';
 import 'dart:io' show Directory, Platform;
 
-import 'package:pillow_example/gen/generated_bindings.dart';
+import 'package:pillow/gen/generated_bindings.dart';
 import 'package:ffi/ffi.dart';
 
 void runMarkdown() {

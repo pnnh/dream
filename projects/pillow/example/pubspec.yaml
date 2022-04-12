@@ -12,8 +12,6 @@ dependencies:
   cupertino_icons: ^1.0.2
   pillow:
     path: ../
-  ffi:
-  ffigen: ^4.1.3
 
 dev_dependencies:
   flutter_test:
@@ -22,10 +20,3 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-
-ffigen:
-  name: CouchLibrary
-  output: 'lib/gen/generated_bindings.dart'
-  headers:
-    entry-points:
-      - '../../couch/out/include/markdown.h'
