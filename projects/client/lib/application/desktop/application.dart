@@ -5,6 +5,7 @@ import 'package:dream/application/desktop/route.dart';
 import 'package:dream/services/store/hive.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:pillow/pillow.dart';
 
 class Application extends StatefulWidget {
   const Application({Key? key}) : super(key: key);
@@ -48,4 +49,5 @@ Future<void> initApp() async {
     appWindow.alignment = Alignment.center;
     appWindow.show();
   });
+  Pillow.testMarkdown();
 }

@@ -11,7 +11,7 @@ A new flutter plugin project.
                        DESC
   s.homepage         = 'http://example.com'
   s.license          = { :file => '../LICENSE' }
-  s.author           = { 'Your Company' => 'email@example.com' }
+  s.author           = { 'Your Company' => 'xspanni@gmail.com' }
   s.source           = { :path => '.' }
   s.source_files     = 'Classes/**/*'
   s.dependency 'FlutterMacOS'
@@ -20,7 +20,7 @@ A new flutter plugin project.
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES' }
   s.swift_version = '5.0'
 
-  s.ios.vendored_frameworks = 'QtCore.framework'
-  s.ios.vendored_library    = 'libcouch_shared.dylib'
-  s.ios.library  = 'couch_shared'
+  s.vendored_frameworks = 'QtCore.framework'
+  s.vendored_library    = 'libcouch_shared.dylib'
+  s.library  = 'couch_shared'
 end
