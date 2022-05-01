@@ -1,11 +1,12 @@
 import 'package:bitsdojo_window/bitsdojo_window.dart';
+import 'package:dream/application/desktop/provider/body.dart';
 import 'package:dream/application/desktop/provider/home.dart';
 import 'package:dream/application/desktop/provider/todo.dart';
 import 'package:dream/application/desktop/route.dart';
 import 'package:dream/services/store/hive.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:pillow/pillow.dart';
+import 'package:provider/provider.dart';
 
 class Application extends StatefulWidget {
   const Application({Key? key}) : super(key: key);
@@ -28,6 +29,9 @@ class _ApplicationState extends State<Application> {
           ),
           ChangeNotifierProvider(
             create: (_) => HomeProvider(),
+          ),
+          ChangeNotifierProvider(
+            create: (_) => BodyProvider(),
           )
         ],
         child: MaterialApp.router(

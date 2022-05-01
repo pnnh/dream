@@ -1,3 +1,4 @@
+import 'package:dream/application/desktop/provider/body.dart';
 import 'package:dream/application/desktop/provider/home.dart';
 import 'package:dream/application/desktop/provider/todo.dart';
 import 'package:dream/services/models/task.dart';
@@ -26,6 +27,7 @@ class _WorkBodyWidget extends State<WorkBodyWidget> {
   Widget build(BuildContext context) {
     final todoProvider = Provider.of<TodoProvider>(context);
     final homeProvider = Provider.of<HomeProvider>(context);
+    final bodyProvider = Provider.of<BodyProvider>(context);
     bodyController.text = widget.task.body;
     return Padding(
       padding: const EdgeInsets.all(16),
@@ -80,22 +82,75 @@ class _WorkBodyWidget extends State<WorkBodyWidget> {
             ),
             const SizedBox(height: 24),
             Expanded(
-                child: TextField(
-              keyboardType: TextInputType.multiline,
-              decoration: const InputDecoration(
-                contentPadding: EdgeInsets.all(4),
-                border: InputBorder.none,
-                filled: true,
-                fillColor: Colors.white,
-                hoverColor: Colors.white,
-                hintText: "任务正文",
-              ),
-              controller: bodyController,
-              onChanged: (text) {
-                debugPrint("WorkBodyWidget body update $text");
-                todoProvider.putItem(widget.task.key, widget.task.title, text);
-              },
-            ))
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                  Expanded(
+                      flex: bodyProvider.flexSource,
+                      child: TextField(
+                        keyboardType: TextInputType.multiline,
+                        minLines: null,
+                        maxLines: null,
+                        decoration: const InputDecoration(
+                          contentPadding: EdgeInsets.all(4),
+                          border: InputBorder.none,
+                          filled: true,
+                          fillColor: Colors.white,
+                          hoverColor: Colors.white,
+                          hintText: "任务正文",
+                        ),
+                        controller: bodyController,
+                        onChanged: (text) {
+                          debugPrint("WorkBodyWidget body update $text");
+                          todoProvider.putItem(
+                              widget.task.key, widget.task.title, text);
+                        },
+                      )),
+                  Draggable(
+                    axis: Axis.vertical,
+                    child: Container(height: 3, color: Colors.red),
+                    feedback: Container(height: 3, color: Colors.green),
+                    childWhenDragging: Container(height: 3, color: Colors.grey),
+                    onDragStarted: () {
+                      print('onDragStarted');
+                    },
+                    onDragEnd: (DraggableDetails details) {
+                      print('onDragEnd:$details');
+                    },
+                    onDragUpdate: (DragUpdateDetails details) {
+                      print('onDragUpdate:${details.delta}');
+                      bodyProvider.setOffsetY(details.delta.dy);
+                    },
+                    onDraggableCanceled: (Velocity velocity, Offset offset) {
+                      print(
+                          'onDraggableCanceled velocity:$velocity,offset:$offset');
+                    },
+                    onDragCompleted: () {
+                      print('onDragCompleted');
+                    },
+                  ),
+                  Expanded(
+                      flex: bodyProvider.flexPreview,
+                      child: TextField(
+                        keyboardType: TextInputType.multiline,
+                        minLines: null,
+                        maxLines: null,
+                        decoration: const InputDecoration(
+                          contentPadding: EdgeInsets.all(4),
+                          border: InputBorder.none,
+                          filled: true,
+                          fillColor: Colors.white,
+                          hoverColor: Colors.white,
+                          hintText: "任务正文2",
+                        ),
+                        controller: bodyController,
+                        onChanged: (text) {
+                          debugPrint("WorkBodyWidget body update 2 $text");
+                          todoProvider.putItem(
+                              widget.task.key, widget.task.title, text);
+                        },
+                      ))
+                ]))
           ]),
           if (homeProvider.showDatePicker)
             Positioned(
