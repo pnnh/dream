@@ -1,4 +1,3 @@
-import 'package:dream/application/desktop/provider/body.dart';
 import 'package:dream/application/desktop/provider/home.dart';
 import 'package:dream/application/desktop/provider/todo.dart';
 import 'package:dream/services/models/task.dart';
@@ -15,19 +14,21 @@ class WorkBodyWidget extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<WorkBodyWidget> createState() => _WorkBodyWidget();
+  State<WorkBodyWidget> createState() => _WorkBodyWidgetState();
 }
 
-class _WorkBodyWidget extends State<WorkBodyWidget> {
+class _WorkBodyWidgetState extends State<WorkBodyWidget> {
   final Color selectedColor = const Color.fromRGBO(0, 119, 212, 100);
   final Color defaultColor = const Color.fromRGBO(146, 148, 152, 100);
   final bodyController = TextEditingController();
+  double sourceHeight = 240;
+  bool isDragging = false;
 
   @override
   Widget build(BuildContext context) {
     final todoProvider = Provider.of<TodoProvider>(context);
     final homeProvider = Provider.of<HomeProvider>(context);
-    final bodyProvider = Provider.of<BodyProvider>(context);
+    //final bodyProvider = Provider.of<BodyProvider>(context);
     bodyController.text = widget.task.body;
     return Padding(
       padding: const EdgeInsets.all(16),
@@ -82,75 +83,84 @@ class _WorkBodyWidget extends State<WorkBodyWidget> {
             ),
             const SizedBox(height: 24),
             Expanded(
-                child: Column(
+                child: GestureDetector(
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                  Expanded(
-                      flex: bodyProvider.flexSource,
-                      child: TextField(
-                        keyboardType: TextInputType.multiline,
-                        minLines: null,
-                        maxLines: null,
-                        decoration: const InputDecoration(
-                          contentPadding: EdgeInsets.all(4),
-                          border: InputBorder.none,
-                          filled: true,
-                          fillColor: Colors.white,
-                          hoverColor: Colors.white,
-                          hintText: "任务正文",
-                        ),
-                        controller: bodyController,
-                        onChanged: (text) {
-                          debugPrint("WorkBodyWidget body update $text");
-                          todoProvider.putItem(
-                              widget.task.key, widget.task.title, text);
-                        },
-                      )),
-                  Draggable(
-                    axis: Axis.vertical,
-                    child: Container(height: 3, color: Colors.red),
-                    feedback: Container(height: 3, color: Colors.green),
-                    childWhenDragging: Container(height: 3, color: Colors.grey),
-                    onDragStarted: () {
-                      print('onDragStarted');
-                    },
-                    onDragEnd: (DraggableDetails details) {
-                      print('onDragEnd:$details');
-                    },
-                    onDragUpdate: (DragUpdateDetails details) {
-                      print('onDragUpdate:${details.delta}');
-                      bodyProvider.setOffsetY(details.delta.dy);
-                    },
-                    onDraggableCanceled: (Velocity velocity, Offset offset) {
-                      print(
-                          'onDraggableCanceled velocity:$velocity,offset:$offset');
-                    },
-                    onDragCompleted: () {
-                      print('onDragCompleted');
-                    },
+                      SizedBox(
+                          height: sourceHeight,
+                          child: TextField(
+                            keyboardType: TextInputType.multiline,
+                            minLines: null,
+                            maxLines: null,
+                            decoration: const InputDecoration(
+                              contentPadding: EdgeInsets.all(4),
+                              border: InputBorder.none,
+                              filled: true,
+                              fillColor: Colors.white,
+                              hoverColor: Colors.white,
+                              hintText: "任务正文",
+                            ),
+                            controller: bodyController,
+                            onChanged: (text) {
+                              debugPrint("WorkBodyWidget body update $text");
+                              todoProvider.putItem(
+                                  widget.task.key, widget.task.title, text);
+                            },
+                          )),
+                      Container(height: 3, color: Colors.red),
+                      Expanded(
+                          child: TextField(
+                            keyboardType: TextInputType.multiline,
+                            minLines: null,
+                            maxLines: null,
+                            decoration: const InputDecoration(
+                              contentPadding: EdgeInsets.all(4),
+                              border: InputBorder.none,
+                              filled: true,
+                              fillColor: Colors.white,
+                              hoverColor: Colors.white,
+                              hintText: "任务正文2",
+                            ),
+                            controller: bodyController,
+                            onChanged: (text) {
+                              debugPrint("WorkBodyWidget body update 2 $text");
+                              todoProvider.putItem(
+                                  widget.task.key, widget.task.title, text);
+                            },
+                          ))
+                    ],
                   ),
-                  Expanded(
-                      flex: bodyProvider.flexPreview,
-                      child: TextField(
-                        keyboardType: TextInputType.multiline,
-                        minLines: null,
-                        maxLines: null,
-                        decoration: const InputDecoration(
-                          contentPadding: EdgeInsets.all(4),
-                          border: InputBorder.none,
-                          filled: true,
-                          fillColor: Colors.white,
-                          hoverColor: Colors.white,
-                          hintText: "任务正文2",
-                        ),
-                        controller: bodyController,
-                        onChanged: (text) {
-                          debugPrint("WorkBodyWidget body update 2 $text");
-                          todoProvider.putItem(
-                              widget.task.key, widget.task.title, text);
-                        },
-                      ))
-                ]))
+                  onVerticalDragStart: (DragStartDetails details) {
+                    var diff = sourceHeight - details.localPosition.dy.abs();
+                    if (diff <= 5 && diff >= -5) {
+                      setState(() {
+                        isDragging = true;
+                      });
+                    }
+                  },
+                  onVerticalDragUpdate: (DragUpdateDetails details) {
+                    print(
+                        'onDragUpdate: ${details.delta.dy} ${details
+                            .localPosition.dy} '
+                            '${details.globalPosition.dy}');
+                    var newSourceHeight = sourceHeight + details.delta.dy;
+                    print('onDragUpdate222: $sourceHeight ${newSourceHeight}');
+
+                    if (newSourceHeight < 120 ||
+                        newSourceHeight > 640 ||
+                        details.localPosition.dy < 120 ||
+                        details.localPosition.dy > 640 || !isDragging) return;
+                    setState(() {
+                      sourceHeight = newSourceHeight;
+                    });
+                  },
+                  onVerticalDragEnd: (DragEndDetails details) {
+                    setState(() {
+                      isDragging = false;
+                    });
+                  },
+                ))
           ]),
           if (homeProvider.showDatePicker)
             Positioned(
