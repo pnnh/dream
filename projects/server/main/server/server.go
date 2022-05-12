@@ -58,9 +58,9 @@ func (s *WebServer) Init() error {
 		resource.RegisterRouter(s.router, name)
 	}
 	// 在开发环境下，通过反向代理指向资源服务，避免一些js文件找不到
-	if config.Debug() {
-		s.router.NoRoute(devHandler)
-	}
+	//if config.Debug() {
+	//	s.router.NoRoute(devHandler)
+	//}
 	return nil
 }
 

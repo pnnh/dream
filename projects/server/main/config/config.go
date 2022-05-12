@@ -86,7 +86,7 @@ func init() {
 	}
 	if Debug() {
 		ServerUrl = "http://localhost:5000"
-		ResourceUrl = "http://localhost:5000"
+		ResourceUrl = "http://localhost:3000"
 	}
 	QuestKey = configMap["QUEST_KEY"]
 	if len(QuestKey) < 1 {

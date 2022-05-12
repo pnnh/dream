@@ -103,7 +103,7 @@ func (t MyTransport) RoundTrip(r *http.Request) (*http.Response, error) {
 }
 
 func devHandler(gctx *gin.Context) {
-	target := "localhost:1234"
+	target := "localhost:3000"
 
 	mytransport := MyTransport{}
 	//devUrl := fmt.Sprintf("http://localhost:3000%s", realPath)
