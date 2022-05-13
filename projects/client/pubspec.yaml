@@ -39,7 +39,6 @@ dependencies:
   http:
   provider:
   url_launcher: 6.0.20
-  js: 0.6.3
   path:
   hive:
   hive_flutter:

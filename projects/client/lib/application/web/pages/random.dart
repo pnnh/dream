@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:pillow/pillow.dart';
 
 class RandomWidget extends StatefulWidget {
   const RandomWidget({Key? key}) : super(key: key);
@@ -156,8 +157,12 @@ class _MyStatefulWidgetState extends State<RandomWidget> {
             style: ElevatedButton.styleFrom(fixedSize: const Size(100, 32)),
             onPressed: () async {
               //var result = await promiseToFuture(sayHello());
-              var result = await promiseToFuture(randomString(
-                  length, hasNumber, hasLetter, hasUppercaseLetter, hasSymbol));
+              var result = await Pillow.randomString(
+                  length: length,
+                  hasNumber: hasNumber,
+                  hasLetter: hasLetter,
+                  hasUppercaseLetter: hasUppercaseLetter,
+                  hasSymbol: hasSymbol);
               // var result = await promiseToFuture(
               //     randomString(length, false, false, false, false));
               debugPrint("--> $result");
@@ -200,9 +205,4 @@ class LimitRangeTextInputFormatter extends TextInputFormatter {
     }
     return newValue;
   }
-}
-
-Future getSomething(String someValue) async {
-  var result = await js.context.callMethod('sayHello');
-  return result;
 }

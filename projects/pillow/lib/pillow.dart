@@ -10,7 +10,8 @@ class Pillow {
     return version;
   }
 
-  static Future<String> randomString() async {
+  static Future<String> randomString({int length = 16, bool hasNumber = true,
+      bool hasLetter = true, bool hasUppercaseLetter = true, bool hasSymbol = false}) async {
     final String version = await _channel.invokeMethod('randomString');
     return version;
   }

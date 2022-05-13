@@ -56,17 +56,25 @@ class _MyAppState extends State<MyApp> {
         ),
         body: Column(
           children: [
-            Text('Running on: $_platformVersion\n'),
-            Text('randomString: $_randomString'),
-            TextButton(
-              child: Text('Click'),
-              onPressed: () async {
-                var randomString = await Pillow.randomString();
-                setState(() {
-                  _randomString = randomString;
-                });
-              }
+            SizedBox(
+              child:  Text('randomString: $_randomString'),
+            ),
+            SizedBox(
+              child: Text('Running on: $_platformVersion\n'),
+            ),
+            SizedBox(
+              height: 20,
+              child: TextButton(
+                  child: Text('Click'),
+                  onPressed: () async {
+                    var randomString = await Pillow.randomString();
+                    setState(() {
+                      _randomString = randomString;
+                    });
+                  }
+              )
             )
+
           ]
         )
       ),
