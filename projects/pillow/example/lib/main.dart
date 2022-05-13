@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'dart:async';
 
@@ -7,9 +5,6 @@ import 'package:flutter/services.dart';
 import 'package:pillow/pillow.dart';
 
 void main() {
-  var currentDirectory = Directory.current;
-  print('Current directory: $currentDirectory');
-  Pillow.testMarkdown();
   runApp(const MyApp());
 }
 
@@ -22,6 +17,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
+  String _randomString = "";
 
   @override
   void initState() {
@@ -58,9 +54,21 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('Plugin example app'),
         ),
-        body: Center(
-          child: Text('Running on: $_platformVersion\n'),
-        ),
+        body: Column(
+          children: [
+            Text('Running on: $_platformVersion\n'),
+            Text('randomString: $_randomString'),
+            TextButton(
+              child: Text('Click'),
+              onPressed: () async {
+                var randomString = await Pillow.randomString();
+                setState(() {
+                  _randomString = randomString;
+                });
+              }
+            )
+          ]
+        )
       ),
     );
   }

@@ -1,19 +1,5 @@
-@JS()
-library my_lib; //Not avoid the library annotation
-
-import 'dart:js' as js;
-import 'dart:js_util';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:js/js.dart';
-
-@JS()
-external sayHello();
-
-@JS()
-external String randomString(int length, bool has_number, bool has_letter,
-    bool has_uppercase, bool has_symbol);
 
 class RandomWidget extends StatefulWidget {
   const RandomWidget({Key? key}) : super(key: key);

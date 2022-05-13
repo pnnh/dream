@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/services.dart';
-import 'package:pillow/markdown/markdown.dart';
 
 class Pillow {
   static const MethodChannel _channel = MethodChannel('pillow');
@@ -11,8 +10,13 @@ class Pillow {
     return version;
   }
 
+  static Future<String> randomString() async {
+    final String version = await _channel.invokeMethod('randomString');
+    return version;
+  }
+
   static String testMarkdown() {
-    runMarkdown();
+    //runMarkdown();
     return "";
   }
 }
