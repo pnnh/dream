@@ -10,14 +10,17 @@ class Pillow {
     return version;
   }
 
-  static Future<String> randomString({int length = 16, bool hasNumber = true,
-      bool hasLetter = true, bool hasUppercaseLetter = true, bool hasSymbol = false}) async {
+  static Future<String> randomString(
+      {int length = 16,
+      bool hasNumber = true,
+      bool hasLetter = true,
+      bool hasUppercaseLetter = true,
+      bool hasSymbol = false}) async {
     final String version = await _channel.invokeMethod('randomString');
     return version;
   }
 
-  static String testMarkdown() {
-    //runMarkdown();
-    return "";
+  static Future<String> initPlugin({String resUrl = ""}) async {
+    return await _channel.invokeMethod('initPlugin', {"resUrl": resUrl});
   }
 }

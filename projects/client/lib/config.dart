@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart' show kIsWeb, kDebugMode;
+
 class AppConfig {
   String loadArticlesUrl = "/api/query";
   String saveArticleUrl = "/api/add";
@@ -20,4 +22,11 @@ AppConfig loadConfig() {
     return debugConfig;
   }
   return productConfig;
+}
+
+String getResUrl() {
+  if (kDebugMode) {
+    return "http://127.0.0.1:3000/src/index.tsx";
+  }
+  return "https://res.sfx.xyz/index.js?v=1";
 }

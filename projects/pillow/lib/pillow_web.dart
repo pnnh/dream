@@ -1,10 +1,7 @@
 import 'dart:async';
-// In order to *not* need this ignore, consider extracting the "web" version
-// of your plugin as a separate package, instead of inlining it in the same
-// package as the core of your plugin.
-// ignore: avoid_web_libraries_in_flutter
-import 'dart:html' as html show window;
+import 'dart:html';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:pillow/web/random.dart';
@@ -28,6 +25,8 @@ class PillowWeb {
         return getPlatformVersion();
       case 'randomString':
         return randomString(16, true, true, true, true);
+      case 'initPlugin':
+        return initPlugin(call);
       default:
         throw PlatformException(
           code: 'Unimplemented',
@@ -37,7 +36,19 @@ class PillowWeb {
   }
 
   Future<String> getPlatformVersion() {
-    final version = html.window.navigator.userAgent;
+    final version = window.navigator.userAgent;
     return Future.value(version);
+  }
+
+  String initPlugin(MethodCall call) {
+    String resUrl = call.arguments != null ? call.arguments["resUrl"] : "";
+    debugPrint("arguments: $resUrl ${call.arguments}");
+
+    document.head!.append(ScriptElement()
+      ..src = resUrl
+      ..type = 'module'
+      ..defer = false);
+
+    return "";
   }
 }

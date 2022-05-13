@@ -5,7 +5,6 @@ import 'package:dream/application/desktop/provider/todo.dart';
 import 'package:dream/application/desktop/route.dart';
 import 'package:dream/services/store/hive.dart';
 import 'package:flutter/material.dart';
-import 'package:pillow/pillow.dart';
 import 'package:provider/provider.dart';
 
 class Application extends StatefulWidget {
@@ -18,7 +17,7 @@ class Application extends StatefulWidget {
 class _ApplicationState extends State<Application> {
   final BookRouterDelegate _routerDelegate = BookRouterDelegate();
   final BookRouteInformationParser _routeInformationParser =
-      BookRouteInformationParser();
+  BookRouteInformationParser();
 
   @override
   Widget build(BuildContext context) {
@@ -53,5 +52,4 @@ Future<void> initApp() async {
     appWindow.alignment = Alignment.center;
     appWindow.show();
   });
-  Pillow.testMarkdown();
 }

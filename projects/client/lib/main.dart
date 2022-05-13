@@ -3,8 +3,11 @@ import 'dart:io' show Platform;
 import 'package:dream/application/desktop/application.dart'
     if (dart.library.html) 'package:dream/application/web/application.dart'
     as application;
-import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:pillow/pillow.dart';
+
+import 'config.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,5 +30,7 @@ void main() async {
   debugPrint("platformName :- " + platformName.toString());
 
   await application.initApp();
+
+  await Pillow.initPlugin(resUrl: getResUrl());
   runApp(const application.Application());
 }
